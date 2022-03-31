@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <x-header/>
+  <x-header title="Login"/>
 
   <body style="background-color: #343957">
     <div class="unix-login">

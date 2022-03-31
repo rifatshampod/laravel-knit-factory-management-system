@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <x-header/>
+  <x-header title="Production Report"/>
 
   <body>
     <x-navigation/>

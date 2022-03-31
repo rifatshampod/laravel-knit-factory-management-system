@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<x-header/>
+<x-header title="forget password"/>
 
 <body style="background-color: #343957;">
 

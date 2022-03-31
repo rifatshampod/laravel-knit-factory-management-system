@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <x-header/>
+  <x-header title="Dashboard"/>
 
   <body>
     <x-navigation/>
