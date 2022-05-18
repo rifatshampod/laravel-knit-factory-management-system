@@ -71,3 +71,14 @@
 
 
 })(jQuery);
+
+//Create Order Calculation
+
+function qtyCal()
+{
+    const orderQty = document.getElementById("orderQty").value;
+    const orderExtra = document.getElementById("orderExtra").value =
+        (parseInt(orderQty) / 100) * 5;
+    const Equation = parseInt(orderQty) + orderExtra;
+    document.getElementById("totalQty").value = Equation;
+}

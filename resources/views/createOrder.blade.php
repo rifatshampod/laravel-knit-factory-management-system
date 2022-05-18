@@ -5,7 +5,7 @@
   <body>
     <x-navigation/>
 
-    <div class="content-wrap">
+        <div class="content-wrap">
       <div class="main">
         <div class="container-fluid">
           <div class="row">
@@ -34,15 +34,18 @@
           <!-- /# row -->
           <section id="main-content">
             <div class="row">
+              <form action="add-order" method="post" enctype="multipart/form-data">
               <div class="col-lg-12">
                 <div class="card">
-                  <form action="allOrder.html">
+                  
+                    @csrf
                     <div class="row justify-content-center">
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Style Name</label>
                           <input
                             type="text"
+                            name="style"
                             class="form-control input-default"
                             placeholder="Style Name"
                             required
@@ -54,6 +57,7 @@
                           <label>Order No</label>
                           <input
                             type="text"
+                            name="orderNo"
                             class="form-control input-default"
                             placeholder="Order No"
                             required
@@ -63,36 +67,39 @@
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Body Color</label>
-                          <select class="form-control input-default">
+                          <select class="form-control input-default" name="bodyColor">
                             <option disabled hidden selected>
                               Select Color
                             </option>
-                            <option>Red</option>
-                            <option>Blue</option>
+                            @foreach ($bodycolorlist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach 
                           </select>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Print Quality</label>
-                          <select class="form-control input-default">
+                          <select class="form-control input-default" name="printQuality">
                             <option disabled hidden selected>
-                              Select Print
+                              Select Print Quality
                             </option>
-                            <option>Soft Rubber print</option>
-                            <option>Rubber print</option>
+                            @foreach ($qualitylist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach
                           </select>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Parts Name</label>
-                          <select class="form-control input-default">
+                          <select class="form-control input-default" name="partsName">
                             <option disabled hidden selected>
-                              Select Parts
+                              Select Parts Name
                             </option>
-                            <option>Front center chest</option>
-                            <option>Back center</option>
+                            @foreach ($partslist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach
                           </select>
                         </div>
                       </div>
@@ -101,6 +108,7 @@
                           <label>Print Color</label>
                           <input
                             type="text"
+                            name="printColor"
                             class="form-control input-default"
                             placeholder="Print Color"
                             required
@@ -112,6 +120,7 @@
                           <label>Color Qty</label>
                           <input
                             type="number"
+                            name="colorQty"
                             class="form-control input-default"
                             placeholder="Color Qty"
                             required
@@ -122,10 +131,13 @@
                         <div class="form-group">
                           <label>Order Qty</label>
                           <input
+                            id="orderQty"
                             type="number"
+                            name="orderQty"
                             class="form-control input-default"
                             placeholder="Order Qty"
                             required
+                            onchange="qtyCal()"
                           />
                         </div>
                       </div>
@@ -133,10 +145,12 @@
                         <div class="form-group">
                           <label>Extra 5%</label>
                           <input
+                            id="orderExtra"
                             type="number"
+                            name="extraQty"
                             class="form-control input-default"
                             placeholder="Extra 5%"
-                            required
+                            readonly
                           />
                         </div>
                       </div>
@@ -144,10 +158,12 @@
                         <div class="form-group">
                           <label>Total Qty</label>
                           <input
+                            id="totalQty"
                             type="number"
+                            name="totalQty"
                             class="form-control input-default"
                             placeholder="Total Qty"
-                            required
+                            readonly
                           />
                         </div>
                       </div>
@@ -156,6 +172,7 @@
                           <label>Delivery Date</label>
                           <input
                             type="date"
+                            name="deliveryDate"
                             class="form-control input-default"
                             placeholder=""
                             required
@@ -167,6 +184,8 @@
                           <label>Price Dozen</label>
                           <input
                             type="number"
+                            name="priceDozen"
+                            step="0.01"
                             class="form-control input-default"
                             placeholder="$"
                             required
@@ -176,23 +195,27 @@
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label>Merchandiser</label>
-                          <input
-                            type="text"
-                            class="form-control input-default"
-                            placeholder="Merchandiser"
-                            required
-                          />
+                          <select class="form-control input-default" name="merchandiser">
+                            <option disabled hidden selected>
+                              Select Merchandiser
+                            </option>
+                            @foreach ($merchandiserlist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach                        
+                          </select>
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label>Supplier Name</label>
-                          <input
-                            type="text"
-                            class="form-control input-default"
-                            placeholder="Supplier Name"
-                            required
-                          />
+                          <select class="form-control input-default" name="supplier">
+                            <option disabled hidden selected>
+                              Select Supplier
+                            </option>
+                            @foreach ($supplierlist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach   
+                          </select>
                         </div>
                       </div>
                       <div class="col-lg-4">
@@ -203,11 +226,12 @@
                             >
                             <input
                               type="file"
+                              name="artwork"
                               class="form-control-file"
                               id="exampleFormControlFile1"
                             />
                           </div>
-                        </form>
+                        
                       </div>
                     </div>
                     <div class="row justify-content-center">

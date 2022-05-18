@@ -39,7 +39,7 @@
                   <div class="d-flex justify-content-end">
                     <div>
                       <button
-                        onclick="location.href='createOrder.html'"
+                        onclick="location.href='create-order'"
                         type="button"
                         class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
                       >
