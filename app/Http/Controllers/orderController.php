@@ -69,4 +69,10 @@ class orderController extends Controller
         //return $req->file('file')->store('cv');
 
     }
+
+    function showData(Request $req){
+        $orderlist = Order::all();
+
+        return view('allOrder',['orderlist'=>$orderlist]);
+    }
 }

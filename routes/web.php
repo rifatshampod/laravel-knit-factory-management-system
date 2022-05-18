@@ -20,7 +20,7 @@ use App\Http\Controllers\orderController;
 Route::view('/','index');  //add redirector later
 Route::view('dashboard','index');
 
-Route::view('order','allOrder');
+
 Route::view('create-plan','createPlan');
 Route::view('plan','allPlan');
 Route::view('production-report','productionReport');
@@ -30,3 +30,4 @@ Route::view('delivery-report','allDelivery');
 //dynamic
 Route::get('create-order',[orderController::class, 'retrieveData']); //retrieve dropdown data to show in create page
 Route::post('add-order',[orderController::class, 'addData']); //add order to database
+Route::get('order',[orderController::class, 'showData']); //show all order
