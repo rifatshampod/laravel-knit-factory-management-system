@@ -85,9 +85,9 @@
                               @if($item['status']==0)
                                 <div class="employeeTableIcon d-flex">
                                   <button
-                                    onclick="location.href='createDelivery.html'"
+                                    value="{{$item['id']}}"
                                     type="button"
-                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
+                                    class="btn editBtn btn-primary btn-flat btn-addon m-b-10 m-l-5"
                                   >
                                     <i class="ti-plus"></i>Add Delivery
                                   </button>
@@ -131,8 +131,8 @@
       </div>
     </div>
 
-        <!-------edit-Modal------>
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-------Receive-Modal------>
+    <div class="modal fade" id="receiveModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
@@ -140,64 +140,53 @@
               @csrf
               @method('PUT')
 
-              <input type="hidden" name="id" id="plan_id" />
+              <input type="hidden" name="id" id="delivery_id" />
+              <input type="hidden" name="order_id" id="order_id" />
 
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="target_day">Target Day</label>
-                    <input
-                      type="number"
-                      name="target_day"
-                      class="form-control"
-                      id="target_day"
-                      placeholder="Enter number of days"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="target_perday">Target Per Day</label>
-                    <input
-                      type="number"
-                      name="target_perday"
-                      class="form-control"
-                      id="target_perday"
-                      placeholder="Target Per Day"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="production_start">Production Start</label>
+                    <label for="first_receive">First Receive Date</label>
                     <input
                       type="date"
-                      name="production_start"
+                      name="first_receive"
                       class="form-control"
-                      id="production_start"
+                      id="first_receive"
+                      placeholder="Enter first Receive"
                     />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="production_end">Production End</label>
+                    <label for="today_receive">Today Receive</label>
                     <input
-                      type="date"
-                      name="production_end"
+                      type="number"
+                      name="today_receive"
                       class="form-control"
-                      id="production_end"
+                      id="today_receive"
+                      placeholder="Today Receive"
                     />
                   </div>
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="section">Section</label>
+                    <label for="total_receive">Total Receive</label>
                     <input
-                      type="text"
-                      name="section"
+                      type="number"
+                      name="total_receive"
                       class="form-control"
-                      id="section"
-                      placeholder="Section"
+                      id="total_receive"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="receive_balance">Receive Balance </label>
+                    <input
+                      type="number"
+                      name="receive_balance"
+                      class="form-control"
+                      id="receive_balance"
                     />
                   </div>
                 </div>
@@ -243,21 +232,21 @@
       $(document).ready(function(){
         $(document).on('click', '.editBtn', function(){
           
-          var plan_id = $(this).val();
-          console.log(plan_id);
+          var delivery_id = $(this).val();
+          console.log(delivery_id);
           jQuery.noConflict(); 
-          $('#editModal').modal('show');
+          $('#receiveModal').modal('show');
           $.ajax({
-            url: '/edit-plan' + plan_id,
+            url: '/edit-delivery' + delivery_id,
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#target_day').val(response.plan.target_day);
-              $('#target_perday').val(response.plan.target_perday);
-              $('#production_start').val(response.plan.production_start);
-              $('#production_end').val(response.plan.production_end);
-              $('#section').val(response.plan.section);
-              $('#plan_id').val(plan_id);
+              $('#first_receive').val(response.delivery.first_receive);
+              $('#today_receive').val(response.delivery.today_receive);
+              $('#total_receive').val(response.delivery.total_receive);
+              $('#receive_balance').val(response.delivery.receive_balance);
+              $('#order_id').val(response.delivery.order_id);
+              $('#delivery_id').val(delivery_id);
             }
           });
         });
