@@ -76,72 +76,45 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          @foreach ($planlist as $item)
+                              <tr>
                             <td>
                               <div class="orderImg">
                                 <img
-                                  src="https://media.istockphoto.com/photos/blank-black-tshirt-front-with-clipping-path-picture-id483960103?b=1&k=20&m=483960103&s=170667a&w=0&h=hNKNseCmaThTsh4i7Q3kHETlWo5Zi7Ogw-luVozfP_M="
+                                  src="{{$item['artwork']}}"
                                   alt=""
                                 />
                               </div>
                             </td>
-                            <td>rifat</td>
-                            <td>Av85796</td>
-                            <td>Ocre</td>
-                            <td>Soft Rubber print</td>
-                            <td>Front center chest</td>
-                            <td>03</td>
-                            <td>3,000</td>
-                            <td>3,000</td>
-                            <td>150</td>
-                            <td>3,150</td>
-                            <td>2.0</td>
-                            <td>1,575</td>
-                            <td>9-may-2022</td>
-                            <td>9-may-2022</td>
-                            <td>9-june-2022</td>
-                            <td>Digital</td>
+                            <td>{{$item['style']}}</td>
+                            <td>{{$item['order_no']}}</td>
+                            <td>{{$item['body_color']}}</td>
+                            <td>{{$item['print_quality']}}</td>
+                            <td>{{$item['parts_name']}}</td>
+                            <td>{{$item['print_color']}}</td>
+                            <td>{{$item['color_qty']}}</td>
+                            <td>{{$item['order_qty']}}</td>
+                            <td>{{$item['extra_qty']}}</td>
+                            <td>{{$item['total_qty']}}</td>
+                            <td>{{$item['target_day']}}</td>
+                            <td>{{$item['target_perday']}}</td>
+                            <td>{{$item['delivery_date']}}</td>
+                            <td>{{$item['production_start']}}</td>
+                            <td>{{$item['production_end']}}</td>
+                            <td>{{$item['section']}}</td>
                             <td>
-                              <div class="employeeTableIcon">
-                              <div class="">
-                              <button
-                               type="button"
-                               class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" data-toggle="modal"
-                                  data-target="#editModal"
-                                >
-                             <i class="ti-plus"></i>Add Plan
-                            </button>
-                            </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="orderImg">
-                                <img
-                                  src="https://media.istockphoto.com/photos/blank-black-tshirt-front-with-clipping-path-picture-id483960103?b=1&k=20&m=483960103&s=170667a&w=0&h=hNKNseCmaThTsh4i7Q3kHETlWo5Zi7Ogw-luVozfP_M="
-                                  alt=""
-                                />
-                              </div>
-                            </td>
-                            <td>685796</td>
-                            <td>cxxcc</td>
-                            <td>Ocre</td>
-                            <td>Soft Rubber print</td>
-                            <td>Front center chest</td>
-                            <td>03</td>
-                            <td>3,000</td>
-                            <td>3,000</td>
-                            <td>150</td>
-                            <td>3,150</td>
-                            <td>2.0</td>
-                            <td>1,575</td>
-                            <td>9-may-2022</td>
-                            <td>9-may-2022</td>
-                            <td>9-june-2022</td>
-                            <td>Digital</td>
-                            <td>
-                              <div class="employeeTableIcon d-flex">
+                              @if($item['status']==0)
+                                <div class="employeeTableIcon">
+                                  <div class="">
+                                    <button
+                                    value="{{$item['id']}}"
+                                    class="btn editBtn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                      <i class="ti-plus"></i>Add Plan
+                                    </button>
+                                  </div>
+                                </div>
+                              @else
+                                <div class="employeeTableIcon d-flex">
                                 <div
                                   class="Icon1 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                   onclick="location.href='profile.html'"
@@ -149,61 +122,19 @@
                                 >
                                   <i class="ti-eye mr-1"></i>View
                                 </div>
-                                <div
-                                  class="Icon3 px-3 py-1 text-white cursor rounded-3 d-flex justify-content-center align-items-center mr-1"
+                                <button
+                                value="{{$item['id']}}"
+                                  class="Icon3 editBtn px-3 py-1 text-white cursor border-none rounded d-flex justify-content-center align-items-center mr-1"
                                 >
                                   <i class="ti-pencil-alt mr-1"></i>Edit
-                                </div>
+                              </button>
                               </div>
+
+                              @endif
+                              
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              <div class="orderImg">
-                                <img
-                                  src="https://media.istockphoto.com/photos/blank-black-tshirt-front-with-clipping-path-picture-id483960103?b=1&k=20&m=483960103&s=170667a&w=0&h=hNKNseCmaThTsh4i7Q3kHETlWo5Zi7Ogw-luVozfP_M="
-                                  alt=""
-                                />
-                              </div>
-                            </td>
-                            <td>685796</td>
-                            <td>Av85796</td>
-                            <td>Ocre</td>
-                            <td>Soft Rubber print</td>
-                            <td>Front center chest</td>
-                            <td>03</td>
-                            <td>3,000</td>
-                            <td>3,000</td>
-                            <td>150</td>
-                            <td>3,150</td>
-                            <td>2.0</td>
-                            <td>1,575</td>
-                            <td>9-may-2022</td>
-                            <td>9-may-2022</td>
-                            <td>9-june-2022</td>
-                            <td>Digital</td>
-                            <td>
-                              <div class="employeeTableIcon d-flex">
-                                <div
-                                  class="employeeTableIconDiv Icon1 d-flex justify-content-center align-items-center mr-1"
-                                  onclick="location.href='profile.html'"
-                                  onclick="location.href='profile.html'"
-                                >
-                                  <i class="ti-eye"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon2 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-trash"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon3 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-pencil-alt"></i>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -228,7 +159,7 @@
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog rounded" role="document">
+      <div class="modal-dialog rounded">
         <div class="modal-content py-5">
           <div class="text-center">
             <h5 class="">Are You Sure want to delete?</h5>
@@ -248,43 +179,72 @@
     </div>
 
     <!-------edit-Modal------>
-    <div
-      class="modal fade"
-      id="editModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog rounded" role="document">
-        <div class="modal-content py-5">
-          <div class="text-center">
-            <h5 class="">Edit</h5>
-          </div>
-          <div class="modal-body d-flex justify-content-center">
-            <form action="">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+            <form action="update-plan" method="POST">
+              @csrf
+              @method('PUT')
+
+              <input type="hidden" name="id" id="plan_id" />
+
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
+                    <label for="target_day">Target Day</label>
                     <input
-                      type="email"
+                      type="number"
+                      name="target_day"
                       class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter email"
+                      id="target_day"
+                      placeholder="Enter number of days"
                     />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
+                    <label for="target_perday">Target Per Day</label>
                     <input
-                      type="email"
+                      type="number"
+                      name="target_perday"
                       class="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                      placeholder="Enter email"
+                      id="target_perday"
+                      placeholder="Target Per Day"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="production_start">Production Start</label>
+                    <input
+                      type="date"
+                      name="production_start"
+                      class="form-control"
+                      id="production_start"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="production_end">Production End</label>
+                    <input
+                      type="date"
+                      name="production_end"
+                      class="form-control"
+                      id="production_end"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="section">Section</label>
+                    <input
+                      type="text"
+                      name="section"
+                      class="form-control"
+                      id="section"
+                      placeholder="Section"
                     />
                   </div>
                 </div>
@@ -308,9 +268,7 @@
     </div>
 
 
-
-
-    <!-- jquery vendor -->
+     <!-- jquery vendor -->
     <script src="assets/js/lib/jquery.min.js"></script>
     <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
     <!-- nano scroller -->
@@ -326,5 +284,33 @@
     <!-- scripit init-->
     <script src="assets/js/lib/data-table/datatables.min.js"></script>
     <script src="assets/js/lib/data-table/datatables-init.js"></script>
+
+    <!-- Edit Modal functions -->
+    <script>
+      $(document).ready(function(){
+        $(document).on('click', '.editBtn', function(){
+          
+          var plan_id = $(this).val();
+          console.log(plan_id);
+          jQuery.noConflict(); 
+          $('#editModal').modal('show');
+          $.ajax({
+            url: '/edit-plan' + plan_id,
+            type: "GET",
+            success:function(response){
+              console.log(response);
+              $('#target_day').val(response.plan.target_day);
+              $('#target_perday').val(response.plan.target_perday);
+              $('#production_start').val(response.plan.production_start);
+              $('#production_end').val(response.plan.production_end);
+              $('#section').val(response.plan.section);
+              $('#plan_id').val(plan_id);
+            }
+          });
+        });
+      });
+    </script>
+
+   
   </body>
 </html>

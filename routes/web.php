@@ -23,7 +23,7 @@ Route::view('dashboard','index');
 
 
 Route::view('create-plan','createPlan');
-Route::view('plan','allPlan');
+
 Route::view('production-report','productionReport');
 Route::view('create-delivery','createDelivery');
 Route::view('all-delivery','allDelivery');
@@ -32,3 +32,8 @@ Route::view('all-delivery','allDelivery');
 Route::get('create-order',[orderController::class, 'retrieveData']); //retrieve dropdown data to show in create page
 Route::post('add-order',[orderController::class, 'addData']); //add order to database
 Route::get('order',[orderController::class, 'showData']); //show all order
+
+//plan
+Route::get('plan',[planController::class, 'showData']);
+Route::get('edit-plan{id}', [planController::class,'editData']);
+Route::put('update-plan', [planController::class,'updateData']);
