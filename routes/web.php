@@ -35,3 +35,5 @@ Route::get('order',[orderController::class, 'showData']); //show all order
 
 //plan
 Route::get('plan',[planController::class, 'showData']);
+Route::get('edit-plan{id}', [planController::class,'editData']);
+Route::put('update-plan', [planController::class,'updateData']);
