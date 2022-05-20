@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\orderController;
+use App\Http\Controllers\planController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ Route::view('create-plan','createPlan');
 Route::view('plan','allPlan');
 Route::view('production-report','productionReport');
 Route::view('create-delivery','createDelivery');
-Route::view('delivery-report','allDelivery');
+Route::view('all-delivery','allDelivery');
 
 //dynamic
 Route::get('create-order',[orderController::class, 'retrieveData']); //retrieve dropdown data to show in create page

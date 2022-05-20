@@ -27,7 +27,7 @@
               </ul>
             </li>
             <li>
-              <a class=""><i class="ti-gift"></i>Planning</a>
+              <a class="" href="plan"><i class="ti-gift"></i>Planning</a>
             </li>
             <li>
               <a class="sidebar-sub-toggle"
@@ -47,7 +47,7 @@
                 ></span
               ></a>
               <ul>
-                <li><a href="allDelivery.html">All Delivery</a></li>
+                <li><a href="all-delivery">All Delivery</a></li>
                 <li><a href="#">Receive Delivery</a></li>
                 <li><a href="#">Complete Delivery</a></li>
               </ul>
