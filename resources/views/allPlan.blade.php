@@ -76,72 +76,47 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
+                          @foreach ($planlist as $item)
+                              <tr>
                             <td>
                               <div class="orderImg">
                                 <img
-                                  src="https://media.istockphoto.com/photos/blank-black-tshirt-front-with-clipping-path-picture-id483960103?b=1&k=20&m=483960103&s=170667a&w=0&h=hNKNseCmaThTsh4i7Q3kHETlWo5Zi7Ogw-luVozfP_M="
+                                  src="{{$item['artwork']}}"
                                   alt=""
                                 />
                               </div>
                             </td>
-                            <td>rifat</td>
-                            <td>Av85796</td>
-                            <td>Ocre</td>
-                            <td>Soft Rubber print</td>
-                            <td>Front center chest</td>
-                            <td>03</td>
-                            <td>3,000</td>
-                            <td>3,000</td>
-                            <td>150</td>
-                            <td>3,150</td>
-                            <td>2.0</td>
-                            <td>1,575</td>
-                            <td>9-may-2022</td>
-                            <td>9-may-2022</td>
-                            <td>9-june-2022</td>
-                            <td>Digital</td>
+                            <td>{{$item['style']}}</td>
+                            <td>{{$item['order_no']}}</td>
+                            <td>{{$item['body_color']}}</td>
+                            <td>{{$item['print_quality']}}</td>
+                            <td>{{$item['parts_name']}}</td>
+                            <td>{{$item['print_color']}}</td>
+                            <td>{{$item['color_qty']}}</td>
+                            <td>{{$item['order_qty']}}</td>
+                            <td>{{$item['extra_qty']}}</td>
+                            <td>{{$item['total_qty']}}</td>
+                            <td>{{$item['target_day']}}</td>
+                            <td>{{$item['target_per_day']}}</td>
+                            <td>{{$item['delivery_date']}}</td>
+                            <td>{{$item['production_Start']}}</td>
+                            <td>{{$item['production_end']}}</td>
+                            <td>{{$item['section']}}</td>
                             <td>
-                              <div class="employeeTableIcon">
-                              <div class="">
-                              <button
-                               type="button"
-                               class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" data-toggle="modal"
-                                  data-target="#editModal"
-                                >
-                             <i class="ti-plus"></i>Add Plan
-                            </button>
-                            </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="orderImg">
-                                <img
-                                  src="https://media.istockphoto.com/photos/blank-black-tshirt-front-with-clipping-path-picture-id483960103?b=1&k=20&m=483960103&s=170667a&w=0&h=hNKNseCmaThTsh4i7Q3kHETlWo5Zi7Ogw-luVozfP_M="
-                                  alt=""
-                                />
-                              </div>
-                            </td>
-                            <td>685796</td>
-                            <td>cxxcc</td>
-                            <td>Ocre</td>
-                            <td>Soft Rubber print</td>
-                            <td>Front center chest</td>
-                            <td>03</td>
-                            <td>3,000</td>
-                            <td>3,000</td>
-                            <td>150</td>
-                            <td>3,150</td>
-                            <td>2.0</td>
-                            <td>1,575</td>
-                            <td>9-may-2022</td>
-                            <td>9-may-2022</td>
-                            <td>9-june-2022</td>
-                            <td>Digital</td>
-                            <td>
-                              <div class="employeeTableIcon d-flex">
+                              @if($item['status']==0)
+                                <div class="employeeTableIcon">
+                                  <div class="">
+                                    <button
+                                    type="button"
+                                    class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5" data-toggle="modal"
+                                        data-target="#editModal"
+                                      >
+                                      <i class="ti-plus"></i>Add Plan
+                                    </button>
+                                  </div>
+                                </div>
+                              @else
+                                <div class="employeeTableIcon d-flex">
                                 <div
                                   class="Icon1 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                   onclick="location.href='profile.html'"
@@ -155,55 +130,12 @@
                                   <i class="ti-pencil-alt mr-1"></i>Edit
                                 </div>
                               </div>
+
+                              @endif
+                              
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              <div class="orderImg">
-                                <img
-                                  src="https://media.istockphoto.com/photos/blank-black-tshirt-front-with-clipping-path-picture-id483960103?b=1&k=20&m=483960103&s=170667a&w=0&h=hNKNseCmaThTsh4i7Q3kHETlWo5Zi7Ogw-luVozfP_M="
-                                  alt=""
-                                />
-                              </div>
-                            </td>
-                            <td>685796</td>
-                            <td>Av85796</td>
-                            <td>Ocre</td>
-                            <td>Soft Rubber print</td>
-                            <td>Front center chest</td>
-                            <td>03</td>
-                            <td>3,000</td>
-                            <td>3,000</td>
-                            <td>150</td>
-                            <td>3,150</td>
-                            <td>2.0</td>
-                            <td>1,575</td>
-                            <td>9-may-2022</td>
-                            <td>9-may-2022</td>
-                            <td>9-june-2022</td>
-                            <td>Digital</td>
-                            <td>
-                              <div class="employeeTableIcon d-flex">
-                                <div
-                                  class="employeeTableIconDiv Icon1 d-flex justify-content-center align-items-center mr-1"
-                                  onclick="location.href='profile.html'"
-                                  onclick="location.href='profile.html'"
-                                >
-                                  <i class="ti-eye"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon2 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-trash"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon3 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-pencil-alt"></i>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
+                          @endforeach
                         </tbody>
                       </table>
                     </div>

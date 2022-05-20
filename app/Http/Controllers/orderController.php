@@ -50,6 +50,7 @@ class orderController extends Controller
 
         $plan = new Plan;
         $plan->order_id = $order->id;
+        $plan->status = 0;
         $plan->save();
         
 

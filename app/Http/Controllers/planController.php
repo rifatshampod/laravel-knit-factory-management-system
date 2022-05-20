@@ -9,9 +9,9 @@ use App\Models\Order;
 class planController extends Controller
 {
     function showData(Request $req){
-        $planlist = Plan::join('orders','orders.id'=>'plans.order_id')
-                    ->all();
+        $planlist = Plan::join('orders','orders.id','=','plans.order_id')
+                    ->get();
 
-        return view('allOrder',['orderlist'=>$orderlist]);
+        return view('allPlan',['planlist'=>$planlist]);
     }
 }
