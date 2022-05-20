@@ -36,7 +36,7 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card">
-                  <div class="d-flex justify-content-end">
+                  {{-- <div class="d-flex justify-content-end">
                     <div>
                       <button
                         onclick="location.href='createDelivery.html'"
@@ -46,7 +46,7 @@
                         <i class="ti-plus"></i>Add Delivery
                       </button>
                     </div>
-                  </div>
+                  </div> --}}
                   <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
                       <table
@@ -82,23 +82,15 @@
                             <td>8,000</td>
                             <td>
                               <div class="employeeTableIcon d-flex">
-                                <div
-                                  class="employeeTableIconDiv Icon1 d-flex justify-content-center align-items-center mr-1"
-                                  onclick="location.href='profile.html'"
-                                  onclick="location.href='profile.html'"
+                                <div>
+                                <button
+                                  onclick="location.href='createDelivery.html'"
+                                  type="button"
+                                  class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
                                 >
-                                  <i class="ti-eye"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon2 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-trash"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon3 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-pencil-alt"></i>
-                                </div>
+                                  <i class="ti-plus"></i>Add Delivery
+                                </button>
+                              </div>
                               </div>
                             </td>
                           </tr>
@@ -116,21 +108,16 @@
                             <td>
                               <div class="employeeTableIcon d-flex">
                                 <div
-                                  class="employeeTableIconDiv Icon1 d-flex justify-content-center align-items-center mr-1"
+                                  class="Icon1 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                   onclick="location.href='profile.html'"
                                   onclick="location.href='profile.html'"
                                 >
-                                  <i class="ti-eye"></i>
+                                  <i class="ti-eye mr-1"></i> Receive
                                 </div>
                                 <div
-                                  class="employeeTableIconDiv Icon2 d-flex justify-content-center align-items-center mr-1"
+                                  class="Icon3 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                 >
-                                  <i class="ti-trash"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon3 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-pencil-alt"></i>
+                                  <i class="ti-pencil-alt mr-1"></i> Deliver
                                 </div>
                               </div>
                             </td>

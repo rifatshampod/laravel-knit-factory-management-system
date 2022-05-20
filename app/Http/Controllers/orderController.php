@@ -9,6 +9,7 @@ use App\Models\Supplier;
 use App\Models\Body_color;
 use App\Models\Print_quality;
 use App\Models\Parts_name;
+use App\Models\Plan;
 
 class orderController extends Controller
 {
@@ -46,6 +47,10 @@ class orderController extends Controller
         $order->supplier= $req->input('supplier');
         $order->price_dozen= $req->input('priceDozen');
         $order->save();
+
+        $plan = new Plan;
+        $plan->order_id = $order->id;
+        $plan->save();
         
 
         //save image file
