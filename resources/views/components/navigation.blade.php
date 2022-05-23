@@ -36,8 +36,8 @@
                 ></span
               ></a>
               <ul>
-                <li><a href="allPlan.html">All Production</a></li>
-                <li><a href="#">Add today production</a></li>
+                <li><a href="all-production">All Production</a></li>
+                <li><a href="#">Day wise production</a></li>
               </ul>
             </li>
             <li>
@@ -48,7 +48,7 @@
               ></a>
               <ul>
                 <li><a href="all-delivery">All Delivery</a></li>
-                <li><a href="#">Receive Delivery</a></li>
+                <li><a href="all-receive">Receive Delivery</a></li>
                 <li><a href="#">Complete Delivery</a></li>
               </ul>
             </li>

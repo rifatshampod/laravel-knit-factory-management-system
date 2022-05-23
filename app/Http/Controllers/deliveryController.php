@@ -68,4 +68,17 @@ class deliveryController extends Controller
         return redirect()->back()->with('status','receive information has been updated');
     }
 
+    function showReceiveData(Request $req){
+        $deliverylist = Receive::join('deliveries','deliveries.id','=','receives.delivery_id')
+                    ->join('orders','orders.id','=','deliveries.order_id')
+                    ->orderBy('receives.id', 'DESC')
+                    ->get(['receives.id as id','orders.id as orderId',
+                        'orders.style','orders.order_no','orders.body_color',
+                        'receives.receive_today','receives.receive_total',
+                        'receives.receive_balance','receives.created_at']);
+                    
+
+        return view('allReceive',['deliverylist'=>$deliverylist]);
+    }
+
 }

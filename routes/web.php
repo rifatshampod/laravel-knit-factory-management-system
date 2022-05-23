@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\planController;
 use App\Http\Controllers\deliveryController;
+use App\Http\Controllers\productionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,13 @@ Route::get('edit-delivery{id}', [deliveryController::class,'editData']);
 Route::put('start-receive', [deliveryController::class,'updateReceiveData']);
 Route::put('add-receive', [deliveryController::class,'addReceiveData']);
 
+//receive
+Route::get('all-receive',[deliveryController::class, 'showReceiveData']);
+
 //plan
 Route::get('plan',[planController::class, 'showData']);
 Route::get('edit-plan{id}', [planController::class,'editData']);
 Route::put('update-plan', [planController::class,'updateData']);
+
+//production
+Route::get('all-production',[productionController::class, 'showData']);

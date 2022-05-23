@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Order;
+use App\Models\Production;
 
 class planController extends Controller
 {
@@ -40,6 +41,12 @@ class planController extends Controller
         $plan->section=$req->input('section');
         $plan->status=1;
         $plan->update();
+
+        $production = new Production;
+        $production->plan_id = $plan->id;
+        $production->status = 0;
+        $production->save();
+        
 
         return redirect()->back()->with('status','plan information has been updated');
     }
