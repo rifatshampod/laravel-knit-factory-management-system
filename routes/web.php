@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\planController;
+use App\Http\Controllers\deliveryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,12 +27,18 @@ Route::view('create-plan','createPlan');
 
 Route::view('production-report','productionReport');
 Route::view('create-delivery','createDelivery');
-Route::view('all-delivery','allDelivery');
+
 
 //dynamic
 Route::get('create-order',[orderController::class, 'retrieveData']); //retrieve dropdown data to show in create page
 Route::post('add-order',[orderController::class, 'addData']); //add order to database
 Route::get('order',[orderController::class, 'showData']); //show all order
+
+//delivery
+Route::get('all-delivery',[deliveryController::class, 'showData']);
+Route::get('edit-delivery{id}', [deliveryController::class,'editData']);
+Route::put('start-receive', [deliveryController::class,'updateReceiveData']);
+Route::put('add-receive', [deliveryController::class,'addReceiveData']);
 
 //plan
 Route::get('plan',[planController::class, 'showData']);

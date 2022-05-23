@@ -10,6 +10,7 @@ use App\Models\Body_color;
 use App\Models\Print_quality;
 use App\Models\Parts_name;
 use App\Models\Plan;
+use App\Models\Delivery;
 
 class orderController extends Controller
 {
@@ -48,10 +49,10 @@ class orderController extends Controller
         $order->price_dozen= $req->input('priceDozen');
         $order->save();
 
-        $plan = new Plan;
-        $plan->order_id = $order->id;
-        $plan->status = 0;
-        $plan->save();
+        $delivery = new Delivery;
+        $delivery->order_id = $order->id;
+        $delivery->status = 0;
+        $delivery->save();
         
 
         //save image file
@@ -77,7 +78,8 @@ class orderController extends Controller
     }
 
     function showData(Request $req){
-        $orderlist = Order::all();
+        $orderlist = Order::orderBy('id','DESC')
+        ->get();
 
         return view('allOrder',['orderlist'=>$orderlist]);
     }
