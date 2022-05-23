@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\Plan;
+use App\Models\Receive;
 
 class deliveryController extends Controller
 {
@@ -36,11 +37,15 @@ class deliveryController extends Controller
         $delivery_id = $req->input('id');
         $delivery=Delivery::find($delivery_id);
         $delivery->first_receive=$req->input('first_receive');
-        $delivery->today_receive=$req->input('today_receive');
-        $delivery->total_receive=$req->input('total_receive');
-        $delivery->receive_balance=$req->input('receive_balance');
         $delivery->status=1;
         $delivery->update();
+
+        $receive = new Receive;
+        $receive->delivery_id= $req->input('id');
+        $receive->receive_today= $req->input('today_receive');
+        $receive->receive_total= $req->input('total_receive');
+        $receive->receive_balance= $req->input('receive_balance');
+        $receive->save();
 
 
 
@@ -50,6 +55,17 @@ class deliveryController extends Controller
         $plan->save();
 
         return redirect()->back()->with('status','delivery information has been updated');
+    }
+
+    function addReceiveData(Request $req){
+        $receive = new Receive;
+        $receive->delivery_id= $req->input('id');
+        $receive->receive_today= $req->input('today_receive');
+        $receive->receive_total= $req->input('total_receive');
+        $receive->receive_balance= $req->input('receive_balance');
+        $receive->save();
+
+        return redirect()->back()->with('status','receive information has been updated');
     }
 
 }

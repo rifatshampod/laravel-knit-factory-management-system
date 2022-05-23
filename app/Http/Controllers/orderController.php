@@ -78,7 +78,8 @@ class orderController extends Controller
     }
 
     function showData(Request $req){
-        $orderlist = Order::all();
+        $orderlist = Order::orderBy('id','DESC')
+        ->get();
 
         return view('allOrder',['orderlist'=>$orderlist]);
     }
