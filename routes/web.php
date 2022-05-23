@@ -40,6 +40,9 @@ Route::get('edit-delivery{id}', [deliveryController::class,'editData']);
 Route::put('start-receive', [deliveryController::class,'updateReceiveData']);
 Route::put('add-receive', [deliveryController::class,'addReceiveData']);
 
+//receive
+Route::get('all-receive',[deliveryController::class, 'showReceiveData']);
+
 //plan
 Route::get('plan',[planController::class, 'showData']);
 Route::get('edit-plan{id}', [planController::class,'editData']);
