@@ -5,6 +5,7 @@ use App\Http\Controllers\orderController;
 use App\Http\Controllers\planController;
 use App\Http\Controllers\deliveryController;
 use App\Http\Controllers\productionController;
+use App\Http\Controllers\settingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,3 +58,10 @@ Route::get('edit-production{id}', [productionController::class,'editData']);
 Route::put('update-production', [productionController::class,'updateData']);
 Route::put('add-production', [productionController::class,'addDailyData']); // add daily production
 Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
+
+//settings
+Route::get('all-merchandiser',[settingsController::class, 'showMerchandiserData']); //show all merchandiser
+Route::put('add-merchandiser', [settingsController::class,'addMerchandiser']); // add new merchandiser
+Route::get('get-merchandiser{id}', [settingsController::class,'getMerchandiserData']); //get merchandiser name
+Route::put('edit-merchandiser', [settingsController::class,'editMerchandiserData']);
+Route::put('delete-merchandiser', [settingsController::class,'deleteMerchandiserData']);

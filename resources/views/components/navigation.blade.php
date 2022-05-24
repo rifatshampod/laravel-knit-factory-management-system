@@ -66,7 +66,18 @@
               </ul>
             </li>
             <li>
-              <a href="#"><i class="ti-user"></i> Settings </a>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-truck"></i>Settings<span
+                  class="sidebar-collapse-icon ti-angle-down"
+                ></span
+              ></a>
+              <ul>
+                <li><a href="all-merchandiser">Merchandiser</a></li>
+                <li><a href="#">Supplier</a></li>
+                <li><a href="#">Body Color</a></li>
+                <li><a href="#">Print Quality</a></li>
+                <li><a href="#">Parts Name</a></li>
+              </ul>
             </li>
             <li>
               <a href="user.html"><i class="ti-user"></i> User </a>

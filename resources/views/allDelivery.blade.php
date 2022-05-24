@@ -96,7 +96,7 @@
                                 <div class="employeeTableIcon d-flex">
                                 <button
                                 value="{{$item['id']}}"
-                                  class="Icon1 receiveBtn px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
+                                  class="Icon1 receiveBtn px-3 py-1 text-white cursor rounded d-flex border-none justify-content-center align-items-center mr-1"
                                 >
                                   <i class="ti-eye mr-1"></i> Receive
                                 </button>
@@ -104,7 +104,7 @@
                                 {{-- @if($item['delivery_status']==1) --}}
                                 <button
                                 value="{{$item['id']}}"
-                                class="Icon3 deliveryBtn px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
+                                class="Icon3 deliveryBtn px-3 py-1 text-white cursor rounded d-flex border-none justify-content-center align-items-center mr-1"
                                 >
                                   <i class="ti-pencil-alt mr-1"></i> Deliver
                               </button>
