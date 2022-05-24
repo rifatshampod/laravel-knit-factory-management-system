@@ -48,8 +48,8 @@
               ></a>
               <ul>
                 <li><a href="all-delivery">All Delivery</a></li>
-                <li><a href="all-receive">Receive Delivery</a></li>
-                <li><a href="#">Complete Delivery</a></li>
+                <li><a href="all-receive">Daily Receive</a></li>
+                <li><a href="daily-delivery">Daily Delivery</a></li>
               </ul>
             </li>
             <li>
@@ -66,7 +66,18 @@
               </ul>
             </li>
             <li>
-              <a href="#"><i class="ti-user"></i> Settings </a>
+              <a class="sidebar-sub-toggle"
+                ><i class="ti-truck"></i>Settings<span
+                  class="sidebar-collapse-icon ti-angle-down"
+                ></span
+              ></a>
+              <ul>
+                <li><a href="all-merchandiser">Merchandiser</a></li>
+                <li><a href="all-supplier">Supplier</a></li>
+                <li><a href="all-bodycolor">Body Color</a></li>
+                <li><a href="all-printquality">Print Quality</a></li>
+                <li><a href="all-parts">Parts Name</a></li>
+              </ul>
             </li>
             <li>
               <a href="user.html"><i class="ti-user"></i> User </a>

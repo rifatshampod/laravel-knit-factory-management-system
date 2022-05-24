@@ -55,63 +55,37 @@
                       >
                         <thead>
                           <tr>
+                            <th>Date</th>
                             <th>Style Name</th>
                             <th>Order No</th>
                             <th>Body Color</th>
-                            <th>First Receive Date</th>
                             <th>Today Receive</th>
                             <th>Total Receive</th>
                             <th>Receive Balance</th>
-                            <th>To Day Delivery</th>
-                            <th>Total Delivery</th>
-                            <th>Delivery Balance</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
                           @foreach ($deliverylist as $item)
                               <tr>
+                            <td>{{$item['created_at']->format('Y-m-d')}}</td>
                             <td>{{$item['style']}}</td>
                             <td>{{$item['order_no']}}</td>
                             <td>{{$item['body_color']}}</td>
-                            <td>{{$item['first_receive']}}</td>
-                            <td>{{$item['today_receive']}}</td>
-                            <td>{{$item['total_receive']}}</td>
-                            <td>{{$item['receive_balance']}}</td>
-                            <td>{{$item['today_delivery']}}</td>
-                            <td>{{$item['total_delivery']}}</td>
+                            <td>{{$item['delivery_today']}}</td>
+                            <td>{{$item['delivery_total']}}</td>
                             <td>{{$item['delivery_balance']}}</td>
                             <td>
-                              @if($item['status']==0)
+                              
                                 <div class="employeeTableIcon d-flex">
-                                  <button
-                                    value="{{$item['id']}}"
-                                    type="button"
-                                    class="btn editBtn btn-primary btn-flat btn-addon m-b-10 m-l-5"
-                                  >
-                                    <i class="ti-plus"></i>Start Delivery
-                                  </button>
-                                </div>
-                              @else
-                                <div class="employeeTableIcon d-flex">
-                                <button
-                                value="{{$item['id']}}"
-                                  class="Icon1 receiveBtn px-3 py-1 text-white cursor rounded d-flex border-none justify-content-center align-items-center mr-1"
+                                
+                                <div
+                                  class="Icon3 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                 >
-                                  <i class="ti-eye mr-1"></i> Receive
-                                </button>
-
-                                {{-- @if($item['delivery_status']==1) --}}
-                                <button
-                                value="{{$item['id']}}"
-                                class="Icon3 deliveryBtn px-3 py-1 text-white cursor rounded d-flex border-none justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-pencil-alt mr-1"></i> Deliver
-                              </button>
-
-                                {{-- @endif --}}
+                                  <i class="ti-pencil-alt mr-1"></i> Edit
+                                </div> 
                               </div>
-                              @endif
+                              
                               
                             </td>
                           </tr>
@@ -210,139 +184,6 @@
       </div>
     </div>
 
-    <!-------Receive-Modal------>
-    <div class="modal fade" id="receiveModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body">
-            <form action="add-receive" method="POST">
-              @csrf
-              @method('PUT')
-
-              <input type="hidden" name="id" id="receive_id" />
-
-              <div class="row">
-                
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label for="today_receive">Today Receive</label>
-                    <input
-                      type="number"
-                      name="today_receive"
-                      class="form-control"
-                      id="today_receive"
-                      placeholder="Today Receive"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="total_receive">Total Receive</label>
-                    <input
-                      type="number"
-                      name="total_receive"
-                      class="form-control"
-                      id="total_receive"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="receive_balance">Receive Balance </label>
-                    <input
-                      type="number"
-                      name="receive_balance"
-                      class="form-control"
-                      id="receive_balance"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="row justify-content-center">
-                <div class="col-lg-4">
-                  <button type="button" class="btn btn-danger w-100" data-dismiss="modal">
-                    Cancel
-                  </button>
-                </div>
-                <div class="col-lg-4">
-                  <button type="submit" class="btn btn-success w-100">
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-------Deliver-Modal------>
-    <div class="modal fade" id="deliveryModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-body">
-            <form action="add-delivery" method="POST">
-              @csrf
-              @method('PUT')
-
-              <input type="hidden" name="id" id="main_delivery_id" />
-
-              <div class="row">
-                
-                <div class="col-lg-12">
-                  <div class="form-group">
-                    <label for="today_delivery">Today Delivery</label>
-                    <input
-                      type="number"
-                      name="today_delivery"
-                      class="form-control"
-                      id="today_delivery"
-                      placeholder="Today Delivery"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="total_delivery">Total Delivery</label>
-                    <input
-                      type="number"
-                      name="total_delivery"
-                      class="form-control"
-                      id="total_delivery"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="delivery_balance">Delivery Balance </label>
-                    <input
-                      type="number"
-                      name="delivery_balance"
-                      class="form-control"
-                      id="delivery_balance"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="row justify-content-center">
-                <div class="col-lg-4">
-                  <button type="button" class="btn btn-danger w-100" data-dismiss="modal">
-                    Cancel
-                  </button>
-                </div>
-                <div class="col-lg-4">
-                  <button type="submit" class="btn btn-success w-100">
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
     <!-- jquery vendor -->
     <script src="assets/js/lib/jquery.min.js"></script>
     <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
@@ -385,33 +226,6 @@
         });
       });
 
-      //receive modal function
-
-      $(document).ready(function(){
-        $(document).on('click', '.receiveBtn', function(){
-          
-          var receive_id = $(this).val();
-          console.log(receive_id);
-          jQuery.noConflict(); 
-          $('#receiveModal').modal('show');
-          $('#receive_id').val(receive_id);
-         
-        });
-      });
-
-      //delivery modal function
-
-      $(document).ready(function(){
-        $(document).on('click', '.deliveryBtn', function(){
-          
-          var delivery_id = $(this).val();
-          console.log(delivery_id);
-          jQuery.noConflict(); 
-          $('#deliveryModal').modal('show');
-          $('#main_delivery_id').val(delivery_id);
-         
-        });
-      });
     </script>
 
 
