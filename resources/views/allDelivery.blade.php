@@ -100,14 +100,14 @@
                                 >
                                   <i class="ti-eye mr-1"></i> Receive
                                 </button>
-                                @if($item['delivery_status']==1)
+                                {{-- @if($item['delivery_status']==1) --}}
                                 <div
                                   class="Icon3 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                 >
                                   <i class="ti-pencil-alt mr-1"></i> Deliver
                                 </div>
 
-                                @endif
+                                {{-- @endif --}}
                               </div>
                               @endif
                               

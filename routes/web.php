@@ -51,3 +51,7 @@ Route::put('update-plan', [planController::class,'updateData']);
 
 //production
 Route::get('all-production',[productionController::class, 'showData']);
+Route::get('edit-production{id}', [productionController::class,'editData']);
+Route::put('update-production', [productionController::class,'updateData']);
+Route::put('add-production', [productionController::class,'addDailyData']); // add daily production
+Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
