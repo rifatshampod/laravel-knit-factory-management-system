@@ -60,8 +60,17 @@ Route::put('add-production', [productionController::class,'addDailyData']); // a
 Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
 
 //settings
+
+//merchandiser
 Route::get('all-merchandiser',[settingsController::class, 'showMerchandiserData']); //show all merchandiser
 Route::put('add-merchandiser', [settingsController::class,'addMerchandiser']); // add new merchandiser
 Route::get('get-merchandiser{id}', [settingsController::class,'getMerchandiserData']); //get merchandiser name
 Route::put('edit-merchandiser', [settingsController::class,'editMerchandiserData']);
 Route::put('delete-merchandiser', [settingsController::class,'deleteMerchandiserData']);
+
+//supplier
+Route::get('all-supplier',[settingsController::class, 'showSupplierData']); //show all merchandiser
+Route::put('add-supplier', [settingsController::class,'addSupplier']); // add new merchandiser
+Route::get('get-supplier{id}', [settingsController::class,'getSupplierData']); //get merchandiser name
+Route::put('edit-supplier', [settingsController::class,'editSupplierData']);
+Route::put('delete-supplier', [settingsController::class,'deleteSupplierData']);

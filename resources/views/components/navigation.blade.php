@@ -73,7 +73,7 @@
               ></a>
               <ul>
                 <li><a href="all-merchandiser">Merchandiser</a></li>
-                <li><a href="#">Supplier</a></li>
+                <li><a href="all-supplier">Supplier</a></li>
                 <li><a href="#">Body Color</a></li>
                 <li><a href="#">Print Quality</a></li>
                 <li><a href="#">Parts Name</a></li>
