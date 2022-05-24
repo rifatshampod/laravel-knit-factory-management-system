@@ -74,3 +74,24 @@ Route::put('add-supplier', [settingsController::class,'addSupplier']); // add ne
 Route::get('get-supplier{id}', [settingsController::class,'getSupplierData']); //get merchandiser name
 Route::put('edit-supplier', [settingsController::class,'editSupplierData']);
 Route::put('delete-supplier', [settingsController::class,'deleteSupplierData']);
+
+//bodycolor
+Route::get('all-bodycolor',[settingsController::class, 'showBodycolorData']); //show all merchandiser
+Route::put('add-bodycolor', [settingsController::class,'addBodycolor']); // add new merchandiser
+Route::get('get-bodycolor{id}', [settingsController::class,'getBodycolorData']); //get merchandiser name
+Route::put('edit-bodycolor', [settingsController::class,'editBodycolorData']);
+Route::put('delete-bodycolor', [settingsController::class,'deleteBodycolorData']);
+
+//printquality
+Route::get('all-printquality',[settingsController::class, 'showPrintqualityData']); //show all merchandiser
+Route::put('add-printquality', [settingsController::class,'addPrintquality']); // add new merchandiser
+Route::get('get-printquality{id}', [settingsController::class,'getPrintqualityData']); //get merchandiser name
+Route::put('edit-printquality', [settingsController::class,'editPrintqualityData']);
+Route::put('delete-printquality', [settingsController::class,'deletePrintqualityData']);
+
+//parts
+Route::get('all-parts',[settingsController::class, 'showPartsData']); //show all merchandiser
+Route::put('add-parts', [settingsController::class,'addParts']); // add new merchandiser
+Route::get('get-parts{id}', [settingsController::class,'getPartsData']); //get merchandiser name
+Route::put('edit-parts', [settingsController::class,'editPartsData']);
+Route::put('delete-parts', [settingsController::class,'deletePartsData']);

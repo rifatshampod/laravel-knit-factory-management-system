@@ -90,5 +90,125 @@ class settingsController extends Controller
 
         return redirect()->back()->with('status','Merchandiser information deleted');
     }
-    //merchandiser functions start
+    //supplier functions start
+
+    //Bodycolor functions start
+    function showBodycolorData(Request $req){
+        $bodycolorlist = Body_color::get();                
+        return view('settings.bodycolor',['bodycolorlist'=>$bodycolorlist]);
+    }
+
+    function addBodycolor(Request $req){
+        $bodycolor = new Body_color;
+        $bodycolor->name= $req->input('name');
+        $bodycolor->save();
+
+        return redirect()->back()->with('status','New bodycolor added successfully');
+    }
+
+    function getBodycolorData($id){
+        $bodycolor=Body_color::find($id);
+        return response()->json([
+            'status'=>200,
+            'bodycolor'=>$bodycolor,
+        ]);
+    }
+
+    function editBodycolorData(Request $req){
+        $bodycolor_id = $req->input('id');
+        $bodycolor=Body_color::find($bodycolor_id);
+        $bodycolor->name=$req->input('name');
+        $bodycolor->update();
+
+        return redirect()->back()->with('status','Merchandiser information has been updated');
+    }
+
+    function deleteBodycolorData(Request $req){
+        $bodycolor_id = $req->input('id');
+        $bodycolor=Body_color::find($bodycolor_id);
+        $bodycolor->delete();
+
+        return redirect()->back()->with('status','Merchandiser information deleted');
+    }
+    //Bodycolor functions start
+
+    //Print_quality functions start
+    function showPrintqualityData(Request $req){
+        $printqualitylist = Print_quality::get();                
+        return view('settings.printquality',['printqualitylist'=>$printqualitylist]);
+    }
+
+    function addPrintquality(Request $req){
+        $printquality = new Print_quality;
+        $printquality->name= $req->input('name');
+        $printquality->save();
+
+        return redirect()->back()->with('status','New printquality added successfully');
+    }
+
+    function getPrintqualityData($id){
+        $printquality=Print_quality::find($id);
+        return response()->json([
+            'status'=>200,
+            'printquality'=>$printquality,
+        ]);
+    }
+
+    function editPrintqualityData(Request $req){
+        $printquality_id = $req->input('id');
+        $printquality=Print_quality::find($printquality_id);
+        $printquality->name=$req->input('name');
+        $printquality->update();
+
+        return redirect()->back()->with('status','printquality information has been updated');
+    }
+
+    function deletePrintqualityData(Request $req){
+        $printquality_id = $req->input('id');
+        $printquality=Print_quality::find($printquality_id);
+        $printquality->delete();
+
+        return redirect()->back()->with('status','Merchandiser information deleted');
+    }
+    //Print_quality functions start
+
+    //Parts functions start
+    function showPartsData(Request $req){
+        $partslist = Parts_name::get();                
+        return view('settings.parts',['partslist'=>$partslist]);
+    }
+
+    function addParts(Request $req){
+        $parts = new Parts_name;
+        $parts->name= $req->input('name');
+        $parts->save();
+
+        return redirect()->back()->with('status','New printquality added successfully');
+    }
+
+    function getPartsData($id){
+        $parts=Parts_name::find($id);
+        return response()->json([
+            'status'=>200,
+            'parts'=>$parts,
+        ]);
+    }
+
+    function editPartsData(Request $req){
+        $parts_id = $req->input('id');
+        $parts=Parts_name::find($parts_id);
+        $parts->name=$req->input('name');
+        $parts->update();
+
+        return redirect()->back()->with('status','parts information has been updated');
+    }
+
+    function deletePartsData(Request $req){
+        $parts_id = $req->input('id');
+        $parts=Parts_name::find($parts_id);
+        $parts->delete();
+
+        return redirect()->back()->with('status','Merchandiser information deleted');
+    }
+    //Parts_name functions start
 }
