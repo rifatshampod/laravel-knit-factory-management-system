@@ -48,8 +48,8 @@
               ></a>
               <ul>
                 <li><a href="all-delivery">All Delivery</a></li>
-                <li><a href="all-receive">Receive Delivery</a></li>
-                <li><a href="#">Complete Delivery</a></li>
+                <li><a href="all-receive">Daily Receive</a></li>
+                <li><a href="daily-delivery">Daily Delivery</a></li>
               </ul>
             </li>
             <li>

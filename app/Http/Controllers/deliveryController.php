@@ -7,6 +7,7 @@ use App\Models\Delivery;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\Receive;
+use App\Models\Daily_delivery;
 
 class deliveryController extends Controller
 {
@@ -79,6 +80,30 @@ class deliveryController extends Controller
                     
 
         return view('allReceive',['deliverylist'=>$deliverylist]);
+    }
+
+    function addDeliveryData(Request $req){
+        $delivery = new Daily_delivery;
+        $delivery->delivery_id= $req->input('id');
+        $delivery->delivery_today= $req->input('today_delivery');
+        $delivery->delivery_total= $req->input('total_delivery');
+        $delivery->delivery_balance= $req->input('delivery_balance');
+        $delivery->save();
+
+        return redirect()->back()->with('status','delivery information has been updated');
+    }
+
+    function showDeliveryData(Request $req){
+        $deliverylist = Daily_delivery::join('deliveries','deliveries.id','=','daily_deliveries.delivery_id')
+                    ->join('orders','orders.id','=','deliveries.order_id')
+                    ->orderBy('daily_deliveries.id', 'DESC')
+                    ->get(['daily_deliveries.id as id','orders.id as orderId',
+                        'orders.style','orders.order_no','orders.body_color',
+                        'daily_deliveries.delivery_today','daily_deliveries.delivery_total',
+                        'daily_deliveries.delivery_balance','daily_deliveries.created_at']);
+                    
+
+        return view('allDailyDelivery',['deliverylist'=>$deliverylist]);
     }
 
 }
