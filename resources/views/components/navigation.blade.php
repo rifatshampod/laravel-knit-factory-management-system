@@ -37,7 +37,7 @@
               ></a>
               <ul>
                 <li><a href="all-production">All Production</a></li>
-                <li><a href="#">Day wise production</a></li>
+                <li><a href="daily-production">Day wise production</a></li>
               </ul>
             </li>
             <li>

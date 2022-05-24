@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <x-header title="Production Report"/>
+  <x-header title="All Delivery"/>
 
   <body>
     <x-navigation/>
@@ -12,7 +12,7 @@
             <div class="col-lg-8 p-r-0 title-margin-right">
               <div class="page-header">
                 <div class="page-title">
-                  <h1>Production Report</h1>
+                  <h1>All Delivery</h1>
                 </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
                     <li class="breadcrumb-item">
                       <a href="index.html">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Production Report</li>
+                    <li class="breadcrumb-item active">All Delivery</li>
                   </ol>
                 </div>
               </div>
@@ -36,6 +36,17 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card">
+                  {{-- <div class="d-flex justify-content-end">
+                    <div>
+                      <button
+                        onclick="location.href='createDelivery.html'"
+                        type="button"
+                        class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
+                      >
+                        <i class="ti-plus"></i>Add Delivery
+                      </button>
+                    </div>
+                  </div> --}}
                   <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
                       <table
@@ -44,79 +55,48 @@
                       >
                         <thead>
                           <tr>
-                            
-                            <th>Artwork</th>
+                            <th>Date</th>
                             <th>Style Name</th>
                             <th>Order No</th>
                             <th>Body Color</th>
-                            <th>Print Quality</th>
-                            <th>Parts Name</th>
-                            <th>Print Color</th>
-                            <th>Total Qty</th>
-                            <th>Target Per Day</th>
-                            <th>Inhand</th>
-                            <th>Today Prod</th>
-                            <th>Total Prod</th>
-                            <th>Without Print Balance</th>
+                            <th>Today Receive</th>
+                            <th>Total Receive</th>
+                            <th>Receive Balance</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach ($productionlist as $item)
+                          @foreach ($deliverylist as $item)
                               <tr>
-                            <td>
-                              <div class="orderImg">
-                                <img
-                                  src="{{$item['artwork']}}"
-                                  alt=""
-                                />
-                              </div>
-                            </td>
-                            
+                            <td>{{$item['created_at']->format('Y-m-d')}}</td>
                             <td>{{$item['style']}}</td>
                             <td>{{$item['order_no']}}</td>
                             <td>{{$item['body_color']}}</td>
-                            <td>{{$item['print_quality']}}</td>
-                            <td>{{$item['parts_name']}}</td>
-                            <td>{{$item['print_color']}}</td>
-                            <td>{{$item['total_qty']}}</td>
-                            <td>{{$item['target_perday']}}</td>
-                            <td>{{$item['inhand']}}</td>
-                            <td>{{$item['today_production']}}</td>
-                            <td>{{$item['total_production']}}</td>
-                            <td>{{$item['balance']}}</td>
+                            <td>{{$item['receive_today']}}</td>
+                            <td>{{$item['receive_total']}}</td>
+                            <td>{{$item['receive_balance']}}</td>
                             <td>
-                              @if($item['productionStatus']==0)
-                                <div class="employeeTableIcon">
-                                  <div class="">
-                                    <button
-                                    value="{{$item['id']}}"
-                                    class="btn editBtn btn-primary btn-flat btn-addon m-b-10 m-l-5">
-                                      <i class="ti-plus"></i>Add Production
-                                    </button>
-                                  </div>
-                                </div>
-                              @else
+                              
                                 <div class="employeeTableIcon d-flex">
+                                  <!--
                                 <button
                                 value="{{$item['id']}}"
-                                  class="Icon1 dailyBtn px-3 py-1 text-white border-none cursor rounded d-flex justify-content-center align-items-center mr-1"
+                                  class="Icon1 receiveBtn px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                 >
-                                  <i class="ti-plus mr-1"></i>Add Today
-                                </button>
-                                <button
-                                value="{{$item['id']}}"
-                                  class="Icon3 editBtn px-3 py-1 text-white cursor border-none rounded d-flex justify-content-center align-items-center mr-1"
+                                  <i class="ti-eye mr-1"></i> Receive
+                                </button>  -->
+                                
+                                <div
+                                  class="Icon3 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
                                 >
-                                  <i class="ti-pencil-alt mr-1"></i>Edit
-                              </button>
+                                  <i class="ti-pencil-alt mr-1"></i> Edit
+                                </div> 
                               </div>
-
-                              @endif
+                              
+                              
                             </td>
                           </tr>
                           @endforeach
-                          
                           
                         </tbody>
                       </table>
@@ -133,62 +113,62 @@
       </div>
     </div>
 
-    <!-------edit-Modal------>
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-------Start-Modal------>
+    <div class="modal fade" id="startModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
-            <form action="update-production" method="POST">
+            <form action="start-receive" method="POST">
               @csrf
               @method('PUT')
 
-              <input type="hidden" name="id" id="production_id" />
-              
+              <input type="hidden" name="id" id="delivery_id" />
+              <input type="hidden" name="order_id" id="order_id" />
 
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="target_day">Inhand</label>
+                    <label for="first_receive">First Receive Date</label>
                     <input
-                      type="number"
-                      name="inhand"
+                      type="date"
+                      name="first_receive"
                       class="form-control"
-                      id="inhand"
-                      placeholder="Enter inhand amount"
+                      id="first_receive"
+                      placeholder="Enter first Receive"
                     />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="today_production">Today Production</label>
+                    <label for="today_receive">Today Receive</label>
                     <input
                       type="number"
-                      name="today_production"
+                      name="today_receive"
                       class="form-control"
-                      id="today_production"
-                      placeholder="Today Production amount"
+                      id="today_receive"
+                      placeholder="Today Receive"
                     />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="total_production">Total Production</label>
+                    <label for="total_receive">Total Receive</label>
                     <input
                       type="number"
-                      name="total_production"
+                      name="total_receive"
                       class="form-control"
-                      id="total_production"
+                      id="total_receive"
                     />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="balance">Without Print Balance</label>
+                    <label for="receive_balance">Receive Balance </label>
                     <input
                       type="number"
-                      name="balance"
+                      name="receive_balance"
                       class="form-control"
-                      id="balance"
+                      id="receive_balance"
                     />
                   </div>
                 </div>
@@ -211,50 +191,50 @@
       </div>
     </div>
 
-    <!-------Today Production Modal------>
-    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-------Receive-Modal------>
+    <div class="modal fade" id="receiveModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
-            <form action="add-production" method="POST">
+            <form action="add-receive" method="POST">
               @csrf
               @method('PUT')
 
-              <input type="hidden" name="id" id="daily_id" />
+              <input type="hidden" name="id" id="receive_id" />
 
               <div class="row">
                 
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="today_production">Today Production</label>
+                    <label for="today_receive">Today Receive</label>
                     <input
                       type="number"
-                      name="today_production"
+                      name="today_receive"
                       class="form-control"
-                      id="today_production"
-                      placeholder="Today Production"
+                      id="today_receive"
+                      placeholder="Today Receive"
                     />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="total_production">Total Production</label>
+                    <label for="total_receive">Total Receive</label>
                     <input
                       type="number"
-                      name="total_production"
+                      name="total_receive"
                       class="form-control"
-                      id="total_production"
+                      id="total_receive"
                     />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="balance">Without Print Balance </label>
+                    <label for="receive_balance">Receive Balance </label>
                     <input
                       type="number"
-                      name="balance"
+                      name="receive_balance"
                       class="form-control"
-                      id="balance"
+                      id="receive_balance"
                     />
                   </div>
                 </div>
@@ -276,6 +256,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- jquery vendor -->
     <script src="assets/js/lib/jquery.min.js"></script>
@@ -294,41 +275,44 @@
     <script src="assets/js/lib/data-table/datatables.min.js"></script>
     <script src="assets/js/lib/data-table/datatables-init.js"></script>
 
-        <!-- Edit Modal functions -->
+    <!-- Edit Modal functions -->
     <script>
       $(document).ready(function(){
         $(document).on('click', '.editBtn', function(){
           
-          var production_id = $(this).val();
-          console.log(production_id);
+          var delivery_id = $(this).val();
+          console.log(delivery_id);
           jQuery.noConflict(); 
-          $('#editModal').modal('show');
+          $('#startModal').modal('show');
           $.ajax({
-            url: '/edit-production' + production_id,
+            url: '/edit-delivery' + delivery_id,
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#inhand').val(response.production.inhand);
-              $('#today_production').val(response.production.today_production);
-              $('#total_production').val(response.production.total_production);
-              $('#balance').val(response.production.balance);
-              $('#production_id').val(production_id);
+              $('#first_receive').val(response.delivery.first_receive);
+              $('#today_receive').val(response.delivery.today_receive);
+              $('#total_receive').val(response.delivery.total_receive);
+              $('#receive_balance').val(response.delivery.receive_balance);
+              $('#order_id').val(response.delivery.order_id);
+              $('#delivery_id').val(delivery_id);
             }
           });
         });
       });
 
       $(document).ready(function(){
-        $(document).on('click', '.dailyBtn', function(){
+        $(document).on('click', '.receiveBtn', function(){
           
-          var daily_id = $(this).val();
-          console.log(daily_id);
+          var receive_id = $(this).val();
+          console.log(receive_id);
           jQuery.noConflict(); 
-          $('#addModal').modal('show');
-          $('#daily_id').val(daily_id);
+          $('#receiveModal').modal('show');
+          $('#receive_id').val(receive_id);
          
         });
       });
     </script>
+
+
   </body>
 </html>

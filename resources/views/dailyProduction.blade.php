@@ -44,17 +44,10 @@
                       >
                         <thead>
                           <tr>
-                            
-                            <th>Artwork</th>
-                            <th>Style Name</th>
+                            <th>Date</th>
                             <th>Order No</th>
-                            <th>Body Color</th>
-                            <th>Print Quality</th>
-                            <th>Parts Name</th>
-                            <th>Print Color</th>
                             <th>Total Qty</th>
                             <th>Target Per Day</th>
-                            <th>Inhand</th>
                             <th>Today Prod</th>
                             <th>Total Prod</th>
                             <th>Without Print Balance</th>
@@ -62,57 +55,27 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach ($productionlist as $item)
+                          @foreach ($dailylist as $item)
                               <tr>
-                            <td>
-                              <div class="orderImg">
-                                <img
-                                  src="{{$item['artwork']}}"
-                                  alt=""
-                                />
-                              </div>
-                            </td>
                             
-                            <td>{{$item['style']}}</td>
+                            <td>{{$item['created_at']->format('Y-m-d')}}</td>
                             <td>{{$item['order_no']}}</td>
-                            <td>{{$item['body_color']}}</td>
-                            <td>{{$item['print_quality']}}</td>
-                            <td>{{$item['parts_name']}}</td>
-                            <td>{{$item['print_color']}}</td>
                             <td>{{$item['total_qty']}}</td>
-                            <td>{{$item['target_perday']}}</td>
-                            <td>{{$item['inhand']}}</td>
+                            <td>{{$item['targetPerDay']}}</td>
                             <td>{{$item['today_production']}}</td>
                             <td>{{$item['total_production']}}</td>
                             <td>{{$item['balance']}}</td>
                             <td>
-                              @if($item['productionStatus']==0)
-                                <div class="employeeTableIcon">
-                                  <div class="">
-                                    <button
-                                    value="{{$item['id']}}"
-                                    class="btn editBtn btn-primary btn-flat btn-addon m-b-10 m-l-5">
-                                      <i class="ti-plus"></i>Add Production
-                                    </button>
-                                  </div>
-                                </div>
-                              @else
-                                <div class="employeeTableIcon d-flex">
-                                <button
-                                value="{{$item['id']}}"
-                                  class="Icon1 dailyBtn px-3 py-1 text-white border-none cursor rounded d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-plus mr-1"></i>Add Today
-                                </button>
+                              <div class="employeeTableIcon d-flex">
+                                
                                 <button
                                 value="{{$item['id']}}"
                                   class="Icon3 editBtn px-3 py-1 text-white cursor border-none rounded d-flex justify-content-center align-items-center mr-1"
                                 >
                                   <i class="ti-pencil-alt mr-1"></i>Edit
-                              </button>
+                                </button>
                               </div>
 
-                              @endif
                             </td>
                           </tr>
                           @endforeach
@@ -143,7 +106,6 @@
               @method('PUT')
 
               <input type="hidden" name="id" id="production_id" />
-              
 
               <div class="row">
                 <div class="col-lg-6">
