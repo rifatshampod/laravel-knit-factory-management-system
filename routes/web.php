@@ -21,6 +21,12 @@ use App\Http\Controllers\settingsController;
 // Route::get('/', function () {
 //     return view('login');
 // });
+
+Auth::routes(['register' => false]);  //auth routes call
+
+Route::group(['middleware' => ['web', 'auth']], function(){
+
+
 Route::view('/','index');  //add redirector later
 Route::view('dashboard','index');
 
@@ -95,3 +101,5 @@ Route::put('add-parts', [settingsController::class,'addParts']); // add new merc
 Route::get('get-parts{id}', [settingsController::class,'getPartsData']); //get merchandiser name
 Route::put('edit-parts', [settingsController::class,'editPartsData']);
 Route::put('delete-parts', [settingsController::class,'deletePartsData']);
+
+});

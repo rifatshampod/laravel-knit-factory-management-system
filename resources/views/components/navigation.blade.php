@@ -15,43 +15,95 @@
             </li>
 
             <li class="label">Apps</li>
+              @if (auth()->user()->role == 2)
+                <li>
+                  <a class="sidebar-sub-toggle"
+                    ><i class="ti-gift"></i> Order<span
+                      class="sidebar-collapse-icon ti-angle-down"
+                    ></span
+                  ></a>
+                  <ul>
+                    <li><a href="create-order">Create Order</a></li>
+                    <li><a href="order">All Order</a></li>
+                  </ul>
+                </li>
+              @elseif (auth()->user()->role == 3)
+                <li>
+                <a class="" href="plan"><i class="ti-gift"></i>Planning</a>
+                </li>
+
+              @elseif (auth()->user()->role == 4)
+                <li>
+                <a class="sidebar-sub-toggle"
+                  ><i class="ti-layers-alt"></i>Production<span
+                    class="sidebar-collapse-icon ti-angle-down"
+                  ></span
+                ></a>
+                <ul>
+                  <li><a href="all-production">All Production</a></li>
+                  <li><a href="daily-production">Day wise production</a></li>
+                </ul>
+                </li>
+              @elseif (auth()->user()->role == 5)
+                <li>
+                <a class="sidebar-sub-toggle"
+                  ><i class="ti-truck"></i>Delivery<span
+                    class="sidebar-collapse-icon ti-angle-down"
+                  ></span
+                ></a>
+                <ul>
+                  <li><a href="all-delivery">All Delivery</a></li>
+                  <li><a href="all-receive">Daily Receive</a></li>
+                  <li><a href="daily-delivery">Daily Delivery</a></li>
+                </ul>
+                </li>
+
+              @endif
+
+              {{-- admin users --}}
+            @if(auth()->user()->role == 1)  
+
             <li>
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-gift"></i> Order<span
-                  class="sidebar-collapse-icon ti-angle-down"
-                ></span
-              ></a>
-              <ul>
-                <li><a href="create-order">Create Order</a></li>
-                <li><a href="order">All Order</a></li>
-              </ul>
-            </li>
+                  <a class="sidebar-sub-toggle"
+                    ><i class="ti-gift"></i> Order<span
+                      class="sidebar-collapse-icon ti-angle-down"
+                    ></span
+                  ></a>
+                  <ul>
+                    <li><a href="create-order">Create Order</a></li>
+                    <li><a href="order">All Order</a></li>
+                  </ul>
+                </li>
+
             <li>
-              <a class="" href="plan"><i class="ti-gift"></i>Planning</a>
-            </li>
+                <a class="" href="plan"><i class="ti-gift"></i>Planning</a>
+                </li>
+
             <li>
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-layers-alt"></i>Production<span
-                  class="sidebar-collapse-icon ti-angle-down"
-                ></span
-              ></a>
-              <ul>
-                <li><a href="all-production">All Production</a></li>
-                <li><a href="daily-production">Day wise production</a></li>
-              </ul>
-            </li>
+                <a class="sidebar-sub-toggle"
+                  ><i class="ti-layers-alt"></i>Production<span
+                    class="sidebar-collapse-icon ti-angle-down"
+                  ></span
+                ></a>
+                <ul>
+                  <li><a href="all-production">All Production</a></li>
+                  <li><a href="daily-production">Day wise production</a></li>
+                </ul>
+                </li>
+              
             <li>
-              <a class="sidebar-sub-toggle"
-                ><i class="ti-truck"></i>Delivery<span
-                  class="sidebar-collapse-icon ti-angle-down"
-                ></span
-              ></a>
-              <ul>
-                <li><a href="all-delivery">All Delivery</a></li>
-                <li><a href="all-receive">Daily Receive</a></li>
-                <li><a href="daily-delivery">Daily Delivery</a></li>
-              </ul>
-            </li>
+                <a class="sidebar-sub-toggle"
+                  ><i class="ti-truck"></i>Delivery<span
+                    class="sidebar-collapse-icon ti-angle-down"
+                  ></span
+                ></a>
+                <ul>
+                  <li><a href="all-delivery">All Delivery</a></li>
+                  <li><a href="all-receive">Daily Receive</a></li>
+                  <li><a href="daily-delivery">Daily Delivery</a></li>
+                </ul>
+                </li>
+
             <li>
               <a class="sidebar-sub-toggle"
                 ><i class="ti-truck"></i>Report<span
@@ -81,6 +133,19 @@
             </li>
             <li>
               <a href="user.html"><i class="ti-user"></i> User </a>
+            </li>
+            @endif
+            
+            <li>
+              <a class="dropdown-item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                 document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+              </a>
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
             </li>
           </ul>
         </div>
