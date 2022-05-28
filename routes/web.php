@@ -6,6 +6,7 @@ use App\Http\Controllers\planController;
 use App\Http\Controllers\deliveryController;
 use App\Http\Controllers\productionController;
 use App\Http\Controllers\settingsController;
+use App\Http\Controllers\userController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,5 +102,12 @@ Route::put('add-parts', [settingsController::class,'addParts']); // add new merc
 Route::get('get-parts{id}', [settingsController::class,'getPartsData']); //get merchandiser name
 Route::put('edit-parts', [settingsController::class,'editPartsData']);
 Route::put('delete-parts', [settingsController::class,'deletePartsData']);
+
+//users
+Route::get('users',[userController::class, 'showUser']);
+Route::post('createuser',[userController::class,'makeUser']);
+Route::get('edit-user{id}', [userController::class,'editData']);
+Route::delete('delete-user', [userController::class,'deleteData']);
+Route::put('update-user', [userController::class,'updateData']);
 
 });
