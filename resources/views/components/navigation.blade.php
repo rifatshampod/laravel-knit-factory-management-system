@@ -132,7 +132,7 @@
               </ul>
             </li>
             <li>
-              <a href="user.html"><i class="ti-user"></i> User </a>
+              <a href="users"><i class="ti-user"></i> User </a>
             </li>
             @endif
             
