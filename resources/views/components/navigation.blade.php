@@ -93,12 +93,12 @@
               
             <li>
                 <a class="sidebar-sub-toggle"
-                  ><i class="ti-truck"></i>Delivery<span
+                  ><i class="ti-truck"></i>Receive / Delivery<span
                     class="sidebar-collapse-icon ti-angle-down"
                   ></span
                 ></a>
                 <ul>
-                  <li><a href="all-delivery">All Delivery</a></li>
+                  <li><a href="all-delivery">All Data</a></li>
                   <li><a href="all-receive">Daily Receive</a></li>
                   <li><a href="daily-delivery">Daily Delivery</a></li>
                 </ul>
