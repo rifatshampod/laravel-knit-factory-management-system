@@ -108,7 +108,7 @@
                                   <div class="">
                                     <button
                                     value="{{$item['id']}}"
-                                    class="btn editBtn btn-primary btn-flat btn-addon m-b-10 m-l-5">
+                                    class="btn startBtn btn-primary btn-flat btn-addon m-b-10 m-l-5">
                                       <i class="ti-plus"></i>Add Plan
                                     </button>
                                   </div>
@@ -221,7 +221,7 @@
                       name="target_day"
                       class="form-control"
                       id="target_day"
-                      placeholder="Enter number of days" onblur="targetDay()"
+                      placeholder="Enter number of days"
                       readonly
                     />
                   </div>
@@ -309,7 +309,7 @@
     <!-- Edit Modal functions -->
     <script>
       $(document).ready(function(){
-        $(document).on('click', '.editBtn', function(){ 
+        $(document).on('click', '.startBtn', function(){ 
           var plan_id = $(this).val();
           console.log(plan_id);
           jQuery.noConflict(); 
@@ -320,12 +320,26 @@
             success:function(response){
               console.log(response);
               $('#total_qty').val(response.plan.total_qty);
-              $('#target_day').val(response.plan.target_day);
-              $('#target_perday').val(response.plan.target_perday);
+              $('#plan_id').val(plan_id);
+            }
+          });
+        });
+
+        $(document).on('click', '.editBtn', function(){ 
+          var plan_id2 = $(this).val();
+          console.log(plan_id);
+          jQuery.noConflict(); 
+          $('#editModal').modal('show');
+          $.ajax({
+            url: '/edit-plan' + plan_id2,
+            type: "GET",
+            success:function(response){
+              console.log(response);
+              $('#total_qty').val(response.plan.total_qty);
+              // $('#target_perday').val(response.plan.target_perday);
               $('#production_start').val(response.plan.production_start);
               $('#production_end').val(response.plan.production_end);
-              $('#section').val(response.section.name);
-              $('#plan_id').val(plan_id);
+              $('#plan_id').val(plan_id2);
             }
           });
         });
