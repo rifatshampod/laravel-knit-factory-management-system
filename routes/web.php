@@ -110,4 +110,11 @@ Route::get('edit-user{id}', [userController::class,'editData']);
 Route::delete('delete-user', [userController::class,'deleteData']);
 Route::put('update-user', [userController::class,'updateData']);
 
+//sections
+Route::get('all-sections',[settingsController::class, 'showSectionsData']); //show all merchandiser
+Route::put('add-sections', [settingsController::class,'addSections']); // add new merchandiser
+Route::get('get-sections{id}', [settingsController::class,'getSectionsData']); //get merchandiser name
+Route::put('edit-sections', [settingsController::class,'editSectionsData']);
+Route::put('delete-sections', [settingsController::class,'deleteSectionsData']);
+
 });
