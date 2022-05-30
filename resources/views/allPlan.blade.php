@@ -336,7 +336,8 @@
             success:function(response){
               console.log(response);
               $('#total_qty').val(response.plan.total_qty);
-              // $('#target_perday').val(response.plan.target_perday);
+              $('#target_perday').val(response.plan.target_perday);
+              $('#target_day').val(response.plan.target_day);
               $('#production_start').val(response.plan.production_start);
               $('#production_end').val(response.plan.production_end);
               $('#plan_id').val(plan_id2);
