@@ -146,15 +146,16 @@
               
 
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="target_day">Inhand</label>
+                    <label for="target_day">Target Per Day</label>
                     <input
                       type="number"
-                      name="inhand"
+                      name="target"
                       class="form-control"
-                      id="inhand"
-                      placeholder="Enter inhand amount"
+                      id="target"
+                      placeholder="Enter target amount"
+                      readonly
                     />
                   </div>
                 </div>
@@ -165,19 +166,8 @@
                       type="number"
                       name="today_production"
                       class="form-control"
-                      id="today_production"
+                      id="today_production" onblur="findBalance()"
                       placeholder="Today Production amount"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="total_production">Total Production</label>
-                    <input
-                      type="number"
-                      name="total_production"
-                      class="form-control"
-                      id="total_production"
                     />
                   </div>
                 </div>
@@ -188,7 +178,8 @@
                       type="number"
                       name="balance"
                       class="form-control"
-                      id="balance"
+                      id="balance" 
+                      readonly
                     />
                   </div>
                 </div>
@@ -297,8 +288,9 @@
         <!-- Edit Modal functions -->
     <script>
       $(document).ready(function(){
+
+        //production start
         $(document).on('click', '.editBtn', function(){
-          
           var production_id = $(this).val();
           console.log(production_id);
           jQuery.noConflict(); 
@@ -308,7 +300,7 @@
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#inhand').val(response.production.inhand);
+              $('#target').val(response.production.target_perday);
               $('#today_production').val(response.production.today_production);
               $('#total_production').val(response.production.total_production);
               $('#balance').val(response.production.balance);
@@ -318,9 +310,9 @@
         });
       });
 
+      //daily production
       $(document).ready(function(){
         $(document).on('click', '.dailyBtn', function(){
-          
           var daily_id = $(this).val();
           console.log(daily_id);
           jQuery.noConflict(); 
@@ -329,6 +321,14 @@
          
         });
       });
+
+      //---find balance
+      function findBalance(){
+        const todayProduction = document.getElementById("today_production").value;
+        const target = document.getElementById("target").value;
+        const balance = todayProduction - target;
+        document.getElementById("balance").value = balance;
+      }
     </script>
   </body>
 </html>

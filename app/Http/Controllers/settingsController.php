@@ -8,6 +8,7 @@ use App\Models\Supplier;
 use App\Models\Body_color;
 use App\Models\Print_quality;
 use App\Models\Parts_name;
+use App\Models\Section;
 
 class settingsController extends Controller
 {
@@ -211,4 +212,44 @@ class settingsController extends Controller
         return redirect()->back()->with('status','Merchandiser information deleted');
     }
     //Parts_name functions start
+
+    //Sections functions start
+    function showSectionsData(Request $req){
+        $sectionslist = Section::get();                
+        return view('settings.sections',['sectionslist'=>$sectionslist]);
+    }
+
+    function addSections(Request $req){
+        $sections = new Section;
+        $sections->name= $req->input('name');
+        $sections->save();
+
+        return redirect()->back()->with('status','New printquality added successfully');
+    }
+
+    function getSectionsData($id){
+        $sections=Section::find($id);
+        return response()->json([
+            'status'=>200,
+            'sections'=>$sections,
+        ]);
+    }
+
+    function editSectionsData(Request $req){
+        $sections_id = $req->input('id');
+        $sections=Section::find($sections_id);
+        $sections->name=$req->input('name');
+        $sections->update();
+
+        return redirect()->back()->with('status','sections information has been updated');
+    }
+
+    function deleteSectionsData(Request $req){
+        $sections_id = $req->input('id');
+        $sections=Section::find($sections_id);
+        $sections->delete();
+
+        return redirect()->back()->with('status','sections information deleted');
+    }
+    //Section functions end
 }

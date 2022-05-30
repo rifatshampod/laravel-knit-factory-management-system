@@ -129,6 +129,7 @@
                 <li><a href="all-bodycolor">Body Color</a></li>
                 <li><a href="all-printquality">Print Quality</a></li>
                 <li><a href="all-parts">Parts Name</a></li>
+                <li><a href="all-sections">Section</a></li>
               </ul>
             </li>
             <li>

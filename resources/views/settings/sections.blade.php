@@ -12,7 +12,7 @@
             <div class="col-lg-8 p-r-0 title-margin-right">
               <div class="page-header">
                 <div class="page-title">
-                  <h1>All Delivery</h1>
+                  <h1>All Sections</h1>
                 </div>
               </div>
             </div>
@@ -22,9 +22,9 @@
                 <div class="page-title">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                      <a href="index.html">Dashboard</a>
+                      <a href="/">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">All Delivery</li>
+                    <li class="breadcrumb-item active"> Sections</li>
                   </ol>
                 </div>
               </div>
@@ -33,20 +33,19 @@
           </div>
           <!-- /# row -->
           <section id="main-content">
-            <div class="row">
-              <div class="col-lg-12">
+            <div class="row justify-content-center">
+              <div class="col-lg-8">
                 <div class="card">
-                  {{-- <div class="d-flex justify-content-end">
+                  <div class="d-flex justify-content-end">
                     <div>
                       <button
-                        onclick="location.href='createDelivery.html'"
                         type="button"
-                        class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
+                        class="btn btn-primary addBtn btn-flat btn-addon m-b-10 m-l-5"
                       >
-                        <i class="ti-plus"></i>Add Delivery
+                        <i class="ti-plus"></i>Add Section
                       </button>
                     </div>
-                  </div> --}}
+                  </div>
                   <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
                       <table
@@ -55,26 +54,16 @@
                       >
                         <thead>
                           <tr>
-                            <th>Date</th>
-                            <th>Style Name</th>
-                            <th>Order No</th>
-                            <th>Body Color</th>
-                            <th>Today Receive</th>
-                            {{-- <th>Total Receive</th>
-                            <th>Receive Balance</th> --}}
+                            <th>Id</th>
+                            <th>Section Name</th>
                             <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach ($deliverylist as $item)
+                          @foreach ($sectionslist as $item)
                               <tr>
-                            <td>{{$item['created_at']->format('Y-m-d')}}</td>
-                            <td>{{$item['style']}}</td>
-                            <td>{{$item['order_no']}}</td>
-                            <td>{{$item['body_color']}}</td>
-                            <td>{{$item['receive_today']}}</td>
-                            {{-- <td>{{$item['receive_total']}}</td>
-                            <td>{{$item['receive_balance']}}</td> --}}
+                            <td>{{$item['id']}}</td>
+                            <td>{{$item['name']}}</td>
                             <td>
                               
                                 <div class="employeeTableIcon d-flex">
@@ -86,12 +75,21 @@
                                   <i class="ti-eye mr-1"></i> Receive
                                 </button>  -->
                                 
-                                <div
-                                  class="Icon3 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
+                                <button
+                                  value="{{$item['id']}}"
+                                  class="Icon3 px-3 py-1 bg-success editBtn text-white cursor border-none
+                                  rounded d-flex justify-content-center align-items-center mr-1"
                                 >
                                   <i class="ti-pencil-alt mr-1"></i> Edit
-                                </div> 
-                              </div>
+                              </button> 
+                              <button
+                                value="{{$item['id']}}"
+                                  class="Icon3 bg-danger px-3 py-1 deleteBtn text-white cursor border-none
+                                   rounded d-flex justify-content-center align-items-center mr-1"
+                                >
+                                  <i class="ti-trash mr-1"></i> Delete
+                              </button> 
+                            </div>
                               
                               
                             </td>
@@ -113,62 +111,25 @@
       </div>
     </div>
 
-        <!-------Start-Modal------>
-    <div class="modal fade" id="startModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-------Add sections------>
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
-            <form action="start-receive" method="POST">
+            <form action="add-sections" method="POST">
               @csrf
               @method('PUT')
 
-              <input type="hidden" name="id" id="delivery_id" />
-              <input type="hidden" name="order_id" id="order_id" />
-
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="first_receive">First Receive Date</label>
+                    <label for="name">Sections Name</label>
                     <input
-                      type="date"
-                      name="first_receive"
+                      type="text"
+                      name="name"
                       class="form-control"
-                      id="first_receive"
-                      placeholder="Enter first Receive"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="today_receive">Today Receive</label>
-                    <input
-                      type="number"
-                      name="today_receive"
-                      class="form-control"
-                      id="today_receive"
-                      placeholder="Today Receive"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="total_receive">Total Receive</label>
-                    <input
-                      type="number"
-                      name="total_receive"
-                      class="form-control"
-                      id="total_receive"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="receive_balance">Receive Balance </label>
-                    <input
-                      type="number"
-                      name="receive_balance"
-                      class="form-control"
-                      id="receive_balance"
+                      id="name"
+                      placeholder="Enter sections Name"
                     />
                   </div>
                 </div>
@@ -191,53 +152,31 @@
       </div>
     </div>
 
-        <!-------Receive-Modal------>
-    <div class="modal fade" id="receiveModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-------Edit sections------>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body">
-            <form action="add-receive" method="POST">
+            <form action="edit-sections" method="POST">
               @csrf
               @method('PUT')
 
-              <input type="hidden" name="id" id="receive_id" />
+              <input type="hidden" name="id" id="sections_id" />
 
               <div class="row">
                 
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="today_receive">Today Receive</label>
+                    <label for="name">Section Name</label>
                     <input
-                      type="number"
-                      name="today_receive"
+                      type="text"
+                      name="name"
                       class="form-control"
-                      id="today_receive"
-                      placeholder="Today Receive"
+                      id="sections_name"
                     />
                   </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="total_receive">Total Receive</label>
-                    <input
-                      type="number"
-                      name="total_receive"
-                      class="form-control"
-                      id="total_receive"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="receive_balance">Receive Balance </label>
-                    <input
-                      type="number"
-                      name="receive_balance"
-                      class="form-control"
-                      id="receive_balance"
-                    />
-                  </div>
-                </div>
+                
               </div>
               <div class="row justify-content-center">
                 <div class="col-lg-4">
@@ -248,6 +187,38 @@
                 <div class="col-lg-4">
                   <button type="submit" class="btn btn-success w-100">
                     Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-------delete sections------>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-body">
+            <form action="delete-sections" method="POST">
+              @csrf
+              @method('PUT')
+              <div class="text-center pt-4 pb-4">
+                <h4>Are you sure you want to delete?</h4>
+              </div>
+
+              <input type="hidden" name="id" id="delete_sections_id" />
+
+              <div class="row justify-content-center">
+                <div class="col-lg-4">
+                  <button type="button" class="btn btn-success w-100" data-dismiss="modal">
+                    No, cancel
+                  </button>
+                </div>
+                <div class="col-lg-4">
+                  <button type="submit" class="btn btn-danger w-100">
+                    Yes, Delete
                   </button>
                 </div>
               </div>
@@ -280,35 +251,37 @@
       $(document).ready(function(){
         $(document).on('click', '.editBtn', function(){
           
-          var delivery_id = $(this).val();
-          console.log(delivery_id);
+          var sections_id = $(this).val();
+          console.log(sections_id);
           jQuery.noConflict(); 
-          $('#startModal').modal('show');
+          $('#editModal').modal('show');
+          
+
           $.ajax({
-            url: '/edit-delivery' + delivery_id,
+            url: '/get-sections' + sections_id,
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#first_receive').val(response.delivery.first_receive);
-              $('#today_receive').val(response.delivery.today_receive);
-              $('#total_receive').val(response.delivery.total_receive);
-              $('#receive_balance').val(response.delivery.receive_balance);
-              $('#order_id').val(response.delivery.order_id);
-              $('#delivery_id').val(delivery_id);
+              $('#sections_name').val(response.sections.name);
+              $('#sections_id').val(sections_id);
             }
           });
         });
       });
 
       $(document).ready(function(){
-        $(document).on('click', '.receiveBtn', function(){
-          
-          var receive_id = $(this).val();
-          console.log(receive_id);
+        $(document).on('click', '.addBtn', function(){
           jQuery.noConflict(); 
-          $('#receiveModal').modal('show');
-          $('#receive_id').val(receive_id);
-         
+          $('#addModal').modal('show');
+        });
+      });
+
+      $(document).ready(function(){
+        $(document).on('click', '.deleteBtn', function(){
+          var sections_id = $(this).val();
+          jQuery.noConflict(); 
+          $('#deleteModal').modal('show');
+          $('#delete_sections_id').val(sections_id);
         });
       });
     </script>

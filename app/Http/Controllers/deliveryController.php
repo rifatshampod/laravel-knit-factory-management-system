@@ -15,7 +15,7 @@ class deliveryController extends Controller
         $deliverylist = Delivery::join('orders','orders.id','=','deliveries.order_id')
                     ->orderBy('deliveries.id', 'DESC')
                     ->get(['deliveries.id as id','orders.id as orderId',
-                        'orders.style','orders.order_no','orders.body_color',
+                        'orders.style','orders.order_no','orders.body_color','orders.total_qty as total_order',
                         'deliveries.first_receive', 'deliveries.today_receive',
                         'deliveries.total_receive','deliveries.receive_balance',
                         'deliveries.today_delivery','deliveries.total_delivery',
@@ -38,14 +38,16 @@ class deliveryController extends Controller
         $delivery_id = $req->input('id');
         $delivery=Delivery::find($delivery_id);
         $delivery->first_receive=$req->input('first_receive');
+        $delivery->today_receive= $req->input('today_receive');
+        $delivery->total_receive+= $req->input('today_receive');
         $delivery->status=1;
         $delivery->update();
 
         $receive = new Receive;
         $receive->delivery_id= $req->input('id');
         $receive->receive_today= $req->input('today_receive');
-        $receive->receive_total= $req->input('total_receive');
-        $receive->receive_balance= $req->input('receive_balance');
+        // $receive->receive_total= $req->input('total_receive');
+        // $receive->receive_balance= $req->input('receive_balance');
         $receive->save();
 
 
@@ -65,6 +67,12 @@ class deliveryController extends Controller
         $receive->receive_total= $req->input('total_receive');
         $receive->receive_balance= $req->input('receive_balance');
         $receive->save();
+
+        $delivery_id = $req->input('id');
+        $delivery=Delivery::find($delivery_id);
+        $delivery->today_receive= $req->input('today_receive');
+        $delivery->total_receive+= $req->input('today_receive');
+        $delivery->update();
 
         return redirect()->back()->with('status','receive information has been updated');
     }

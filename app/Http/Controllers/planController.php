@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Plan;
 use App\Models\Order;
 use App\Models\Production;
+use App\Models\Section;
 
 class planController extends Controller
 {
@@ -18,16 +19,30 @@ class planController extends Controller
                         'orders.extra_qty','orders.total_qty','orders.delivery_date','plans.target_day',
                         'plans.target_perday','plans.production_start','plans.production_end',
                         'plans.section','plans.status']);
+        $sectionlist=Section::all();
                     
 
-        return view('allPlan',['planlist'=>$planlist]);
+        return view('allPlan',['planlist'=>$planlist])->with('sectionlist',$sectionlist);
     }
 
     function editData($id){
-        $plan=Plan::find($id);
+        // $plan=Plan::find($id);
+        $plan=Plan::join('orders','orders.id','=','plans.order_id')
+        ->find($id);
         return response()->json([
             'status'=>200,
             'plan'=>$plan,
+        ]);
+    }
+
+    function fetchTotalData($id){
+        $plan=Plan::join('orders','orders.id','=','plans.order_id')
+        ->find($id);
+        $section=Section::get();
+        return response()->json([
+            'status'=>200,
+            'plan'=>$plan,
+            'section'=>$section,
         ]);
     }
 
