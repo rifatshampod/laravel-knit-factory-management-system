@@ -117,8 +117,6 @@
                                 <div class="employeeTableIcon d-flex">
                                 <div
                                   class="Icon1 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
-                                  onclick="location.href='profile.html'"
-                                  onclick="location.href='profile.html'"
                                 >
                                   <i class="ti-eye mr-1"></i>View
                                 </div>
@@ -190,15 +188,16 @@
               <input type="hidden" name="id" id="plan_id" />
 
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="target_day">Target Day</label>
+                    <label for="section">Total Order Quantity</label>
                     <input
-                      type="number"
-                      name="target_day"
+                      type="text"
+                      name="total_qty"
                       class="form-control"
-                      id="target_day"
-                      placeholder="Enter number of days"
+                      id="total_qty"
+                      placeholder="Section"
+                      readonly
                     />
                   </div>
                 </div>
@@ -210,10 +209,24 @@
                       name="target_perday"
                       class="form-control"
                       id="target_perday"
-                      placeholder="Target Per Day"
+                      placeholder="Target Per Day" onblur="targetDay()"
                     />
                   </div>
                 </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="target_day">Target Days</label>
+                    <input
+                      type="number"
+                      name="target_day"
+                      class="form-control"
+                      id="target_day"
+                      placeholder="Enter number of days" onblur="targetDay()"
+                      readonly
+                    />
+                  </div>
+                </div>
+                
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label for="production_start">Production Start</label>
@@ -239,13 +252,21 @@
                 <div class="col-lg-12">
                   <div class="form-group">
                     <label for="section">Section</label>
-                    <input
+                    <select class="form-control input-default" name="section">
+                            <option disabled hidden selected>
+                              Select Section
+                            </option>
+                            @foreach ($sectionlist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach   
+                          </select>
+                    {{-- <input
                       type="text"
-                      name="section"
+                      
                       class="form-control"
                       id="section"
                       placeholder="Section"
-                    />
+                    /> --}}
                   </div>
                 </div>
               </div>
@@ -288,8 +309,7 @@
     <!-- Edit Modal functions -->
     <script>
       $(document).ready(function(){
-        $(document).on('click', '.editBtn', function(){
-          
+        $(document).on('click', '.editBtn', function(){ 
           var plan_id = $(this).val();
           console.log(plan_id);
           jQuery.noConflict(); 
@@ -299,16 +319,39 @@
             type: "GET",
             success:function(response){
               console.log(response);
+              $('#total_qty').val(response.plan.total_qty);
               $('#target_day').val(response.plan.target_day);
               $('#target_perday').val(response.plan.target_perday);
               $('#production_start').val(response.plan.production_start);
               $('#production_end').val(response.plan.production_end);
-              $('#section').val(response.plan.section);
+              $('#section').val(response.section.name);
               $('#plan_id').val(plan_id);
             }
           });
         });
       });
+
+
+      function targetDay(){
+        const totalQty = document.getElementById("total_qty").value;
+        const targetPerDay = document.getElementById("target_perday").value;
+        const targetDay = totalQty / targetPerDay ;
+        document.getElementById("target_day").value = Math.ceil(targetDay) ;
+      }
+
+      //---------date calculation
+      /*
+        function add_bus_days(date, busDays) { // add business days to a date
+                var wkdy = date.getDay(); // get weekday number
+                var addDays = wkdy >= 3 ? (busDays + 2) : busDays; // if it's wednesday or later set add days to 5 instead of 3 to account for the weekend
+                date.setDate(date.getDate() + addDays); // add days to current date
+                return date
+            }
+        // usage
+        var dt = new Date(); // get date
+        newDate = add_bus_days(dt, 3) // add 3 business days
+        */
+      //---------date calculation ends
     </script>
 
    

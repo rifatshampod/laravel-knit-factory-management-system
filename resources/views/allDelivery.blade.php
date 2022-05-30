@@ -12,7 +12,7 @@
             <div class="col-lg-8 p-r-0 title-margin-right">
               <div class="page-header">
                 <div class="page-title">
-                  <h1>All Delivery</h1>
+                  <h1>All Receive/Delivery</h1>
                 </div>
               </div>
             </div>
@@ -24,7 +24,7 @@
                     <li class="breadcrumb-item">
                       <a href="index.html">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">All Delivery</li>
+                    <li class="breadcrumb-item active">All Data</li>
                   </ol>
                 </div>
               </div>
@@ -36,17 +36,6 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card">
-                  {{-- <div class="d-flex justify-content-end">
-                    <div>
-                      <button
-                        onclick="location.href='createDelivery.html'"
-                        type="button"
-                        class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
-                      >
-                        <i class="ti-plus"></i>Add Delivery
-                      </button>
-                    </div>
-                  </div> --}}
                   <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
                       <table
@@ -77,7 +66,7 @@
                             <td>{{$item['first_receive']}}</td>
                             <td>{{$item['today_receive']}}</td>
                             <td>{{$item['total_receive']}}</td>
-                            <td>{{$item['receive_balance']}}</td>
+                            <td>{{$item['total_order'] - $item['total_receive']}}</td>
                             <td>{{$item['today_delivery']}}</td>
                             <td>{{$item['total_delivery']}}</td>
                             <td>{{$item['delivery_balance']}}</td>
@@ -169,7 +158,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                   <div class="form-group">
                     <label for="total_receive">Total Receive</label>
                     <input
@@ -179,8 +168,8 @@
                       id="total_receive"
                     />
                   </div>
-                </div>
-                <div class="col-lg-6">
+                </div> --}}
+                {{-- <div class="col-lg-6">
                   <div class="form-group">
                     <label for="receive_balance">Receive Balance </label>
                     <input
@@ -190,7 +179,7 @@
                       id="receive_balance"
                     />
                   </div>
-                </div>
+                </div> --}}
               </div>
               <div class="row justify-content-center">
                 <div class="col-lg-4">
@@ -235,7 +224,7 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                   <div class="form-group">
                     <label for="total_receive">Total Receive</label>
                     <input
@@ -256,7 +245,7 @@
                       id="receive_balance"
                     />
                   </div>
-                </div>
+                </div> --}}
               </div>
               <div class="row justify-content-center">
                 <div class="col-lg-4">
