@@ -26,7 +26,8 @@ class productionController extends Controller
     }
 
      function editData($id){
-        $production=Production::find($id);
+        $production=Production::join('plans','productions.plan_id','=','plans.id')
+        ->find($id);
         return response()->json([
             'status'=>200,
             'production'=>$production,
