@@ -37,12 +37,17 @@ class productionController extends Controller
         function updateData(Request $req){
         $production_id = $req->input('id');
         $production=Production::find($production_id);
-        $production->inhand=$req->input('inhand');
         $production->today_production=$req->input('today_production');
-        $production->total_production=$req->input('total_production');
-        $production->balance=$req->input('balance');
+        $production->total_production+=$req->input('today_production');
+        $production->balance+=$req->input('balance');
         $production->status=1;
         $production->update();
+
+        $production = new Daily_production;
+        $production->production_id= $req->input('id');
+        $production->today_production= $req->input('today_production');
+        $production->balance= $req->input('balance');
+        $production->save();
 
         return redirect()->back()->with('status','production information has been updated');
     }
@@ -55,6 +60,14 @@ class productionController extends Controller
         $production->total_production= $req->input('total_production');
         $production->balance= $req->input('balance');
         $production->save();
+
+        $production_id = $req->input('id');
+        $production=Production::find($production_id);
+        $production->today_production=$req->input('today_production');
+        $production->total_production+=$req->input('today_production');
+        $production->balance+=$req->input('balance');
+        $production->inhand=$req->input('inhand');
+        $production->update();
 
         return redirect()->back()->with('status','Today production information has been updated');
     }
