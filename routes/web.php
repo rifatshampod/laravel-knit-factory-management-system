@@ -46,6 +46,7 @@ Route::get('order',[orderController::class, 'showData']); //show all order
 //delivery
 Route::get('all-delivery',[deliveryController::class, 'showData']);
 Route::get('edit-delivery{id}', [deliveryController::class,'editData']);
+Route::get('fetch-delivery{id}', [deliveryController::class,'editDeliveryData']);
 Route::put('start-receive', [deliveryController::class,'updateReceiveData']);
 Route::put('add-receive', [deliveryController::class,'addReceiveData']);
 Route::put('add-delivery', [deliveryController::class,'addDeliveryData']);

@@ -133,7 +133,7 @@
       </div>
     </div>
 
-    <!-------edit-Modal------>
+    <!-------start-Modal------>
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -143,6 +143,7 @@
               @method('PUT')
 
               <input type="hidden" name="id" id="production_id" />
+              <input type="text" name="order_id" id="order_id" />
               
 
               <div class="row">
@@ -214,27 +215,43 @@
               <input type="hidden" name="id" id="daily_id" />
 
               <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="target_day">Target Per Day</label>
+                    <input
+                      type="number"
+                      name="target"
+                      class="form-control"
+                      id="target_daily"
+                      placeholder="Enter target amount"
+                      readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="inhand">Inhand</label>
+                    <input
+                      type="number"
+                      name="inhand"
+                      class="form-control"
+                      id="inhand"
+                      placeholder="Enter target amount"
+                      readonly
+                    />
+                  </div>
+                </div>
                 
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                   <div class="form-group">
                     <label for="today_production">Today Production</label>
                     <input
                       type="number"
                       name="today_production"
                       class="form-control"
-                      id="today_production"
+                      id="today_production_daily" onblur="findBalanceDaily()"
                       placeholder="Today Production"
-                    />
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="form-group">
-                    <label for="total_production">Total Production</label>
-                    <input
-                      type="number"
-                      name="total_production"
-                      class="form-control"
-                      id="total_production"
                     />
                   </div>
                 </div>
@@ -245,7 +262,8 @@
                       type="number"
                       name="balance"
                       class="form-control"
-                      id="balance"
+                      id="balance_daily"
+                      readonly
                     />
                   </div>
                 </div>
@@ -301,6 +319,7 @@
             success:function(response){
               console.log(response);
               $('#target').val(response.production.target_perday);
+              $('#order_id').val(response.production.order_id);
               $('#today_production').val(response.production.today_production);
               $('#total_production').val(response.production.total_production);
               $('#balance').val(response.production.balance);
@@ -317,7 +336,17 @@
           console.log(daily_id);
           jQuery.noConflict(); 
           $('#addModal').modal('show');
-          $('#daily_id').val(daily_id);
+          $.ajax({
+            url: '/edit-production' + daily_id,
+            type: "GET",
+            success:function(response){
+              console.log(response);
+              $('#target_daily').val(response.production.target_perday);
+              $('#inhand').val(response.production.balance);
+              $('#daily_id').val(daily_id);
+            }
+          });
+          // $('#daily_id').val(daily_id);
          
         });
       });
@@ -328,6 +357,14 @@
         const target = document.getElementById("target").value;
         const balance = todayProduction - target;
         document.getElementById("balance").value = balance;
+      }
+
+      //---find balance daily
+      function findBalanceDaily(){
+        const todayProduction = document.getElementById("today_production_daily").value;
+        const target = document.getElementById("target_daily").value;
+        const balance = todayProduction - target;
+        document.getElementById("balance_daily").value = balance;
       }
     </script>
   </body>

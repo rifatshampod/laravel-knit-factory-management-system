@@ -90,7 +90,7 @@
                                   <i class="ti-eye mr-1"></i> Receive
                                 </button>
 
-                                {{-- @if($item['delivery_status']==1) --}}
+                                @if($item['delivery_status']==1)
                                 <button
                                 value="{{$item['id']}}"
                                 class="Icon3 deliveryBtn px-3 py-1 text-white cursor rounded d-flex border-none justify-content-center align-items-center mr-1"
@@ -98,7 +98,7 @@
                                   <i class="ti-pencil-alt mr-1"></i> Deliver
                               </button>
 
-                                {{-- @endif --}}
+                                @endif
                               </div>
                               @endif
                               
@@ -280,6 +280,33 @@
                 
                 <div class="col-lg-12">
                   <div class="form-group">
+                    <label for="total_production">Total Production</label>
+                    <input
+                      type="number"
+                      name="total_production"
+                      class="form-control"
+                      id="total_production"
+                      placeholder="Total Production"
+                      Readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="total_delivery">Total Delivery Before</label>
+                    <input
+                      type="number"
+                      name="total_delivery_before"
+                      class="form-control"
+                      id="total_delivery_before"
+                      placeholder="Total Delivery Before"
+                      Readonly
+                    />
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="form-group">
                     <label for="today_delivery">Today Delivery</label>
                     <input
                       type="number"
@@ -287,20 +314,25 @@
                       class="form-control"
                       id="today_delivery"
                       placeholder="Today Delivery"
+                      onblur="fBalanceDaily()"
                     />
                   </div>
                 </div>
-                <div class="col-lg-6">
+                
+                <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="total_delivery">Total Delivery</label>
+                    <label for="total_delivery_completed">Total Delivery</label>
                     <input
                       type="number"
                       name="total_delivery"
                       class="form-control"
-                      id="total_delivery"
+                      id="total_delivery_completed"
+                      placeholder="Total Delivery"
+                      Readonly
                     />
                   </div>
                 </div>
+
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label for="delivery_balance">Delivery Balance </label>
@@ -309,6 +341,7 @@
                       name="delivery_balance"
                       class="form-control"
                       id="delivery_balance"
+                      readonly
                     />
                   </div>
                 </div>
@@ -397,10 +430,33 @@
           console.log(delivery_id);
           jQuery.noConflict(); 
           $('#deliveryModal').modal('show');
-          $('#main_delivery_id').val(delivery_id);
+          $.ajax({
+            url: '/fetch-delivery' + delivery_id,
+            type: "GET",
+            success:function(response){
+              console.log(response);
+              $('#total_production').val(response.delivery.total_production); 
+              $('#total_delivery_before').val(response.delivery.total_delivery);
+              $('#main_delivery_id').val(delivery_id);
+            }
+          });
+          
          
         });
       });
+
+      //---find delivery total & balance 
+      function fBalanceDaily(){
+        const todayProduction = parseInt(document.getElementById("total_production").value);
+        const totalBefore = parseInt(document.getElementById("total_delivery_before").value);
+        const today = parseInt(document.getElementById("today_delivery").value);
+
+        const total = totalBefore + today;
+        const balance = todayProduction - total;
+        document.getElementById("total_delivery_completed").value = total;
+        document.getElementById("delivery_balance").value = balance;
+        console.log(total);
+      }
     </script>
 
 
