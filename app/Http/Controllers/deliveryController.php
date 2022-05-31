@@ -103,8 +103,8 @@ class deliveryController extends Controller
 
         $delivery_id = $req->input('id');
         $deliveryTable = Delivery::find($delivery_id);
-        $deliveryTable->delivery_today= $req->input('today_delivery');
-        $deliveryTable->delivery_total= $req->input('total_delivery');
+        $deliveryTable->today_delivery= $req->input('today_delivery');
+        $deliveryTable->total_delivery= $req->input('total_delivery');
         $deliveryTable->delivery_balance= $req->input('delivery_balance');
         $deliveryTable->update();
 

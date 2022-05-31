@@ -314,7 +314,7 @@
                       class="form-control"
                       id="today_delivery"
                       placeholder="Today Delivery"
-                      onblur="findBalanceDaily()"
+                      onblur="fBalanceDaily()"
                     />
                   </div>
                 </div>
@@ -446,15 +446,16 @@
       });
 
       //---find delivery total & balance 
-      function findBalanceDaily(){
-        const todayProduction = document.getElementById("today_production").value;
-        const totalBefore = document.getElementById("total_delivery_before").value;
-        const today = document.getElementById("today_delivery").value;
+      function fBalanceDaily(){
+        const todayProduction = parseInt(document.getElementById("total_production").value);
+        const totalBefore = parseInt(document.getElementById("total_delivery_before").value);
+        const today = parseInt(document.getElementById("today_delivery").value);
 
         const total = totalBefore + today;
         const balance = todayProduction - total;
         document.getElementById("total_delivery_completed").value = total;
         document.getElementById("delivery_balance").value = balance;
+        console.log(total);
       }
     </script>
 
