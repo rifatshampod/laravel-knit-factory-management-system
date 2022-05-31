@@ -35,17 +35,6 @@ class planController extends Controller
         ]);
     }
 
-    function fetchTotalData($id){
-        $plan=Plan::join('orders','orders.id','=','plans.order_id')
-        ->find($id);
-        $section=Section::get();
-        return response()->json([
-            'status'=>200,
-            'plan'=>$plan,
-            'section'=>$section,
-        ]);
-    }
-
     function updateData(Request $req){
         $plan_id = $req->input('id');
         $plan=Plan::find($plan_id);
@@ -59,6 +48,7 @@ class planController extends Controller
 
         $production = new Production;
         $production->plan_id = $plan->id;
+        $production->order_id = $req->input('order_id');
         $production->status = 0;
         $production->save();
         

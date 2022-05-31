@@ -186,6 +186,7 @@
               @method('PUT')
 
               <input type="hidden" name="id" id="plan_id" />
+              <input type="hidden" name="order_id" id="order_id" />
 
               <div class="row">
                 <div class="col-lg-12">
@@ -320,6 +321,7 @@
             success:function(response){
               console.log(response);
               $('#total_qty').val(response.plan.total_qty);
+              $('#order_id').val(response.plan.order_id);
               $('#plan_id').val(plan_id);
             }
           });

@@ -49,6 +49,12 @@ class productionController extends Controller
         $production->balance= $req->input('balance');
         $production->save();
 
+        $orderId = $req->input('order_id');
+
+        $delivery = Delivery::where('order_id',$orderId)->update([
+           'delivery_status' => 1
+        ]);
+
         return redirect()->back()->with('status','production information has been updated');
     }
 

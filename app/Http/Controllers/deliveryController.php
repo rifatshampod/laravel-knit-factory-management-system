@@ -34,6 +34,15 @@ class deliveryController extends Controller
         ]);
     }
 
+    function editDeliveryData($id){
+        $delivery=Delivery::join('productions','productions.order_id','=','deliveries.order_id')
+        ->find($id);
+        return response()->json([
+            'status'=>200,
+            'delivery'=>$delivery,
+        ]);
+    }
+
     function updateReceiveData(Request $req){
         $delivery_id = $req->input('id');
         $delivery=Delivery::find($delivery_id);
@@ -91,12 +100,24 @@ class deliveryController extends Controller
     }
 
     function addDeliveryData(Request $req){
+
+        $delivery_id = $req->input('id');
+        $deliveryTable = Delivery::find($delivery_id);
+        $deliveryTable->delivery_today= $req->input('today_delivery');
+        $deliveryTable->delivery_total= $req->input('total_delivery');
+        $deliveryTable->delivery_balance= $req->input('delivery_balance');
+        $deliveryTable->update();
+
+
+
         $delivery = new Daily_delivery;
         $delivery->delivery_id= $req->input('id');
         $delivery->delivery_today= $req->input('today_delivery');
-        $delivery->delivery_total= $req->input('total_delivery');
+        $delivery->delivery_total+= $req->input('total_delivery');
         $delivery->delivery_balance= $req->input('delivery_balance');
         $delivery->save();
+
+
 
         return redirect()->back()->with('status','delivery information has been updated');
     }

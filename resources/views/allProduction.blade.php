@@ -133,7 +133,7 @@
       </div>
     </div>
 
-    <!-------edit-Modal------>
+    <!-------start-Modal------>
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -143,6 +143,7 @@
               @method('PUT')
 
               <input type="hidden" name="id" id="production_id" />
+              <input type="text" name="order_id" id="order_id" />
               
 
               <div class="row">
@@ -318,6 +319,7 @@
             success:function(response){
               console.log(response);
               $('#target').val(response.production.target_perday);
+              $('#order_id').val(response.production.order_id);
               $('#today_production').val(response.production.today_production);
               $('#total_production').val(response.production.total_production);
               $('#balance').val(response.production.balance);
