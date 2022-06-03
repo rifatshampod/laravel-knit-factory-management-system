@@ -39,7 +39,7 @@
                     </div>
                     <div class="stat-content dib">
                       <div class="stat-text">Total Order</div>
-                      <div class="stat-digit">1,012</div>
+                      <div class="stat-digit">{{$orderCount}}</div>
                     </div>
                   </div>
                 </div>
@@ -52,7 +52,7 @@
                     </div>
                     <div class="stat-content dib">
                       <div class="stat-text">In Planning</div>
-                      <div class="stat-digit">961</div>
+                      <div class="stat-digit">{{$planCount}}</div>
                     </div>
                   </div>
                 </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="stat-content dib">
                       <div class="stat-text">Active Production</div>
-                      <div class="stat-digit">770</div>
+                      <div class="stat-digit">{{$productionCount}}</div>
                     </div>
                   </div>
                 </div>
@@ -77,8 +77,8 @@
                       <i class="ti-link color-danger border-danger"></i>
                     </div>
                     <div class="stat-content dib">
-                      <div class="stat-text">Active Delivery</div>
-                      <div class="stat-digit">2,781</div>
+                      <div class="stat-text">Due Delivery</div>
+                      <div class="stat-digit">{{$deliveryCount}}</div>
                     </div>
                   </div>
                 </div>
@@ -105,74 +105,41 @@
                       <table class="table student-data-table m-t-20">
                         <thead>
                           <tr>
-                            <th>
-                              <label><input type="checkbox" value="" /></label
-                              >Exam Name
-                            </th>
-                            <th>Subject</th>
-                            <th>Grade Point</th>
-                            <th>Percent Form</th>
-                            <th>Percent Upto</th>
-                            <th>Date</th>
+                            
+                            <th>Artwork</th>
+                            <th>Order No</th>
+                            <th>Body Color</th>
+                            <th>Total Qty</th>
+                            <th>Target Per Day</th>
+                            <th>Inhand</th>
+                            <th>Today Prod</th>
+                            <th>Total Prod</th>
+                            <th>Without Print Balance</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Class Test</td>
-                            <td>Mathmatics</td>
-                            <td>4.00</td>
-                            <td>95.00</td>
-                            <td>100</td>
-                            <td>20/04/2017</td>
+                          @foreach ($productionlist as $item)
+                              <tr>
+                            <td>
+                              <div class="orderImg">
+                                <img
+                                  src="{{$item['artwork']}}"
+                                  alt=""
+                                />
+                              </div>
+                            </td>
+                            <td>{{$item['order_no']}}</td>
+                            <td>{{$item['body_color']}}</td>
+                            <td>{{$item['total_qty']}}</td>
+                            <td>{{$item['target_perday']}}</td>
+                            <td>{{$item['inhand']}}</td>
+                            <td>{{$item['today_production']}}</td>
+                            <td>{{$item['total_production']}}</td>
+                            <td>{{$item['balance']}}</td>
                           </tr>
-                          <tr>
-                            <td>Class Test</td>
-                            <td>Mathmatics</td>
-                            <td>4.00</td>
-                            <td>95.00</td>
-                            <td>100</td>
-                            <td>20/04/2017</td>
-                          </tr>
-                          <tr>
-                            <td>Class Test</td>
-                            <td>English</td>
-                            <td>4.00</td>
-                            <td>95.00</td>
-                            <td>100</td>
-                            <td>20/04/2017</td>
-                          </tr>
-                          <tr>
-                            <td>Class Test</td>
-                            <td>Bangla</td>
-                            <td>4.00</td>
-                            <td>95.00</td>
-                            <td>100</td>
-                            <td>20/04/2017</td>
-                          </tr>
-                          <tr>
-                            <td>Class Test</td>
-                            <td>Mathmatics</td>
-                            <td>4.00</td>
-                            <td>95.00</td>
-                            <td>100</td>
-                            <td>20/04/2017</td>
-                          </tr>
-                          <tr>
-                            <td>Class Test</td>
-                            <td>English</td>
-                            <td>4.00</td>
-                            <td>95.00</td>
-                            <td>100</td>
-                            <td>20/04/2017</td>
-                          </tr>
-                          <tr>
-                            <td>Class Test</td>
-                            <td>Mathmatics</td>
-                            <td>4.00</td>
-                            <td>95.00</td>
-                            <td>100</td>
-                            <td>20/04/2017</td>
-                          </tr>
+                          @endforeach
+                          
+                          
                         </tbody>
                       </table>
                     </div>

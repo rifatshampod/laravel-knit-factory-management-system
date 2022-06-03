@@ -67,14 +67,16 @@
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Body Color</label>
-                          <select class="form-control input-default" name="bodyColor">
+                          <select class="form-control input-default" name="bodyColor" onchange="showfield(this.options[this.selectedIndex].value)">
                             <option disabled hidden selected>
                               Select Color
                             </option>
                             @foreach ($bodycolorlist as $item)
                                 <option>{{$item['name']}}</option>
                             @endforeach 
+                            <option value="Other">Other, Please Specify</option>
                           </select>
+                          <div id="div1"></div>
                         </div>
                       </div>
                       <div class="col-lg-4">
@@ -286,5 +288,16 @@
     <!-- <script src="assets/js/lib/data-table/buttons.html5.min.js"></script> -->
     <!-- <script src="assets/js/lib/data-table/buttons.print.min.js"></script> -->
     <script src="assets/js/lib/data-table/datatables-init.js"></script>
+
+    <script type="text/javascript">
+      function showfield(name){
+        if(name == 'Other') {
+          document.getElementById('div1').innerHTML = 'Other Bodycolor: <input class="form-control input-default" type="text" name="other" />';
+        }
+        else {
+          document.getElementById('div1').innerHTML='';
+        }	
+      }
+  </script>
   </body>
 </html>

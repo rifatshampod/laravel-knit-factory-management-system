@@ -7,6 +7,7 @@ use App\Http\Controllers\deliveryController;
 use App\Http\Controllers\productionController;
 use App\Http\Controllers\settingsController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\dashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Auth::routes(['register' => false]);  //auth routes call
 Route::group(['middleware' => ['web', 'auth']], function(){
 
 
-Route::view('/','index');  //add redirector later
+Route::get('/',[dashboardController::class,'getData']);  //add redirector later
 Route::view('dashboard','index');
 
 
