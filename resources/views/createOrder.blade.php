@@ -67,40 +67,46 @@
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Body Color</label>
-                          <select class="form-control input-default" name="bodyColor">
+                          <select class="form-control input-default" name="bodyColor" onchange="showfield(this.options[this.selectedIndex].value)">
                             <option disabled hidden selected>
                               Select Color
                             </option>
                             @foreach ($bodycolorlist as $item)
                                 <option>{{$item['name']}}</option>
                             @endforeach 
+                            <option value="other">Other, Please Specify</option>
                           </select>
+                          <div id="div1"></div>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Print Quality</label>
-                          <select class="form-control input-default" name="printQuality">
+                          <select class="form-control input-default" name="printQuality" onchange="showfield2(this.options[this.selectedIndex].value)">
                             <option disabled hidden selected>
                               Select Print Quality
                             </option>
                             @foreach ($qualitylist as $item)
                                 <option>{{$item['name']}}</option>
-                            @endforeach
+                            @endforeach 
+                            <option value="other">Other, Please Specify</option>
                           </select>
+                          <div id="div2"></div>
                         </div>
                       </div>
                       <div class="col-lg-4">
                         <div class="form-group">
                           <label>Parts Name</label>
-                          <select class="form-control input-default" name="partsName">
+                          <select class="form-control input-default" name="partsName" onchange="showfield3(this.options[this.selectedIndex].value)">
                             <option disabled hidden selected>
                               Select Parts Name
                             </option>
                             @foreach ($partslist as $item)
                                 <option>{{$item['name']}}</option>
-                            @endforeach
+                            @endforeach 
+                            <option value="other">Other, Please Specify</option>
                           </select>
+                          <div id="div3"></div>
                         </div>
                       </div>
                       <div class="col-lg-4">
@@ -195,27 +201,31 @@
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label>Merchandiser</label>
-                          <select class="form-control input-default" name="merchandiser">
+                          <select class="form-control input-default" name="merchandiser" onchange="showfield4(this.options[this.selectedIndex].value)">
                             <option disabled hidden selected>
                               Select Merchandiser
                             </option>
                             @foreach ($merchandiserlist as $item)
                                 <option>{{$item['name']}}</option>
-                            @endforeach                        
+                            @endforeach 
+                            <option value="other">Other, Please Specify</option>
                           </select>
+                          <div id="div4"></div>
                         </div>
                       </div>
                       <div class="col-lg-6">
                         <div class="form-group">
                           <label>Supplier Name</label>
-                          <select class="form-control input-default" name="supplier">
+                          <select class="form-control input-default" name="supplier" onchange="showfield5(this.options[this.selectedIndex].value)">
                             <option disabled hidden selected>
                               Select Supplier
                             </option>
                             @foreach ($supplierlist as $item)
                                 <option>{{$item['name']}}</option>
-                            @endforeach   
+                            @endforeach 
+                            <option value="other">Other, Please Specify</option>
                           </select>
+                          <div id="div5"></div>
                         </div>
                       </div>
                       <div class="col-lg-4">
@@ -286,5 +296,48 @@
     <!-- <script src="assets/js/lib/data-table/buttons.html5.min.js"></script> -->
     <!-- <script src="assets/js/lib/data-table/buttons.print.min.js"></script> -->
     <script src="assets/js/lib/data-table/datatables-init.js"></script>
+
+    <script type="text/javascript">
+      function showfield(name){
+        if(name == 'other') {
+          document.getElementById('div1').innerHTML = 'Other Bodycolor: <input class="form-control input-default" type="text" name="otherBodycolor" />';
+        }
+        else {
+          document.getElementById('div1').innerHTML='';
+        }	
+      }
+      function showfield2(name){
+        if(name == 'other') {
+          document.getElementById('div2').innerHTML = 'Other Print Quality: <input class="form-control input-default" type="text" name="otherPrintquality" />';
+        }
+        else {
+          document.getElementById('div2').innerHTML='';
+        }	
+      }
+      function showfield3(name){
+        if(name == 'other') {
+          document.getElementById('div3').innerHTML = 'Other Parts Name: <input class="form-control input-default" type="text" name="otherPartsname" />';
+        }
+        else {
+          document.getElementById('div3').innerHTML='';
+        }	
+      }
+      function showfield4(name){
+        if(name == 'other') {
+          document.getElementById('div4').innerHTML = 'Other Merchandiser: <input class="form-control input-default" type="text" name="otherMerchandiser" />';
+        }
+        else {
+          document.getElementById('div4').innerHTML='';
+        }	
+      }
+      function showfield5(name){
+        if(name == 'other') {
+          document.getElementById('div5').innerHTML = 'Other Supplier: <input class="form-control input-default" type="text" name="otherSupplier" />';
+        }
+        else {
+          document.getElementById('div5').innerHTML='';
+        }	
+      }
+  </script>
   </body>
 </html>
