@@ -35,17 +35,72 @@ class orderController extends Controller
         $order = new Order;
         $order->style= $req->input('style');
         $order->order_no= $req->input('orderNo');
-        $order->body_color= $req->input('bodyColor');
-        $order->print_quality= $req->input('printQuality');
-        $order->parts_name= $req->input('partsName');
+
+        //body color new
+        if($req->input('bodyColor')=='other'){  
+            $order->body_color= $req->input('otherBodycolor');
+            $color = new Body_color;
+            $color->name = $req->input('otherBodycolor');  
+            $color->save();
+        }
+        else{
+            $order->body_color= $req->input('bodyColor');
+        }
+
+        //print quality new
+        if($req->input('printQuality')=='other'){    
+            $order->print_quality= $req->input('otherPrintquality');
+            $color = new Print_quality;
+            $color->name = $req->input('otherPrintquality');  
+            $color->save();
+        }
+        else{
+            $order->print_quality= $req->input('printQuality');
+        }
+
+        //parts name new
+        if($req->input('partsName')=='other'){      
+            $order->parts_name= $req->input('otherPartsname');
+            $color = new Parts_name;
+            $color->name = $req->input('otherPartsname');  
+            $color->save();
+        }
+        else{
+            $order->parts_name= $req->input('partsName');
+        }
+
+
+
         $order->print_color= $req->input('printColor');
         $order->color_qty= $req->input('colorQty');
         $order->order_qty= $req->input('orderQty');
         $order->extra_qty= $req->input('extraQty');
         $order->total_qty= $req->input('totalQty');
         $order->delivery_date= $req->input('deliveryDate');
-        $order->merchandiser= $req->input('merchandiser');
-        $order->supplier= $req->input('supplier');
+
+        if($req->input('merchandiser')=='other'){
+            $order->merchandiser= $req->input('otherMerchandiser');
+            $color = new Merchandiser;
+            $color->name = $req->input('otherMerchandiser');  
+            $color->save();
+        }
+        else{
+            $order->merchandiser= $req->input('merchandiser');
+        }
+
+
+        
+
+        if($req->input('supplier')=='other'){
+            $order->supplier= $req->input('otherSupplier');
+            $color = new Supplier;
+            $color->name = $req->input('otherSupplier');  
+            $color->save();
+        }
+        else{
+            $order->supplier= $req->input('supplier');
+        }
+
         $order->price_dozen= $req->input('priceDozen');
         $order->save();
 
