@@ -78,6 +78,7 @@ class orderController extends Controller
         $order->total_qty= $req->input('totalQty');
         $order->delivery_date= $req->input('deliveryDate');
 
+        //merchandiser new
         if($req->input('merchandiser')=='other'){
             $order->merchandiser= $req->input('otherMerchandiser');
             $color = new Merchandiser;
@@ -87,10 +88,7 @@ class orderController extends Controller
         else{
             $order->merchandiser= $req->input('merchandiser');
         }
-
-
-        
-
+        //supplier ner
         if($req->input('supplier')=='other'){
             $order->supplier= $req->input('otherSupplier');
             $color = new Supplier;
