@@ -74,7 +74,7 @@
                             @foreach ($bodycolorlist as $item)
                                 <option>{{$item['name']}}</option>
                             @endforeach 
-                            <option value="other">Other, Please Specify</option>
+                            <option style="color:violet" value="other">Other, Please Specify</option>
                           </select>
                           <div id="div1"></div>
                         </div>
@@ -89,7 +89,7 @@
                             @foreach ($qualitylist as $item)
                                 <option>{{$item['name']}}</option>
                             @endforeach 
-                            <option value="other">Other, Please Specify</option>
+                            <option style="color:violet" value="other">Other, Please Specify</option>
                           </select>
                           <div id="div2"></div>
                         </div>
@@ -104,7 +104,7 @@
                             @foreach ($partslist as $item)
                                 <option>{{$item['name']}}</option>
                             @endforeach 
-                            <option value="other">Other, Please Specify</option>
+                            <option style="color:violet" value="other">Other, Please Specify</option>
                           </select>
                           <div id="div3"></div>
                         </div>
@@ -208,7 +208,7 @@
                             @foreach ($merchandiserlist as $item)
                                 <option>{{$item['name']}}</option>
                             @endforeach 
-                            <option value="other">Other, Please Specify</option>
+                            <option style="color:violet" value="other">Other, Please Specify</option>
                           </select>
                           <div id="div4"></div>
                         </div>
@@ -223,7 +223,7 @@
                             @foreach ($supplierlist as $item)
                                 <option>{{$item['name']}}</option>
                             @endforeach 
-                            <option value="other">Other, Please Specify</option>
+                            <option style="color:violet" value="other">Other, Please Specify</option>
                           </select>
                           <div id="div5"></div>
                         </div>
