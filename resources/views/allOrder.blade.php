@@ -38,7 +38,8 @@
                 <div class="card">
                   <div class="d-flex justify-content-end">
                     <div>
-                      <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
+                      <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" 
+                      onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
                     </div>
                     <div>
                       <button
@@ -163,7 +164,7 @@
       function exportReportToExcel() {
         let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
         TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
-          name: `allorder.xlsx`, // fileName you could use any name
+          name: `all-order.xlsx`, // fileName you could use any name
           sheet: {
             name: 'Sheet 1' // sheetName
           }

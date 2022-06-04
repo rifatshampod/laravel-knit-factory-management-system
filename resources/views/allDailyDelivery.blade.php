@@ -36,17 +36,12 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card">
-                  {{-- <div class="d-flex justify-content-end">
+                  <div class="d-flex justify-content-end">
                     <div>
-                      <button
-                        onclick="location.href='createDelivery.html'"
-                        type="button"
-                        class="btn btn-primary btn-flat btn-addon m-b-10 m-l-5"
-                      >
-                        <i class="ti-plus"></i>Add Delivery
-                      </button>
+                      <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" 
+                      onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
                     </div>
-                  </div> --}}
+                  </div>
                   <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
                       <table
