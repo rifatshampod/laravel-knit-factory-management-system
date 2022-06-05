@@ -131,9 +131,113 @@ class orderController extends Controller
     }
 
     function showData(Request $req){
+
+        $merchandiserlist = Merchandiser::all();
+        $supplierlist = Supplier::all();
+        $bodycolorlist = Body_color::all();
+        $qualitylist = Print_quality::all();
+        $partslist = Parts_name::all();
+        
         $orderlist = Order::orderBy('id','DESC')
         ->get();
 
-        return view('allOrder',['orderlist'=>$orderlist]);
+        return view('allOrder',['orderlist'=>$orderlist])
+        ->with('supplierlist',$supplierlist)
+        ->with('merchandiserlist',$merchandiserlist)
+        ->with('bodycolorlist',$bodycolorlist)
+        ->with('qualitylist',$qualitylist)
+        ->with('partslist',$partslist);
+    }
+
+        function editData($id){
+        // $plan=Plan::find($id);
+        $order=Order::find($id);
+        return response()->json([
+            'status'=>200,
+            'order'=>$order,
+        ]);
+    }
+
+    function updateData(Request $req){
+        $order_id_before = $req->input('order_id');
+        
+        $order=Order::find($order_id_before);
+        $order->style= $req->input('style');
+        $order->order_no= $req->input('orderNo');
+
+        //body color new
+        if($req->input('bodyColor')=='other'){  
+            $order->body_color= $req->input('otherBodycolor');
+            $color = new Body_color;
+            $color->name = $req->input('otherBodycolor');  
+            $color->save();
+        }
+        else{
+            $order->body_color= $req->input('bodyColor');
+        }
+        //print quality new
+        if($req->input('printQuality')=='other'){    
+            $order->print_quality= $req->input('otherPrintquality');
+            $color = new Print_quality;
+            $color->name = $req->input('otherPrintquality');  
+            $color->save();
+        }
+        else{
+            $order->print_quality= $req->input('printQuality');
+        }
+        //parts name new
+        if($req->input('partsName')=='other'){      
+            $order->parts_name= $req->input('otherPartsname');
+            $color = new Parts_name;
+            $color->name = $req->input('otherPartsname');  
+            $color->save();
+        }
+        else{
+            $order->parts_name= $req->input('partsName');
+        }
+        $order->print_color= $req->input('printColor');
+        $order->color_qty= $req->input('colorQty');
+        $order->order_qty= $req->input('orderQty');
+        $order->extra_qty= $req->input('extraQty');
+        $order->total_qty= $req->input('totalQty');
+        $order->delivery_date= $req->input('deliveryDate');
+        //merchandiser new
+        if($req->input('merchandiser')=='other'){
+            $order->merchandiser= $req->input('otherMerchandiser');
+            $color = new Merchandiser;
+            $color->name = $req->input('otherMerchandiser');  
+            $color->save();
+        }
+        else{
+            $order->merchandiser= $req->input('merchandiser');
+        }
+        //supplier ner
+        if($req->input('supplier')=='other'){
+            $order->supplier= $req->input('otherSupplier');
+            $color = new Supplier;
+            $color->name = $req->input('otherSupplier');  
+            $color->save();
+        }
+        else{
+            $order->supplier= $req->input('supplier');
+        }
+        $order->price_dozen= $req->input('priceDozen');
+        $order->update();
+
+        //save image file
+        if($req->file('artwork')){
+            $lastId = $order->id;
+            $pictureInfo = $req->file('artwork');
+            $picName = $pictureInfo->getClientOriginalName();
+            $folder = "artwork";
+            $pictureInfo->move($folder, $picName);
+            $picUrl = $folder .'/'. $picName;
+            //database
+            $staffPic = Order::find($lastId);
+            $staffPic->artwork = $picUrl;
+            $staffPic->update();
+        }
+
+        return redirect()->back()->with('status','order information has been updated');
     }
 }

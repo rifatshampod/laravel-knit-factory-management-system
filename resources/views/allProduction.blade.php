@@ -149,7 +149,7 @@
               @method('PUT')
 
               <input type="hidden" name="id" id="production_id" />
-              <input type="text" name="order_id" id="order_id" />
+              <input type="hidden" name="order_id" id="order_id" />
               
 
               <div class="row">

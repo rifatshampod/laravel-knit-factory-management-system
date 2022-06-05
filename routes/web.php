@@ -43,6 +43,8 @@ Route::view('create-delivery','createDelivery');
 Route::get('create-order',[orderController::class, 'retrieveData']); //retrieve dropdown data to show in create page
 Route::post('add-order',[orderController::class, 'addData']); //add order to database
 Route::get('order',[orderController::class, 'showData']); //show all order
+Route::get('edit-order{id}', [orderController::class,'editData']);
+Route::put('update-order', [orderController::class,'updateData']);
 
 //delivery
 Route::get('all-delivery',[deliveryController::class, 'showData']);
