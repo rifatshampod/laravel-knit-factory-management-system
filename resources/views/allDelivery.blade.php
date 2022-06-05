@@ -230,6 +230,17 @@
                     />
                   </div>
                 </div>
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="receive_date">Receive Date</label>
+                    <input
+                      type="date"
+                      name="receive_date"
+                      class="form-control"
+                      id="receive_date"
+                    />
+                  </div>
+                </div>
                 {{-- <div class="col-lg-6">
                   <div class="form-group">
                     <label for="total_receive">Total Receive</label>
@@ -351,7 +362,19 @@
                     />
                   </div>
                 </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="receive_date">Delivery Date</label>
+                    <input
+                      type="date"
+                      name="delivery_date"
+                      class="form-control"
+                      id="delivery_date"
+                    />
+                  </div>
+                </div>
               </div>
+              
               <div class="row justify-content-center">
                 <div class="col-lg-4">
                   <button type="button" class="btn btn-danger w-100" data-dismiss="modal">

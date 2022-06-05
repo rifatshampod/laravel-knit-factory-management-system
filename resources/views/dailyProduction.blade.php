@@ -55,19 +55,19 @@
                             <th>Target Per Day</th>
                             <th>Today Prod</th>
                             <th>Without Print Balance</th>
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                           </tr>
                         </thead>
                         <tbody>
                           @foreach ($dailylist as $item)
                               <tr>
                             
-                            <td>{{$item['created_at']->format('Y-m-d')}}</td>
+                            <td>{{$item['production_date']}}</td>
                             <td>{{$item['order_no']}}</td>
                             <td>{{$item['targetPerDay']}}</td>
                             <td>{{$item['today_production']}}</td>
                             <td>{{$item['balance']}}</td>
-                            <td>
+                            {{-- <td>
                               <div class="employeeTableIcon d-flex">
                                 
                                 <button
@@ -78,7 +78,7 @@
                                 </button>
                               </div>
 
-                            </td>
+                            </td> --}}
                           </tr>
                           @endforeach
                           

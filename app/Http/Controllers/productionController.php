@@ -26,7 +26,7 @@ class productionController extends Controller
     }
 
      function editData($id){
-        $production=Production::join('plans','productions.plan_id','=','plans.id')
+        $production=Production::join('deliveries','productions.order_id','=','deliveries.order_id')
         ->find($id);
         return response()->json([
             'status'=>200,
@@ -39,7 +39,7 @@ class productionController extends Controller
         $production=Production::find($production_id);
         $production->today_production=$req->input('today_production');
         $production->total_production+=$req->input('today_production');
-        $production->balance+=$req->input('balance');
+        $production->balance=$req->input('balance');
         $production->status=1;
         $production->update();
 
@@ -62,6 +62,7 @@ class productionController extends Controller
     function addDailyData(Request $req){
         $production = new Daily_production;
         $production->production_id= $req->input('id');
+        $production->production_date= $req->input('production_date');
         $production->today_production= $req->input('today_production');
         $production->total_production= $req->input('total_production');
         $production->balance= $req->input('balance');
@@ -71,7 +72,7 @@ class productionController extends Controller
         $production=Production::find($production_id);
         $production->today_production=$req->input('today_production');
         $production->total_production+=$req->input('today_production');
-        $production->balance+=$req->input('balance');
+        $production->balance=$req->input('balance');
         $production->inhand=$req->input('inhand');
         $production->update();
 
@@ -87,7 +88,7 @@ class productionController extends Controller
                     ->get(['daily_productions.id as id','orders.order_no','orders.total_qty as total',
                         'plans.target_perday as targetPerDay',
                         'daily_productions.today_production','daily_productions.total_production',
-                        'daily_productions.balance','daily_productions.created_at']);
+                        'daily_productions.balance','daily_productions.production_date']);
                     
 
         return view('dailyProduction',['dailylist'=>$dailylist]);

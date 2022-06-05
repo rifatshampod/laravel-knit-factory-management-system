@@ -150,12 +150,13 @@
 
               <input type="hidden" name="id" id="production_id" />
               <input type="hidden" name="order_id" id="order_id" />
+              <input type="hidden" id="total_production" name="total_production">
               
 
               <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="target_day">Target Per Day</label>
+                    <label for="target_day">Total Receive</label>
                     <input
                       type="number"
                       name="target"
@@ -163,6 +164,17 @@
                       id="target"
                       placeholder="Enter target amount"
                       readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="production_date">Date</label>
+                    <input
+                      type="date"
+                      name="production_date"
+                      class="form-control"
+                      id="production_date"
                     />
                   </div>
                 </div>
@@ -219,11 +231,12 @@
               @method('PUT')
 
               <input type="hidden" name="id" id="daily_id" />
+              <input type="hidden" id="total_production" name="total_production">
 
               <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
-                    <label for="target_day">Target Per Day</label>
+                    <label for="target_day">Total Receive</label>
                     <input
                       type="number"
                       name="target"
@@ -231,6 +244,17 @@
                       id="target_daily"
                       placeholder="Enter target amount"
                       readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label for="production_date">Date</label>
+                    <input
+                      type="date"
+                      name="production_date"
+                      class="form-control"
+                      id="production_date"
                     />
                   </div>
                 </div>
@@ -261,7 +285,8 @@
                     />
                   </div>
                 </div>
-                <div class="col-lg-6">
+                
+                <div class="col-lg-12">
                   <div class="form-group">
                     <label for="balance">Without Print Balance </label>
                     <input
@@ -337,10 +362,10 @@
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#target').val(response.production.target_perday);
+              $('#target').val(response.production.total_receive);
               $('#order_id').val(response.production.order_id);
               $('#today_production').val(response.production.today_production);
-              $('#total_production').val(response.production.total_production);
+              // $('#total_production').val(response.production.total_production);
               $('#balance').val(response.production.balance);
               $('#production_id').val(production_id);
             }
@@ -360,7 +385,8 @@
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#target_daily').val(response.production.target_perday);
+              $('#target_daily').val(response.production.total_receive);
+              $('#total_production').val(response.production.total_production);
               $('#inhand').val(response.production.balance);
               $('#daily_id').val(daily_id);
             }
@@ -374,7 +400,8 @@
       function findBalance(){
         const todayProduction = document.getElementById("today_production").value;
         const target = document.getElementById("target").value;
-        const balance = todayProduction - target;
+        const total = document.getElementById("total_production_last").value;
+        const balance = target-todayProduction;
         document.getElementById("balance").value = balance;
       }
 
@@ -382,7 +409,8 @@
       function findBalanceDaily(){
         const todayProduction = document.getElementById("today_production_daily").value;
         const target = document.getElementById("target_daily").value;
-        const balance = todayProduction - target;
+        const total = document.getElementById("total_production").value;
+        const balance = target-todayProduction -total;
         document.getElementById("balance_daily").value = balance;
       }
     </script>

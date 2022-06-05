@@ -3,7 +3,7 @@
         <div class="nano-content">
           <ul>
             <div class="logo">
-              <a href="index.html">
+              <a href="/">
                 <!-- <img src="assets/images/logo.png" alt="" /> --><span
                   >KNIT</span
                 ></a
@@ -11,7 +11,7 @@
             </div>
             <li class="label">Main</li>
             <li>
-              <a href="index.html"><i class="ti-home"></i>Dashboard</a>
+              <a href="/"><i class="ti-home"></i>Dashboard</a>
             </li>
 
             <li class="label">Apps</li>

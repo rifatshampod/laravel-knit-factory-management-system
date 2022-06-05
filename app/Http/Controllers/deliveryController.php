@@ -72,6 +72,7 @@ class deliveryController extends Controller
     function addReceiveData(Request $req){
         $receive = new Receive;
         $receive->delivery_id= $req->input('id');
+        $receive->receive_date= $req->input('receive_date');
         $receive->receive_today= $req->input('today_receive');
         $receive->receive_total= $req->input('total_receive');
         $receive->receive_balance= $req->input('receive_balance');
@@ -93,7 +94,7 @@ class deliveryController extends Controller
                     ->get(['receives.id as id','orders.id as orderId',
                         'orders.style','orders.order_no','orders.body_color',
                         'receives.receive_today','receives.receive_total',
-                        'receives.receive_balance','receives.created_at']);
+                        'receives.receive_balance','receives.receive_date']);
                     
 
         return view('allReceive',['deliverylist'=>$deliverylist]);
@@ -112,6 +113,7 @@ class deliveryController extends Controller
 
         $delivery = new Daily_delivery;
         $delivery->delivery_id= $req->input('id');
+        $delivery->delivery_date= $req->input('delivery_date');
         $delivery->delivery_today= $req->input('today_delivery');
         $delivery->delivery_total+= $req->input('total_delivery');
         $delivery->delivery_balance= $req->input('delivery_balance');
@@ -129,7 +131,7 @@ class deliveryController extends Controller
                     ->get(['daily_deliveries.id as id','orders.id as orderId',
                         'orders.style','orders.order_no','orders.body_color',
                         'daily_deliveries.delivery_today','daily_deliveries.delivery_total',
-                        'daily_deliveries.delivery_balance','daily_deliveries.created_at']);
+                        'daily_deliveries.delivery_balance','daily_deliveries.delivery_date']);
                     
 
         return view('allDailyDelivery',['deliverylist'=>$deliverylist]);
