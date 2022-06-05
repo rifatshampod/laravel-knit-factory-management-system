@@ -104,7 +104,7 @@
                 </ul>
                 </li>
 
-            <li>
+            {{-- <li>
               <a class="sidebar-sub-toggle"
                 ><i class="ti-truck"></i>Report<span
                   class="sidebar-collapse-icon ti-angle-down"
@@ -116,7 +116,7 @@
                 <li><a href="#">Production Report</a></li>
                 <li><a href="#">Delivery Report</a></li>
               </ul>
-            </li>
+            </li> --}}
             <li>
               <a class="sidebar-sub-toggle"
                 ><i class="ti-truck"></i>Settings<span

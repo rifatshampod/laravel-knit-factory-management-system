@@ -36,6 +36,12 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="card">
+                  <div class="d-flex justify-content-end">
+                    <div>
+                      <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" 
+                      onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
+                    </div>
+                  </div>
                   <div class="bootstrap-data-table-panel">
                     <div class="table-responsive">
                       <table
@@ -143,7 +149,7 @@
               @method('PUT')
 
               <input type="hidden" name="id" id="production_id" />
-              <input type="text" name="order_id" id="order_id" />
+              <input type="hidden" name="order_id" id="order_id" />
               
 
               <div class="row">
@@ -302,6 +308,19 @@
     <!-- scripit init-->
     <script src="assets/js/lib/data-table/datatables.min.js"></script>
     <script src="assets/js/lib/data-table/datatables-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+
+    <script>
+      function exportReportToExcel() {
+        let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+        TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
+          name: `all-production.xlsx`, // fileName you could use any name
+          sheet: {
+            name: 'Sheet 1' // sheetName
+          }
+        });
+      }
+    </script>
 
         <!-- Edit Modal functions -->
     <script>

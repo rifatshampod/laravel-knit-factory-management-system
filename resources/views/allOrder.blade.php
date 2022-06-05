@@ -38,7 +38,8 @@
                 <div class="card">
                   <div class="d-flex justify-content-end">
                     <div>
-                      <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
+                      <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" 
+                      onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
                     </div>
                     <div>
                       <button
@@ -103,29 +104,17 @@
                             <td>{{$item['supplier']}}</td>
                             <td>
                               <div class="employeeTableIcon d-flex">
-                                <div
-                                  class="employeeTableIconDiv Icon1 d-flex justify-content-center align-items-center mr-1"
-                                  onclick="location.href='profile.html'"
-                                  onclick="location.href='profile.html'"
-                                >
-                                  <i class="ti-eye"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon2 d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-trash"></i>
-                                </div>
-                                <div
-                                  class="employeeTableIconDiv Icon3 d-flex justify-content-center align-items-center mr-1"
+                                <button
+                                value="{{$item['id']}}"
+                                  class="employeeTableIconDiv editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
                                 >
                                   <i class="ti-pencil-alt"></i>
-                                </div>
+                                </button>
                               </div>
                             </td>
                           </tr>
                           @endforeach
-                          
-                          
+                        
                         </tbody>
                       </table>
                     </div>
@@ -140,6 +129,236 @@
         </div>
       </div>
     </div>
+
+        <!-------edit-Modal------>
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Order</h5>
+        <button type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+            <div class="modal-body">
+            <form action="update-order" method="POST" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
+
+              <input type="hidden" name="order_id" id="order_id_previous" />
+                
+              <div class="row">
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="style_name">Style Name</label>
+                    <input
+                      type="text"
+                      name="style"
+                      class="form-control"
+                      id="style_name"
+                      placeholder="style name"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="order_no">Order No</label>
+                    <input
+                      type="text"
+                      name="orderNo"
+                      class="form-control"
+                      id="order_no"
+                      placeholder="Order No"/>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="body_color">Body Color</label>
+                    <select class="form-control input-default" id="body_color" name="bodyColor" onchange="showfield(this.options[this.selectedIndex].value)">
+                            <option disabled hidden selected>
+                              Select Color
+                            </option>
+                            @foreach ($bodycolorlist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach 
+                            <option style="color:violet" value="other">Other, Please Specify</option>
+                          </select>
+                          <div id="div1"></div>
+                  </div>
+                </div>
+                
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="print_quality">Print Quality</label>
+                    <select class="form-control input-default" id="print_quality" name="printQuality" onchange="showfield2(this.options[this.selectedIndex].value)">
+                            <option disabled hidden selected>
+                              Select Print Quality
+                            </option>
+                            @foreach ($qualitylist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach 
+                            <option style="color:violet" value="other">Other, Please Specify</option>
+                          </select>
+                          <div id="div2"></div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="parts_name">Parts Name</label>
+                    <select class="form-control input-default" id="parts_name" name="partsName" onchange="showfield3(this.options[this.selectedIndex].value)">
+                            <option disabled hidden selected>
+                              Select Parts Name
+                            </option>
+                            @foreach ($partslist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach 
+                            <option style="color:violet" value="other">Other, Please Specify</option>
+                          </select>
+                          <div id="div3"></div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="print_color">Print Color</label>
+                    <input
+                      type="text"
+                      name="printColor"
+                      class="form-control"
+                      id="print_color"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="color_qty">Color Qty</label>
+                    <input
+                      type="number"
+                      name="colorQty"
+                      class="form-control"
+                      id="color_qty"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="order_qty">Order Qty</label>
+                    <input
+                      type="number"
+                      name="orderQty"
+                      class="form-control"
+                      id="order_qty"
+                      onchange="totalQtyCal()"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="extra_qty">Extra 5%</label>
+                    <input
+                      type="number"
+                      name="extraQty"
+                      class="form-control"
+                      id="extra_qty"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="total_qty">Total Qty</label>
+                    <input
+                      type="number"
+                      name="totalQty"
+                      class="form-control"
+                      id="total_qty"
+                      readonly
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="delivery_date">Delivery Date</label>
+                    <input
+                      type="date"
+                      name="deliveryDate"
+                      class="form-control"
+                      id="delivery_date"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="merchandiser">Merchandiser</label>
+                    <select class="form-control input-default" id="merchandiser" name="merchandiser" onchange="showfield4(this.options[this.selectedIndex].value)">
+                            <option disabled hidden selected>
+                              Select Merchandiser
+                            </option>
+                            @foreach ($merchandiserlist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach 
+                            <option style="color:violet" value="other">Other, Please Specify</option>
+                          </select>
+                          <div id="div4"></div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="supplier">Supplier</label>
+                    <select class="form-control input-default" id="supplier" name="supplier" onchange="showfield5(this.options[this.selectedIndex].value)">
+                            <option disabled hidden selected>
+                              Select Supplier
+                            </option>
+                            @foreach ($supplierlist as $item)
+                                <option>{{$item['name']}}</option>
+                            @endforeach 
+                            <option style="color:violet" value="other">Other, Please Specify</option>
+                          </select>
+                          <div id="div5"></div>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="price_dozen">Price Dozen</label>
+                    <input
+                      type="number"
+                      name="priceDozen"
+                      step="0.01"
+                      class="form-control"
+                      id="price_dozen"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <div class="form-group">
+                    <label for="artwork">Change Artwork</label>
+                    <input
+                              type="file"
+                              name="artwork"
+                              class="form-control-file"
+                              id="artwork"
+                            />
+                  </div>
+                </div>
+               
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-lg-4">
+                  <button type="button" class="btn btn-danger w-100" data-dismiss="modal">
+                    Cancel
+                  </button>
+                </div>
+                <div class="col-lg-4">
+                  <button type="submit" class="btn btn-success w-100">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- jquery vendor -->
     <script src="assets/js/lib/jquery.min.js"></script>
     <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
@@ -159,15 +378,99 @@
     <!---- export table -->
     <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
 
+        <!-- Edit Modal functions -->
     <script>
+      $(document).ready(function(){
+
+        $(document).on('click', '.editBtn', function(){ 
+          var order_id_main = $(this).val();
+          console.log(order_id_main);
+          jQuery.noConflict(); 
+          $('#editModal').modal('show');
+          $.ajax({
+            url: '/edit-order' + order_id_main,
+            type: "GET",
+            success:function(response){
+              console.log(response);
+              $('#style_name').val(response.order.style);
+              $('#order_no').val(response.order.order_no);
+              $('#body_color').val(response.order.body_color);
+              $('#print_quality').val(response.order.print_quality);
+              $('#parts_name').val(response.order.parts_name);
+              $('#print_color').val(response.order.print_color);
+              $('#color_qty').val(response.order.color_qty);
+              $('#order_qty').val(response.order.order_qty);
+              $('#extra_qty').val(response.order.extra_qty);
+              $('#total_qty').val(response.order.total_qty);
+              $('#delivery_date').val(response.order.delivery_date);
+              $('#merchandiser').val(response.order.merchandiser);
+              $('#supplier').val(response.order.supplier);
+              $('#price_dozen').val(response.order.price_dozen);
+              // $('#artwork').val(response.order.artwork);
+              $('#order_id_previous').val(order_id_main);
+            }
+          });
+        });
+      });
+    
       function exportReportToExcel() {
         let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
         TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
-          name: `allorder.xlsx`, // fileName you could use any name
+          name: `all-order.xlsx`, // fileName you could use any name
           sheet: {
             name: 'Sheet 1' // sheetName
           }
         });
+      }
+
+      function totalQtyCal()
+      {
+          const orderQty = document.getElementById("order_qty").value;
+          const orderExtra = document.getElementById("extra_qty").value =
+              (parseInt(orderQty) / 100) * 5;
+          const Equation = parseInt(orderQty) + orderExtra;
+          document.getElementById("total_qty").value = Equation;
+      }
+
+      function showfield(name){
+        if(name == 'other') {
+          document.getElementById('div1').innerHTML = 'Other Bodycolor: <input class="form-control input-default" type="text" name="otherBodycolor" />';
+        }
+        else {
+          document.getElementById('div1').innerHTML='';
+        }	
+      }
+      function showfield2(name){
+        if(name == 'other') {
+          document.getElementById('div2').innerHTML = 'Other Print Quality: <input class="form-control input-default" type="text" name="otherPrintquality" />';
+        }
+        else {
+          document.getElementById('div2').innerHTML='';
+        }	
+      }
+      function showfield3(name){
+        if(name == 'other') {
+          document.getElementById('div3').innerHTML = 'Other Parts Name: <input class="form-control input-default" type="text" name="otherPartsname" />';
+        }
+        else {
+          document.getElementById('div3').innerHTML='';
+        }	
+      }
+      function showfield4(name){
+        if(name == 'other') {
+          document.getElementById('div4').innerHTML = 'Other Merchandiser: <input class="form-control input-default" type="text" name="otherMerchandiser" />';
+        }
+        else {
+          document.getElementById('div4').innerHTML='';
+        }	
+      }
+      function showfield5(name){
+        if(name == 'other') {
+          document.getElementById('div5').innerHTML = 'Other Supplier: <input class="form-control input-default" type="text" name="otherSupplier" />';
+        }
+        else {
+          document.getElementById('div5').innerHTML='';
+        }	
       }
     </script>
   </body>
