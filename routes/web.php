@@ -33,10 +33,10 @@ Route::get('/',[dashboardController::class,'getData']);  //add redirector later
 Route::view('dashboard','index');
 
 
-Route::view('create-plan','createPlan');
+// Route::view('create-plan','createPlan');
 
-Route::view('production-report','productionReport');
-Route::view('create-delivery','createDelivery');
+
+// Route::view('create-delivery','createDelivery');
 
 
 //dynamic
@@ -70,7 +70,10 @@ Route::put('update-production', [productionController::class,'updateData']);
 Route::put('add-production', [productionController::class,'addDailyData']); // add daily production
 Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
 
-//settings
+//Report
+Route::get('order-report',[orderController::class, 'showData']); //show all order
+
+//settings----------------------------------------------------------
 
 //merchandiser
 Route::get('all-merchandiser',[settingsController::class, 'showMerchandiserData']); //show all merchandiser
