@@ -70,8 +70,16 @@ Route::put('update-production', [productionController::class,'updateData']);
 Route::put('add-production', [productionController::class,'addDailyData']); // add daily production
 Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
 
-//Report
-Route::get('order-report',[orderController::class, 'showData']); //show all order
+//Report ----------------------------------------------------------
+Route::get('order-report',[orderController::class, 'showReportData']); //show all order report from plan if possible
+Route::get('order-report&&body-color={slug}',[orderController::class, 'showBodyColorReportData']);
+Route::get('order-report&&print-quality={slug}',[orderController::class, 'showPrintQualityReportData']);
+Route::get('order-report&&body-parts={slug}',[orderController::class, 'showPartsReportData']);
+Route::get('production-report',[productionController::class, 'showReportData']); //show all production report
+Route::get('allocation-report',[planController::class, 'showReportData']); //show all production report
+
+
+
 
 //settings----------------------------------------------------------
 

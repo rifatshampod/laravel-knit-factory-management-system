@@ -53,7 +53,7 @@
         @if(auth()->user()->role == 1)
 
         <li>
-          <a class="sidebar-sub-toggle"><i class="ti-gift"></i> Order<span
+          <a class="sidebar-sub-toggle"><i class="ti-shopping-cart"></i> Order<span
               class="sidebar-collapse-icon ti-angle-down"></span></a>
           <ul>
             <li><a href="create-order">Create Order</a></li>
@@ -62,7 +62,7 @@
         </li>
 
         <li>
-          <a class="" href="plan"><i class="ti-gift"></i>Planning</a>
+          <a class="" href="plan"><i class="ti-ruler-pencil"></i>Planning</a>
         </li>
 
         <li>
@@ -85,7 +85,7 @@
         </li>
 
         <li>
-          <a class="sidebar-sub-toggle"><i class="ti-truck"></i>Report<span
+          <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Report<span
               class="sidebar-collapse-icon ti-angle-down"></span></a>
           <ul>
             <li><a href="order-report">Order Report</a></li>
@@ -94,7 +94,7 @@
           </ul>
         </li>
         <li>
-          <a class="sidebar-sub-toggle"><i class="ti-truck"></i>Settings<span
+          <a class="sidebar-sub-toggle"><i class="ti-settings"></i>Settings<span
               class="sidebar-collapse-icon ti-angle-down"></span></a>
           <ul>
             <li><a href="all-merchandiser">Merchandiser</a></li>
