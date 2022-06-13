@@ -229,7 +229,6 @@
                         </div>
                       </div>
                       <div class="col-lg-4">
-                        <form>
                           <div class="form-group uploadFile p-4">
                             <label for="exampleFormControlFile1"
                               >Artwork upload</label

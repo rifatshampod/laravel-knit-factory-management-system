@@ -57,20 +57,20 @@
                             <th>Today Receive</th>
                             {{-- <th>Total Receive</th>
                             <th>Receive Balance</th> --}}
-                            <th>Action</th>
+                            {{-- <th>Action</th> --}}
                           </tr>
                         </thead>
                         <tbody>
                           @foreach ($deliverylist as $item)
                               <tr>
-                            <td>{{$item['created_at']->format('Y-m-d')}}</td>
+                            <td>{{$item['receive_date']}}</td>
                             <td>{{$item['style']}}</td>
                             <td>{{$item['order_no']}}</td>
                             <td>{{$item['body_color']}}</td>
                             <td>{{$item['receive_today']}}</td>
                             {{-- <td>{{$item['receive_total']}}</td>
                             <td>{{$item['receive_balance']}}</td> --}}
-                            <td>
+                            {{-- <td>
                               
                                 <div class="employeeTableIcon d-flex">
                                   <!--
@@ -89,7 +89,7 @@
                               </div>
                               
                               
-                            </td>
+                            </td> --}}
                           </tr>
                           @endforeach
                           
