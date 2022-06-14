@@ -96,8 +96,24 @@
                           <td>
                             <div class="employeeTableIcon d-flex">
                               <button value="{{$item['id']}}"
-                                class="employeeTableIconDiv editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1">
-                                <i class="ti-pencil-alt"></i>
+                                class="employeeTableIconDiv bg-success editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
+                                data-toggle="tooltip" data-placement="top" title="Color">
+                                <i class="ti-palette"></i>
+                              </button>
+                              <button value="{{$item['id']}}"
+                                class="employeeTableIconDiv bg-primary editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
+                                data-toggle="tooltip" data-placement="top" title="Body Parts">
+                                <i class="ti-tag"></i>
+                              </button>
+                              <button value="{{$item['id']}}"
+                                class="employeeTableIconDiv bg-warning editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
+                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                <i class="ti-pencil"></i>
+                              </button>
+                              <button value="{{$item['id']}}"
+                                class="employeeTableIconDiv bg-danger editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
+                                data-toggle="tooltip" data-placement="top" title="Delete">
+                                <i class="ti-trash"></i>
                               </button>
                             </div>
                           </td>
@@ -272,6 +288,18 @@
                   <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen" />
                 </div>
               </div>
+
+              <div class="col-lg-4">
+                <div class="d-flex">
+                  <label for="hide">Hide From Report</label>
+                  {{-- <input type="checkbox" name="hide" class="form-control" id="hide" value="1" /> --}}
+                  <select class="form-control input-default bg-primary" name="hide" id="hide">
+                    <option value="1">Active</option>
+                    <option value="0">Hidden</option>
+                  </select>
+                </div>
+              </div>
+
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="artwork">Change Artwork</label>
@@ -298,6 +326,7 @@
     </div>
   </div>
 
+
   <!-- jquery vendor -->
   <script src="assets/js/lib/jquery.min.js"></script>
   <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
@@ -319,6 +348,10 @@
 
   <!-- Edit Modal functions -->
   <script>
+    // $(document).ready(function(){
+    //       $('[data-toggle="tooltip"]').tooltip();
+    //       });
+
     $(document).ready(function(){
 
         $(document).on('click', '.editBtn', function(){ 
@@ -345,7 +378,7 @@
               $('#merchandiser').val(response.order.merchandiser);
               $('#supplier').val(response.order.supplier);
               $('#price_dozen').val(response.order.price_dozen);
-              // $('#artwork').val(response.order.artwork);
+              $('#hide').val(response.order.status);
               $('#order_id_previous').val(order_id_main);
             }
           });

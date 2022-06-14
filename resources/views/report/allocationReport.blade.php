@@ -39,17 +39,18 @@
                 <div class="d-flex justify-content-between mb-4">
                   <div class="d-flex align-items-center">
                     <div class="mr-2">
-                      <span>Body Color</span>
+                      <span>Sort By Each Section</span>
                     </div>
                     <div class="dropdown">
                       <button class="btn dropDownBtn dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Select Color
+                        Select Section From List
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Red</a>
-                        <a class="dropdown-item" href="#">Blue</a>
-                        <a class="dropdown-item" href="#">Yellow</a>
+                        @foreach ($sectionlist as $item)
+                        <a class="dropdown-item"
+                          href="allocation-report&&section={{$item['name']}}">{{$item['name']}}</a>
+                        @endforeach
                       </div>
                     </div>
                   </div>

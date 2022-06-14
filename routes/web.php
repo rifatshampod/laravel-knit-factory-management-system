@@ -77,6 +77,7 @@ Route::get('order-report&&print-quality={slug}',[orderController::class, 'showPr
 Route::get('order-report&&body-parts={slug}',[orderController::class, 'showPartsReportData']);
 Route::get('production-report',[productionController::class, 'showReportData']); //show all production report
 Route::get('allocation-report',[planController::class, 'showReportData']); //show all production report
+Route::get('allocation-report&&section={slug}',[planController::class, 'showSectionReportData']);
 
 
 

@@ -158,6 +158,7 @@ class orderController extends Controller
         $partslist = Parts_name::all();
         
         $orderlist = Order::orderBy('id','DESC')
+        ->where('status',1)
         ->get();
 
         return view('report/orderReport',['orderlist'=>$orderlist])
@@ -244,6 +245,13 @@ class orderController extends Controller
         $order=Order::find($order_id_before);
         $order->style= $req->input('style');
         $order->order_no= $req->input('orderNo');
+
+        if($req->input('hide')=='1'){
+            $order->status =0;
+        }
+        else{
+            $order->status =1;
+        }
 
         //body color new
         if($req->input('bodyColor')=='other'){  

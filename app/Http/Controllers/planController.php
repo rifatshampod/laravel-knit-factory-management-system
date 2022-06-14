@@ -39,6 +39,21 @@ class planController extends Controller
 
         return view('report/allocationReport',['planlist'=>$planlist])->with('sectionlist',$sectionlist);
     }
+    function showSectionReportData($slug){
+        $planlist = Plan::join('orders','orders.id','=','plans.order_id')
+                    ->orderBy('plans.id', 'DESC')
+                    ->where('section',$slug)
+                    ->get(['plans.id as id','orders.id as orderId','orders.artwork',
+                        'orders.style','orders.order_no','orders.body_color','orders.print_quality',
+                        'orders.parts_name','orders.print_color','orders.color_qty','orders.order_qty',
+                        'orders.extra_qty','orders.total_qty','orders.delivery_date','plans.target_day',
+                        'plans.target_perday','plans.production_start','plans.production_end',
+                        'plans.section','plans.status']);
+        $sectionlist=Section::all();
+                    
+
+        return view('report/allocationReport',['planlist'=>$planlist])->with('sectionlist',$sectionlist);
+    }
 
     function editData($id){
         // $plan=Plan::find($id);
