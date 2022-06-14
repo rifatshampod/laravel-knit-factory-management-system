@@ -179,6 +179,7 @@ class orderController extends Controller
         
         $orderlist = Order::orderBy('id','DESC')
         ->where('body_color', $slug)
+        ->where('status',1)
         ->get();
 
         return view('report/orderReport',['orderlist'=>$orderlist])
@@ -198,6 +199,7 @@ class orderController extends Controller
         
         $orderlist = Order::orderBy('id','DESC')
         ->where('print_quality', $slug)
+        ->where('status',1)
         ->get();
 
         return view('report/orderReport',['orderlist'=>$orderlist])
@@ -217,6 +219,7 @@ class orderController extends Controller
         
         $orderlist = Order::orderBy('id','DESC')
         ->where('parts_name', $slug)
+        ->where('status',1)
         ->get();
 
         return view('report/orderReport',['orderlist'=>$orderlist])
@@ -247,10 +250,10 @@ class orderController extends Controller
         $order->order_no= $req->input('orderNo');
 
         if($req->input('hide')=='1'){
-            $order->status =0;
+            $order->status =1;
         }
         else{
-            $order->status =1;
+            $order->status =0;
         }
 
         //body color new

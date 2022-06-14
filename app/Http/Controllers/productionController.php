@@ -33,7 +33,9 @@ class productionController extends Controller
                         'orders.style','orders.order_no','orders.body_color','orders.print_quality',
                         'orders.parts_name','orders.print_color','orders.total_qty','plans.target_perday',
                         'productions.inhand','productions.today_production',
-                        'productions.total_production','productions.balance','productions.status as productionStatus']);
+                        'productions.total_production','productions.balance',
+                        'productions.status as productionStatus','orders.status as hideStatus'])
+                    ->where('hideStatus',1);
                     
 
         return view('report/productionReport',['productionlist'=>$productionlist]);
