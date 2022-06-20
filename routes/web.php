@@ -45,6 +45,8 @@ Route::post('add-order',[orderController::class, 'addData']); //add order to dat
 Route::get('order',[orderController::class, 'showData']); //show all order
 Route::get('edit-order{id}', [orderController::class,'editData']);
 Route::put('update-order', [orderController::class,'updateData']);
+Route::put('delete-order', [orderController::class,'deleteData']);
+
 
 //delivery
 Route::get('all-delivery',[deliveryController::class, 'showData']);
@@ -76,6 +78,7 @@ Route::get('order-report&&body-color={slug}',[orderController::class, 'showBodyC
 Route::get('order-report&&print-quality={slug}',[orderController::class, 'showPrintQualityReportData']);
 Route::get('order-report&&body-parts={slug}',[orderController::class, 'showPartsReportData']);
 Route::get('production-report',[productionController::class, 'showReportData']); //show all production report
+Route::get('daily-production-report',[productionController::class, 'showDailyData']); //day wise production
 Route::get('allocation-report',[planController::class, 'showReportData']); //show all production report
 Route::get('allocation-report&&section={slug}',[planController::class, 'showSectionReportData']);
 

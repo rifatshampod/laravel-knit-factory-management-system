@@ -96,12 +96,12 @@
                           <td>
                             <div class="employeeTableIcon d-flex">
                               <button value="{{$item['id']}}"
-                                class="employeeTableIconDiv bg-success editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
+                                class="employeeTableIconDiv bg-success colorBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
                                 data-toggle="tooltip" data-placement="top" title="Color">
                                 <i class="ti-palette"></i>
                               </button>
                               <button value="{{$item['id']}}"
-                                class="employeeTableIconDiv bg-primary editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
+                                class="employeeTableIconDiv bg-primary bodyBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
                                 data-toggle="tooltip" data-placement="top" title="Body Parts">
                                 <i class="ti-tag"></i>
                               </button>
@@ -111,7 +111,7 @@
                                 <i class="ti-pencil"></i>
                               </button>
                               <button value="{{$item['id']}}"
-                                class="employeeTableIconDiv bg-danger editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
+                                class="employeeTableIconDiv bg-danger deleteBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
                                 data-toggle="tooltip" data-placement="top" title="Delete">
                                 <i class="ti-trash"></i>
                               </button>
@@ -326,6 +326,414 @@
     </div>
   </div>
 
+  <!-------Body parts-Modal------>
+  <div class="modal fade" id="bodyModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Order</h5>
+          <button type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="update-order" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <input type="hidden" name="order_id" id="order_id_previous" />
+
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="style_name">Style Name</label>
+                  <input type="text" name="style" class="form-control" id="style_name" placeholder="style name" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="order_no">Order No</label>
+                  <input type="text" name="orderNo" class="form-control" id="order_no" placeholder="Order No" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="body_color">Body Color</label>
+                  <select class="form-control input-default" id="body_color" name="bodyColor"
+                    onchange="showfield(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Color
+                    </option>
+                    @foreach ($bodycolorlist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div1"></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="print_quality">Print Quality</label>
+                  <select class="form-control input-default" id="print_quality" name="printQuality"
+                    onchange="showfield2(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Print Quality
+                    </option>
+                    @foreach ($qualitylist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div2"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="parts_name">Parts Name</label>
+                  <select class="form-control input-default" id="parts_name" name="partsName"
+                    onchange="showfield3(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Parts Name
+                    </option>
+                    @foreach ($partslist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div3"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="print_color">Print Color</label>
+                  <input type="text" name="printColor" class="form-control" id="print_color" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="color_qty">Color Qty</label>
+                  <input type="number" name="colorQty" class="form-control" id="color_qty" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="order_qty">Order Qty</label>
+                  <input type="number" name="orderQty" class="form-control" id="order_qty" onchange="totalQtyCal()" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="extra_qty">Extra 5%</label>
+                  <input type="number" name="extraQty" class="form-control" id="extra_qty" readonly />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="total_qty">Total Qty</label>
+                  <input type="number" name="totalQty" class="form-control" id="total_qty" readonly />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="delivery_date">Delivery Date</label>
+                  <input type="date" name="deliveryDate" class="form-control" id="delivery_date" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="merchandiser">Merchandiser</label>
+                  <select class="form-control input-default" id="merchandiser" name="merchandiser"
+                    onchange="showfield4(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Merchandiser
+                    </option>
+                    @foreach ($merchandiserlist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div4"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="supplier">Supplier</label>
+                  <select class="form-control input-default" id="supplier" name="supplier"
+                    onchange="showfield5(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Supplier
+                    </option>
+                    @foreach ($supplierlist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div5"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="price_dozen">Price Dozen</label>
+                  <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen" />
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="d-flex">
+                  <label for="hide">Hide From Report</label>
+                  {{-- <input type="checkbox" name="hide" class="form-control" id="hide" value="1" /> --}}
+                  <select class="form-control input-default bg-primary" name="hide" id="hide">
+                    <option value="1">Active</option>
+                    <option value="0">Hidden</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="artwork">Change Artwork</label>
+                  <input type="file" name="artwork" class="form-control-file" id="artwork" />
+                </div>
+              </div>
+
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-danger w-100" data-dismiss="modal">
+                  Cancel
+                </button>
+              </div>
+              <div class="col-lg-4">
+                <button type="submit" class="btn btn-success w-100">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-------color-quantity-Modal------>
+  <div class="modal fade" id="colorModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Order</h5>
+          <button type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="update-order" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+
+            <input type="hidden" name="order_id" id="order_id_previous" />
+
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="style_name">Style Name</label>
+                  <input type="text" name="style" class="form-control" id="style_name" placeholder="style name" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="order_no">Order No</label>
+                  <input type="text" name="orderNo" class="form-control" id="order_no" placeholder="Order No" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="body_color">Body Color</label>
+                  <select class="form-control input-default" id="body_color" name="bodyColor"
+                    onchange="showfield(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Color
+                    </option>
+                    @foreach ($bodycolorlist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div1"></div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="print_quality">Print Quality</label>
+                  <select class="form-control input-default" id="print_quality" name="printQuality"
+                    onchange="showfield2(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Print Quality
+                    </option>
+                    @foreach ($qualitylist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div2"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="parts_name">Parts Name</label>
+                  <select class="form-control input-default" id="parts_name" name="partsName"
+                    onchange="showfield3(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Parts Name
+                    </option>
+                    @foreach ($partslist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div3"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="print_color">Print Color</label>
+                  <input type="text" name="printColor" class="form-control" id="print_color" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="color_qty">Color Qty</label>
+                  <input type="number" name="colorQty" class="form-control" id="color_qty" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="order_qty">Order Qty</label>
+                  <input type="number" name="orderQty" class="form-control" id="order_qty" onchange="totalQtyCal()" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="extra_qty">Extra 5%</label>
+                  <input type="number" name="extraQty" class="form-control" id="extra_qty" readonly />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="total_qty">Total Qty</label>
+                  <input type="number" name="totalQty" class="form-control" id="total_qty" readonly />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="delivery_date">Delivery Date</label>
+                  <input type="date" name="deliveryDate" class="form-control" id="delivery_date" />
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="merchandiser">Merchandiser</label>
+                  <select class="form-control input-default" id="merchandiser" name="merchandiser"
+                    onchange="showfield4(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Merchandiser
+                    </option>
+                    @foreach ($merchandiserlist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div4"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="supplier">Supplier</label>
+                  <select class="form-control input-default" id="supplier" name="supplier"
+                    onchange="showfield5(this.options[this.selectedIndex].value)">
+                    <option disabled hidden selected>
+                      Select Supplier
+                    </option>
+                    @foreach ($supplierlist as $item)
+                    <option>{{$item['name']}}</option>
+                    @endforeach
+                    <option style="color:violet" value="other">Other, Please Specify</option>
+                  </select>
+                  <div id="div5"></div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="price_dozen">Price Dozen</label>
+                  <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen" />
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="d-flex">
+                  <label for="hide">Hide From Report</label>
+                  {{-- <input type="checkbox" name="hide" class="form-control" id="hide" value="1" /> --}}
+                  <select class="form-control input-default bg-primary" name="hide" id="hide">
+                    <option value="1">Active</option>
+                    <option value="0">Hidden</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="form-group">
+                  <label for="artwork">Change Artwork</label>
+                  <input type="file" name="artwork" class="form-control-file" id="artwork" />
+                </div>
+              </div>
+
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-4">
+                <button type="button" class="btn btn-danger w-100" data-dismiss="modal">
+                  Cancel
+                </button>
+              </div>
+              <div class="col-lg-4">
+                <button type="submit" class="btn btn-success w-100">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- delete modal -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Delete Confirmation</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to delete?
+        </div>
+        <div class="modal-footer">
+          <form action="delete-order" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="order_id" id="order_id_delete_modal">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <!-- jquery vendor -->
   <script src="assets/js/lib/jquery.min.js"></script>
@@ -383,12 +791,21 @@
             }
           });
         });
+
+        //delete modal
+        $(document).on('click', '.deleteBtn', function(){
+        var order_id_delete = $(this).val();
+        console.log(order_id_delete);
+        jQuery.noConflict();
+        $('#deleteModal').modal('show');
+        $('#order_id_delete_modal').val(order_id_delete);
+        });
       });
     
       function exportReportToExcel() {
         let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
         TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
-          name: `all-order.xlsx`, // fileName you could use any name
+          name: 'all-order.csv', // fileName you could use any name
           sheet: {
             name: 'Sheet 1' // sheetName
           }

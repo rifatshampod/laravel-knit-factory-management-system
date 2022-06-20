@@ -90,6 +90,7 @@
           <ul>
             <li><a href="order-report">Order Report</a></li>
             <li><a href="production-report">Production Report</a></li>
+            <li><a href="daily-production-report">Daily Production Report</a></li>
             <li><a href="allocation-report">Allocation Report</a></li>
           </ul>
         </li>

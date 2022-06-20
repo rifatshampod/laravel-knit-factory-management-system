@@ -331,4 +331,11 @@ class orderController extends Controller
 
         return redirect()->back()->with('status','order information has been updated');
     }
+
+    function Data(Request $req){
+        $order_id_before = $req->input('order_id');
+        
+
+        return redirect()->back()->with('status','order information has been deleted');
+    }
 }
