@@ -149,6 +149,90 @@ class orderController extends Controller
         ->with('partslist',$partslist);
     }
 
+    function showReportData(Request $req){
+
+        $merchandiserlist = Merchandiser::all();
+        $supplierlist = Supplier::all();
+        $bodycolorlist = Body_color::all();
+        $qualitylist = Print_quality::all();
+        $partslist = Parts_name::all();
+        
+        $orderlist = Order::orderBy('id','DESC')
+        ->where('status',1)
+        ->get();
+
+        return view('report/orderReport',['orderlist'=>$orderlist])
+        ->with('supplierlist',$supplierlist)
+        ->with('merchandiserlist',$merchandiserlist)
+        ->with('bodycolorlist',$bodycolorlist)
+        ->with('qualitylist',$qualitylist)
+        ->with('partslist',$partslist);
+    }
+
+    function showBodyColorReportData($slug){
+
+        $merchandiserlist = Merchandiser::all();
+        $supplierlist = Supplier::all();
+        $bodycolorlist = Body_color::all();
+        $qualitylist = Print_quality::all();
+        $partslist = Parts_name::all();
+        
+        $orderlist = Order::orderBy('id','DESC')
+        ->where('body_color', $slug)
+        ->where('status',1)
+        ->get();
+
+        return view('report/orderReport',['orderlist'=>$orderlist])
+        ->with('supplierlist',$supplierlist)
+        ->with('merchandiserlist',$merchandiserlist)
+        ->with('bodycolorlist',$bodycolorlist)
+        ->with('qualitylist',$qualitylist)
+        ->with('partslist',$partslist);
+    }
+    function showPrintQualityReportData($slug){
+
+        $merchandiserlist = Merchandiser::all();
+        $supplierlist = Supplier::all();
+        $bodycolorlist = Body_color::all();
+        $qualitylist = Print_quality::all();
+        $partslist = Parts_name::all();
+        
+        $orderlist = Order::orderBy('id','DESC')
+        ->where('print_quality', $slug)
+        ->where('status',1)
+        ->get();
+
+        return view('report/orderReport',['orderlist'=>$orderlist])
+        ->with('supplierlist',$supplierlist)
+        ->with('merchandiserlist',$merchandiserlist)
+        ->with('bodycolorlist',$bodycolorlist)
+        ->with('qualitylist',$qualitylist)
+        ->with('partslist',$partslist);
+    }
+    function showPartsReportData($slug){
+
+        $merchandiserlist = Merchandiser::all();
+        $supplierlist = Supplier::all();
+        $bodycolorlist = Body_color::all();
+        $qualitylist = Print_quality::all();
+        $partslist = Parts_name::all();
+        
+        $orderlist = Order::orderBy('id','DESC')
+        ->where('parts_name', $slug)
+        ->where('status',1)
+        ->get();
+
+        return view('report/orderReport',['orderlist'=>$orderlist])
+        ->with('supplierlist',$supplierlist)
+        ->with('merchandiserlist',$merchandiserlist)
+        ->with('bodycolorlist',$bodycolorlist)
+        ->with('qualitylist',$qualitylist)
+        ->with('partslist',$partslist);
+    }
+
+    
+
+
         function editData($id){
         // $plan=Plan::find($id);
         $order=Order::find($id);
@@ -164,6 +248,13 @@ class orderController extends Controller
         $order=Order::find($order_id_before);
         $order->style= $req->input('style');
         $order->order_no= $req->input('orderNo');
+
+        if($req->input('hide')=='1'){
+            $order->status =1;
+        }
+        else{
+            $order->status =0;
+        }
 
         //body color new
         if($req->input('bodyColor')=='other'){  
@@ -239,5 +330,12 @@ class orderController extends Controller
         }
 
         return redirect()->back()->with('status','order information has been updated');
+    }
+
+    function Data(Request $req){
+        $order_id_before = $req->input('order_id');
+        
+
+        return redirect()->back()->with('status','order information has been deleted');
     }
 }
