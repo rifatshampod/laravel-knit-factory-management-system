@@ -97,13 +97,8 @@
                             <div class="employeeTableIcon d-flex">
                               <button value="{{$item['id']}}"
                                 class="employeeTableIconDiv bg-success colorBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
-                                data-toggle="tooltip" data-placement="top" title="Color">
+                                data-toggle="tooltip" data-placement="top" title="New Body Color/ Color Quantity">
                                 <i class="ti-palette"></i>
-                              </button>
-                              <button value="{{$item['id']}}"
-                                class="employeeTableIconDiv bg-primary bodyBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
-                                data-toggle="tooltip" data-placement="top" title="Body Parts">
-                                <i class="ti-tag"></i>
                               </button>
                               <button value="{{$item['id']}}"
                                 class="employeeTableIconDiv bg-warning editBtn Icon3 border-none d-flex justify-content-center align-items-center mr-1"
@@ -326,197 +321,6 @@
     </div>
   </div>
 
-  <!-------Body parts-Modal------>
-  <div class="modal fade" id="bodyModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Edit Order</h5>
-          <button type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form action="update-order" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-
-            <input type="hidden" name="order_id" id="order_id_previous" />
-
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="style_name">Style Name</label>
-                  <input type="text" name="style" class="form-control" id="style_name" placeholder="style name" />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="order_no">Order No</label>
-                  <input type="text" name="orderNo" class="form-control" id="order_no" placeholder="Order No" />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="body_color">Body Color</label>
-                  <select class="form-control input-default" id="body_color" name="bodyColor"
-                    onchange="showfield(this.options[this.selectedIndex].value)">
-                    <option disabled hidden selected>
-                      Select Color
-                    </option>
-                    @foreach ($bodycolorlist as $item)
-                    <option>{{$item['name']}}</option>
-                    @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
-                  </select>
-                  <div id="div1"></div>
-                </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="print_quality">Print Quality</label>
-                  <select class="form-control input-default" id="print_quality" name="printQuality"
-                    onchange="showfield2(this.options[this.selectedIndex].value)">
-                    <option disabled hidden selected>
-                      Select Print Quality
-                    </option>
-                    @foreach ($qualitylist as $item)
-                    <option>{{$item['name']}}</option>
-                    @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
-                  </select>
-                  <div id="div2"></div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="parts_name">Parts Name</label>
-                  <select class="form-control input-default" id="parts_name" name="partsName"
-                    onchange="showfield3(this.options[this.selectedIndex].value)">
-                    <option disabled hidden selected>
-                      Select Parts Name
-                    </option>
-                    @foreach ($partslist as $item)
-                    <option>{{$item['name']}}</option>
-                    @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
-                  </select>
-                  <div id="div3"></div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="print_color">Print Color</label>
-                  <input type="text" name="printColor" class="form-control" id="print_color" />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="color_qty">Color Qty</label>
-                  <input type="number" name="colorQty" class="form-control" id="color_qty" />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="order_qty">Order Qty</label>
-                  <input type="number" name="orderQty" class="form-control" id="order_qty" onchange="totalQtyCal()" />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="extra_qty">Extra 5%</label>
-                  <input type="number" name="extraQty" class="form-control" id="extra_qty" readonly />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="total_qty">Total Qty</label>
-                  <input type="number" name="totalQty" class="form-control" id="total_qty" readonly />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="delivery_date">Delivery Date</label>
-                  <input type="date" name="deliveryDate" class="form-control" id="delivery_date" />
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="merchandiser">Merchandiser</label>
-                  <select class="form-control input-default" id="merchandiser" name="merchandiser"
-                    onchange="showfield4(this.options[this.selectedIndex].value)">
-                    <option disabled hidden selected>
-                      Select Merchandiser
-                    </option>
-                    @foreach ($merchandiserlist as $item)
-                    <option>{{$item['name']}}</option>
-                    @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
-                  </select>
-                  <div id="div4"></div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="supplier">Supplier</label>
-                  <select class="form-control input-default" id="supplier" name="supplier"
-                    onchange="showfield5(this.options[this.selectedIndex].value)">
-                    <option disabled hidden selected>
-                      Select Supplier
-                    </option>
-                    @foreach ($supplierlist as $item)
-                    <option>{{$item['name']}}</option>
-                    @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
-                  </select>
-                  <div id="div5"></div>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="price_dozen">Price Dozen</label>
-                  <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen" />
-                </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="d-flex">
-                  <label for="hide">Hide From Report</label>
-                  {{-- <input type="checkbox" name="hide" class="form-control" id="hide" value="1" /> --}}
-                  <select class="form-control input-default bg-primary" name="hide" id="hide">
-                    <option value="1">Active</option>
-                    <option value="0">Hidden</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="col-lg-4">
-                <div class="form-group">
-                  <label for="artwork">Change Artwork</label>
-                  <input type="file" name="artwork" class="form-control-file" id="artwork" />
-                </div>
-              </div>
-
-            </div>
-            <div class="row justify-content-center">
-              <div class="col-lg-4">
-                <button type="button" class="btn btn-danger w-100" data-dismiss="modal">
-                  Cancel
-                </button>
-              </div>
-              <div class="col-lg-4">
-                <button type="submit" class="btn btn-success w-100">
-                  Submit
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-------color-quantity-Modal------>
   <div class="modal fade" id="colorModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -528,29 +332,31 @@
           </button>
         </div>
         <div class="modal-body">
-          <form action="update-order" method="POST" enctype="multipart/form-data">
+          <form action="add-order" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
 
-            <input type="hidden" name="order_id" id="order_id_previous" />
+
+            <input type="hidden" name="order_id" id="order_id_previous_color" />
 
             <div class="row">
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="style_name">Style Name</label>
-                  <input type="text" name="style" class="form-control" id="style_name" placeholder="style name" />
+                  <input type="text" name="style" class="form-control" id="style_name_color" placeholder="style name"
+                    readonly />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="order_no">Order No</label>
-                  <input type="text" name="orderNo" class="form-control" id="order_no" placeholder="Order No" />
+                  <input type="text" name="orderNo" class="form-control" id="order_no_color" placeholder="Order No"
+                    readonly />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="body_color">Body Color</label>
-                  <select class="form-control input-default" id="body_color" name="bodyColor"
+                  <select class="form-control input-default" id="body_color_color" name="bodyColor"
                     onchange="showfield(this.options[this.selectedIndex].value)">
                     <option disabled hidden selected>
                       Select Color
@@ -567,7 +373,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="print_quality">Print Quality</label>
-                  <select class="form-control input-default" id="print_quality" name="printQuality"
+                  <select class="form-control input-default" id="print_quality_color" name="printQuality"
                     onchange="showfield2(this.options[this.selectedIndex].value)">
                     <option disabled hidden selected>
                       Select Print Quality
@@ -583,7 +389,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="parts_name">Parts Name</label>
-                  <select class="form-control input-default" id="parts_name" name="partsName"
+                  <select class="form-control input-default" id="parts_name_color" name="partsName"
                     onchange="showfield3(this.options[this.selectedIndex].value)">
                     <option disabled hidden selected>
                       Select Parts Name
@@ -599,43 +405,44 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="print_color">Print Color</label>
-                  <input type="text" name="printColor" class="form-control" id="print_color" />
+                  <input type="text" name="printColor" class="form-control" id="print_color_color" readonly />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="color_qty">Color Qty</label>
-                  <input type="number" name="colorQty" class="form-control" id="color_qty" />
+                  <input type="number" name="colorQty" class="form-control" id="color_qty_color" />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="order_qty">Order Qty</label>
-                  <input type="number" name="orderQty" class="form-control" id="order_qty" onchange="totalQtyCal()" />
+                  <input type="number" name="orderQty" class="form-control" id="order_qty_color"
+                    onchange="totalQtyCal()" />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="extra_qty">Extra 5%</label>
-                  <input type="number" name="extraQty" class="form-control" id="extra_qty" readonly />
+                  <input type="number" name="extraQty" class="form-control" id="extra_qty_color" readonly />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="total_qty">Total Qty</label>
-                  <input type="number" name="totalQty" class="form-control" id="total_qty" readonly />
+                  <input type="number" name="totalQty" class="form-control" id="total_qty_color" readonly />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="delivery_date">Delivery Date</label>
-                  <input type="date" name="deliveryDate" class="form-control" id="delivery_date" />
+                  <input type="date" name="deliveryDate" class="form-control" id="delivery_date_color" readonly />
                 </div>
               </div>
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="merchandiser">Merchandiser</label>
-                  <select class="form-control input-default" id="merchandiser" name="merchandiser"
+                  <select class="form-control input-default" id="merchandiser_color" name="merchandiser"
                     onchange="showfield4(this.options[this.selectedIndex].value)">
                     <option disabled hidden selected>
                       Select Merchandiser
@@ -651,7 +458,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="supplier">Supplier</label>
-                  <select class="form-control input-default" id="supplier" name="supplier"
+                  <select class="form-control input-default" id="supplier_color" name="supplier"
                     onchange="showfield5(this.options[this.selectedIndex].value)">
                     <option disabled hidden selected>
                       Select Supplier
@@ -667,7 +474,8 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="price_dozen">Price Dozen</label>
-                  <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen" />
+                  <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen_color"
+                    readonly />
                 </div>
               </div>
 
@@ -675,7 +483,7 @@
                 <div class="d-flex">
                   <label for="hide">Hide From Report</label>
                   {{-- <input type="checkbox" name="hide" class="form-control" id="hide" value="1" /> --}}
-                  <select class="form-control input-default bg-primary" name="hide" id="hide">
+                  <select class="form-control input-default bg-primary" name="hide" id="hide_color">
                     <option value="1">Active</option>
                     <option value="0">Hidden</option>
                   </select>
@@ -790,6 +598,37 @@
               $('#order_id_previous').val(order_id_main);
             }
           });
+        });
+
+        //body color
+        $(document).on('click', '.colorBtn', function(){
+        var order_id_color = $(this).val();
+        console.log(order_id_color);
+        jQuery.noConflict();
+        $('#colorModal').modal('show');
+        $.ajax({
+        url: '/edit-order' + order_id_color,
+        type: "GET",
+        success:function(response){
+        console.log(response);
+        $('#style_name_color').val(response.order.style);
+        $('#order_no_color').val(response.order.order_no);
+        $('#body_color_color').val(response.order.body_color);
+        $('#print_quality_color').val(response.order.print_quality);
+        $('#parts_name_color').val(response.order.parts_name);
+        $('#print_color_color').val(response.order.print_color);
+        $('#color_qty_color').val(response.order.color_qty);
+        $('#order_qty_color').val(response.order.order_qty);
+        $('#extra_qty_color').val(response.order.extra_qty);
+        $('#total_qty_color').val(response.order.total_qty);
+        $('#delivery_date_color').val(response.order.delivery_date);
+        $('#merchandiser_color').val(response.order.merchandiser);
+        $('#supplier_color').val(response.order.supplier);
+        $('#price_dozen_color').val(response.order.price_dozen);
+        $('#hide_color').val(response.order.status);
+        $('#order_id_previous_color').val(order_id_main_color);
+        }
+        });
         });
 
         //delete modal

@@ -11,6 +11,7 @@ use App\Models\Print_quality;
 use App\Models\Parts_name;
 use App\Models\Plan;
 use App\Models\Delivery;
+use DB;
 
 class orderController extends Controller
 {
@@ -332,8 +333,12 @@ class orderController extends Controller
         return redirect()->back()->with('status','order information has been updated');
     }
 
-    function Data(Request $req){
-        $order_id_before = $req->input('order_id');
+    function deleteData(Request $req){
+        $order_id = $req->input('order_id');
+
+        DB::delete('DELETE FROM deliveries WHERE order_id = ?', [$order_id]);
+        DB::delete('DELETE FROM orders WHERE id = ?', [$order_id]);
+        
         
 
         return redirect()->back()->with('status','order information has been deleted');
