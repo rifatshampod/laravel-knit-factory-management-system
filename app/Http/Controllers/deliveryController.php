@@ -92,7 +92,7 @@ class deliveryController extends Controller
                     ->join('orders','orders.id','=','deliveries.order_id')
                     ->orderBy('receives.id', 'DESC')
                     ->get(['receives.id as id','orders.id as orderId',
-                        'orders.style','orders.order_no','orders.body_color',
+                        'orders.style','orders.order_no','orders.body_color','orders.parts_name',
                         'receives.receive_today','receives.receive_total',
                         'receives.receive_balance','receives.receive_date']);
                     
@@ -129,7 +129,7 @@ class deliveryController extends Controller
                     ->join('orders','orders.id','=','deliveries.order_id')
                     ->orderBy('daily_deliveries.id', 'DESC')
                     ->get(['daily_deliveries.id as id','orders.id as orderId',
-                        'orders.style','orders.order_no','orders.body_color',
+                        'orders.style','orders.order_no','orders.body_color','orders.parts_name',
                         'daily_deliveries.delivery_today','daily_deliveries.delivery_total',
                         'daily_deliveries.delivery_balance','daily_deliveries.delivery_date']);
                     

@@ -405,7 +405,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="print_color">Print Color</label>
-                  <input type="text" name="printColor" class="form-control" id="print_color_color" readonly />
+                  <input type="text" name="printColor" class="form-control" id="print_color_color" />
                 </div>
               </div>
               <div class="col-lg-4">
@@ -436,7 +436,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="delivery_date">Delivery Date</label>
-                  <input type="date" name="deliveryDate" class="form-control" id="delivery_date_color" readonly />
+                  <input type="date" name="deliveryDate" class="form-control" id="delivery_date_color" />
                 </div>
               </div>
               <div class="col-lg-4">
@@ -474,8 +474,7 @@
               <div class="col-lg-4">
                 <div class="form-group">
                   <label for="price_dozen">Price Dozen</label>
-                  <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen_color"
-                    readonly />
+                  <input type="number" name="priceDozen" step="0.01" class="form-control" id="price_dozen_color" />
                 </div>
               </div>
 
