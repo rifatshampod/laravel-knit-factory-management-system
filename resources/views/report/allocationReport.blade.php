@@ -54,14 +54,19 @@
                       </div>
                     </div>
                   </div>
-                  <div>
+                  {{-- <div>
                     <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"
                       onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
+                  </div> --}}
+                  <div>
+                    <button class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" onclick="printDiv()"><i
+                        class="ti-printer"></i>Print
+                      REPORT</button>
                   </div>
                 </div>
                 <div class="bootstrap-data-table-panel">
                   <div class="table-responsive">
-                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                    <table id="Table" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Artwork</th>
@@ -145,15 +150,25 @@
   <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
 
   <script>
-    function exportReportToExcel() {
-        let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
-        TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
-          name: `all-plan.xlsx`, // fileName you could use any name
-          sheet: {
-            name: 'Sheet 1' // sheetName
-          }
-        });
-      }
+    // function exportReportToExcel() {
+    //     let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+    //     TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
+    //       name: `all-plan.xlsx`, // fileName you could use any name
+    //       sheet: {
+    //         name: 'Sheet 1' // sheetName
+    //       }
+    //     });
+    //   }
+
+function printDiv(){
+    var divToPrint = document.getElementById("Table");
+    var htmlToPrint ="" +'<style type="text/css">' +"table th, table td {"+"border:1px solid #000;"+"padding;0.5em;"+"}"+" img{"+"height:50px;"+" width:50px;"+"}"+"</style>";
+    htmlToPrint += divToPrint.outerHTML;
+    newWin = window.open("");
+    newWin.document.write(htmlToPrint);
+    newWin.print();
+    newWin.close();
+    }
   </script>
 </body>
 
