@@ -102,7 +102,7 @@ class productionController extends Controller
                     ->join('orders','orders.id','=','plans.order_id')
                     ->orderBy('daily_productions.id', 'DESC')
                     ->get(['daily_productions.id as id','orders.order_no','orders.total_qty as total',
-                        'plans.target_perday as targetPerDay',
+                        'plans.target_perday as targetPerDay','orders.style','orders.body_color','orders.parts_name',
                         'daily_productions.today_production','daily_productions.total_production',
                         'daily_productions.balance','daily_productions.production_date']);
                     

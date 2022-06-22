@@ -247,7 +247,7 @@
 
               <div class="col-lg-12">
                 <div class="form-group">
-                  <label for="total_production">Total Production</label>
+                  <label for="total_production">Total Receive</label>
                   <input type="number" name="total_production" class="form-control" id="total_production"
                     placeholder="Total Production" Readonly />
                 </div>
@@ -392,7 +392,7 @@
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#total_production').val(response.delivery.total_production); 
+              $('#total_production').val(response.delivery.total_receive); 
               $('#total_delivery_before').val(response.delivery.total_delivery);
               $('#main_delivery_id').val(delivery_id);
             }
