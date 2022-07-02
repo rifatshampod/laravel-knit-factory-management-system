@@ -137,4 +137,28 @@ class deliveryController extends Controller
         return view('allDailyDelivery',['deliverylist'=>$deliverylist]);
     }
 
+    function showOrderDeliveryData(Request $req){
+        // $deliverylist = Daily_delivery::join('deliveries','deliveries.id','=','daily_deliveries.delivery_id')
+        //             ->join('orders','orders.id','=','deliveries.order_id')
+        //             ->orderBy('daily_deliveries.id', 'DESC')
+        //             ->groupBy('delivery_date')
+        //             ->get();
+        //             ->get(['daily_deliveries.id as id','orders.id as orderId','orders.artwork',
+        //                 'orders.style','orders.order_no','orders.body_color','orders.print_quality','orders.parts_name',
+        //                 'orders.print_color','orders.total_qty', 'deliveries.total_receive',
+        //                 'daily_deliveries.delivery_today','daily_deliveries.delivery_total',
+        //                 'daily_deliveries.delivery_balance','daily_deliveries.delivery_date']);
+
+                    $deliverylist = Daily_delivery::join('deliveries','deliveries.id','=','daily_deliveries.delivery_id')
+                    ->join('orders','orders.id','=','deliveries.order_id')
+                    ->orderBy('daily_deliveries.id', 'DESC')
+                    ->selectRaw("SUM(delivery_today) as total_debit, delivery_date")
+                    ->groupBy('daily_deliveries.delivery_date')
+                    ->get();
+                   
+                    
+
+        return view('orderDelReport',['deliverylist'=>$deliverylist]);
+    }
+
 }

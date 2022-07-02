@@ -92,6 +92,9 @@
             <li><a href="production-report">Production Report</a></li>
             <li><a href="daily-production-report">Daily Production Report</a></li>
             <li><a href="allocation-report">Allocation Report</a></li>
+            <li><a href="delivery-report-date">Date Wise Delivery</a></li>
+            <li><a href="delivery-report">Order Wise Delivery</a></li>
+            <li><a href="allocation-report">Order Wise Receive</a></li>
           </ul>
         </li>
         <li>
