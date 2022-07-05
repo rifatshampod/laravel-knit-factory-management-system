@@ -12,7 +12,7 @@
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Order Wise Delivery</h1>
+                                <h1>Order Wise Receive</h1>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="index.html">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Order Wise Delivery</li>
+                                    <li class="breadcrumb-item active">Order Wise Receive</li>
                                 </ol>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
 
-                                        <form method="post" action="order-delivery-report">
+                                        <form method="post" action="order-receive-report">
                                             @csrf
                                             <div class="form-group">
                                                 <label>Select Order Number From List</label>
@@ -56,7 +56,8 @@
 
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="px-4 py-2">Find All Delivery </button></div>
+                                                <button type="submit" class="px-4 py-2">Find All Receive </button>
+                                            </div>
                                         </form>
                                     </div>
                                     {{-- <div>
@@ -83,18 +84,16 @@
                                                     <th>Parts Name</th>
                                                     <th>P.C</th>
                                                     <th>Total Qty</th>
+                                                    <th>Today Rec</th>
                                                     <th>Total Rec</th>
-                                                    <th>Today Del</th>
-                                                    <th>Total Del</th>
-                                                    <th>Del Bal</th>
-                                                    {{-- <th>Action</th> --}}
+                                                    <th>Rec Bal</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($deliverylist as $item)
 
                                                 <tr>
-                                                    <td>{{$item['delivery_date']}}</td>
+                                                    <td>{{$item['receive_date']}}</td>
                                                     <td>
                                                         <div class="orderImg">
                                                             <img src="{{$item['artwork']}}" alt="" />
@@ -107,10 +106,11 @@
                                                     <td>{{$item['parts_name']}}</td>
                                                     <td>{{$item['print_color']}}</td>
                                                     <td>{{$item['total_qty']}}</td>
+                                                    <td>{{$item['receive_today']}}</td>
                                                     <td>{{$item['total_receive']}}</td>
-                                                    <td>{{$item['delivery_today']}}</td>
-                                                    <td>{{$item['delivery_total']}}</td>
-                                                    <td>{{$item['delivery_balance']}}</td>
+                                                    <td>{{$item['total_qty'] - $item['total_receive']}}</td>
+
+
                                                 </tr>
                                                 @endforeach
 
@@ -174,7 +174,8 @@
 
         function printDiv() {
             var divToPrint = document.getElementById("Table");
-            var htmlToPrint = "" + '<style type="text/css">' + "table th, table td {" + "border:1px solid #000;" + "padding;0.5em;" + "}" + " img{" + "height:50px;" + " width:50px;" + "}" + "</style>";
+            var htmlToPrint = "" + '<style type="text/css">' + "table th, table td {" + "border:1px solid #000;" +
+                "padding;0.5em;" + "}" + " img{" + "height:50px;" + " width:50px;" + "}" + "</style>";
             htmlToPrint += divToPrint.outerHTML;
             newWin = window.open("");
             newWin.document.write(htmlToPrint);

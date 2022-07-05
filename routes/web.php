@@ -81,9 +81,12 @@ Route::get('production-report',[productionController::class, 'showReportData']);
 Route::get('daily-production-report',[productionController::class, 'showDailyData']); //day wise production
 Route::get('allocation-report',[planController::class, 'showReportData']); //show all production report
 Route::get('allocation-report&&section={slug}',[planController::class, 'showSectionReportData']);
-
+//delivery specific 
 Route::get('delivery-report-order',[deliveryController::class, 'showOrderNumber']);
 Route::post('order-delivery-report',[deliveryController::class, 'getOrderNumberData']);
+//receive specific 
+Route::get('receive-report-order',[deliveryController::class, 'showReceiveOrderNumber']);
+Route::post('order-receive-report',[deliveryController::class, 'getReceiveOrderNumberData']);
 
 
 

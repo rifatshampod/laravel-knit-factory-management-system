@@ -87,7 +87,8 @@
                         <li><a href="allocation-report">Allocation Report</a></li>
                         <li><a href="delivery-report-date">Date Wise Delivery</a></li>
                         <li><a href="delivery-report-order">Order Wise Delivery</a></li>
-                        <li><a href="allocation-report">Order Wise Receive</a></li>
+                        <li><a href="receive-report-order">Order Wise Receive</a></li>
+
                     </ul>
                 </li>
                 <li>
