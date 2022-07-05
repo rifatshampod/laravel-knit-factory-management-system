@@ -161,6 +161,8 @@ class deliveryController extends Controller
         return view('orderDelReport',['deliverylist'=>$deliverylist]);
     }
 
+    // delivery report--------------------------------------------------------------
+
     function showOrderNumber(Request $req){
         $orderlist = Delivery::join('orders','orders.id','=','deliveries.order_id')
                     ->select('order_no')->distinct()
@@ -188,6 +190,28 @@ class deliveryController extends Controller
 
         return view('report/orderDelReportData',['deliverylist'=>$deliverylist])->with('orderlist',$orderlist);
     }
+
+    function getDateWiseData(Request $req){
+        
+        $datefrom = $req->input('start');
+        $dateto = $req->input('end');
+        
+        $deliverylist = Daily_delivery::join('deliveries','deliveries.id','=','daily_deliveries.delivery_id')
+                    ->join('orders','orders.id','=','deliveries.order_id')
+                    ->whereBetween('daily_deliveries.delivery_date',[$datefrom , $dateto])
+                    // ->groupBy('daily_deliveries.delivery_date')
+                    ->orderBy('daily_deliveries.id', 'DESC')
+                    ->get(['daily_deliveries.id as id','orders.id as orderId','orders.artwork',
+                        'orders.style','orders.order_no','orders.body_color','orders.print_quality','orders.parts_name',
+                        'orders.print_color','orders.total_qty', 'deliveries.total_receive',
+                        'daily_deliveries.delivery_today','daily_deliveries.delivery_total',
+                        'daily_deliveries.delivery_balance','daily_deliveries.delivery_date']);
+                   
+
+        return view('report/dateDelReportData',['deliverylist'=>$deliverylist]);
+    }
+
+    //receive report----------------------------------------------------------
 
     function showReceiveOrderNumber(Request $req){
         $orderlist = Delivery::join('orders','orders.id','=','deliveries.order_id')

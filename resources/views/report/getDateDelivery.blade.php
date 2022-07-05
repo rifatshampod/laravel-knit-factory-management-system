@@ -12,7 +12,7 @@
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Order Wise Delivery</h1>
+                                <h1>Date Wise Delivery</h1>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="index.html">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Order Wise Delivery</li>
+                                    <li class="breadcrumb-item active">Date Wise Delivery</li>
                                 </ol>
                             </div>
                         </div>
@@ -40,42 +40,53 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
 
-                                        <form method="post" action="order-delivery-report">
+                                        <form method="post" action="date-delivery-report">
+
                                             @csrf
                                             <div class="form-group">
-                                                <label>Select Order Number From List</label>
+                                                <label>Date From</label>
+                                                <input type="date" name="start" />
 
-                                                <select class="form-control input-default" name="order_no">
-
-                                                    <option disabled hidden selected>
-                                                        Select Order Number
-                                                    </option>
-                                                    @foreach ($orderlist as $item)
-                                                    <option>{{$item['order_no']}}</option>
-                                                    @endforeach
-                                                </select>
-
+                                                <label>Date To</label>
+                                                <input type="date" name="end" />
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="px-4 py-2">Find All Delivery </button></div>
                                         </form>
                                     </div>
-                                    {{--
+
+                                    {{-- <div class="d-flex align-items-center">
+                    <div class="mr-2">
+                      <span>Search Order Number</span>
+                    </div>
+                    <div class="dropdown">
+                      <button class="btn dropDownBtn dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select Section From List
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @foreach ($sectionlist as $item)
+                        <a class="dropdown-item"
+                          href="allocation-report&&section={{$item['name']}}">{{$item['name']}}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div> --}}
                         <div>
                             <button class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" onclick="printDiv()"><i class="ti-printer"></i>Print
                                 REPORT</button>
-                        </div> --}}
-                                </div>
-
-                            </div>
-                            <!-- /# card -->
                         </div>
-                        <!-- /# column -->
                     </div>
-                    <!-- /# row -->
-                </section>
+
             </div>
+            <!-- /# card -->
         </div>
+        <!-- /# column -->
+    </div>
+    <!-- /# row -->
+    </section>
+    </div>
+    </div>
     </div>
 
     <!-------Start-Modal------>

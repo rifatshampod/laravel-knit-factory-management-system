@@ -84,6 +84,8 @@ Route::get('allocation-report&&section={slug}',[planController::class, 'showSect
 //delivery specific 
 Route::get('delivery-report-order',[deliveryController::class, 'showOrderNumber']);
 Route::post('order-delivery-report',[deliveryController::class, 'getOrderNumberData']);
+Route::view('delivery-report-date',"report/getDateDelivery");  //date wise search
+Route::post('date-delivery-report',[deliveryController::class, 'getDateWiseData']); //date wise result
 //receive specific 
 Route::get('receive-report-order',[deliveryController::class, 'showReceiveOrderNumber']);
 Route::post('order-receive-report',[deliveryController::class, 'getReceiveOrderNumberData']);
