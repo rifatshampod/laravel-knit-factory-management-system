@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Daily_delivery extends Model
 {
     use HasFactory;
+
+    // protected $fillable = ['delivery_id', 'delivery_date', 'delivery_today', 'delivery_total', 'delivery_balance', 'created_at', 'updated_at'];
 }
