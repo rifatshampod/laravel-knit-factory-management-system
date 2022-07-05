@@ -161,4 +161,31 @@ class deliveryController extends Controller
         return view('orderDelReport',['deliverylist'=>$deliverylist]);
     }
 
+    function showOrderNumber(Request $req){
+        $orderlist = Delivery::join('orders','orders.id','=','deliveries.order_id')
+                    ->select('order_no')->distinct()
+                    ->get();
+
+        return view('report/orderDelReport',['orderlist'=>$orderlist]);
+    }
+
+    function getOrderNumberData(Request $req){
+        $slug = $req->input('order_no');
+        $deliverylist = Daily_delivery::join('deliveries','deliveries.id','=','daily_deliveries.delivery_id')
+                    ->join('orders','orders.id','=','deliveries.order_id')
+                    ->where('orders.order_no',$slug)
+                    ->orderBy('daily_deliveries.id', 'DESC')
+                    ->get(['daily_deliveries.id as id','orders.id as orderId','orders.artwork',
+                        'orders.style','orders.order_no','orders.body_color','orders.print_quality','orders.parts_name',
+                        'orders.print_color','orders.total_qty', 'deliveries.total_receive',
+                        'daily_deliveries.delivery_today','daily_deliveries.delivery_total',
+                        'daily_deliveries.delivery_balance','daily_deliveries.delivery_date']);
+                   
+                         $orderlist = Delivery::join('orders','orders.id','=','deliveries.order_id')
+                    ->select('order_no')->distinct()
+                    ->get();
+
+        return view('report/orderDelReportData',['deliverylist'=>$deliverylist])->with('orderlist',$orderlist);
+    }
+
 }
