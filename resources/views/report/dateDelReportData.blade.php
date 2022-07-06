@@ -86,7 +86,8 @@
                                                 @foreach ($deliverylist as $item)
 
                                                 <tr>
-                                                    <td>{{$item['delivery_date']}}</td>
+                                                    <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-m-Y')}}</td>
+
                                                     <td>
                                                         <div class="orderImg">
                                                             <img src="{{$item['artwork']}}" alt="" />

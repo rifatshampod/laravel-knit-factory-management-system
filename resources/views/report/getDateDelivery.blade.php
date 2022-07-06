@@ -54,24 +54,6 @@
                                                 <button type="submit" class="px-4 py-2">Find All Delivery </button></div>
                                         </form>
                                     </div>
-
-                                    {{-- <div class="d-flex align-items-center">
-                    <div class="mr-2">
-                      <span>Search Order Number</span>
-                    </div>
-                    <div class="dropdown">
-                      <button class="btn dropDownBtn dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Select Section From List
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        @foreach ($sectionlist as $item)
-                        <a class="dropdown-item"
-                          href="allocation-report&&section={{$item['name']}}">{{$item['name']}}</a>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div> --}}
                         <div>
                             <button class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" onclick="printDiv()"><i class="ti-printer"></i>Print
                                 REPORT</button>
