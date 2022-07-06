@@ -109,5 +109,33 @@ class productionController extends Controller
 
         return view('dailyProduction',['dailylist'=>$dailylist]);
     }
+
+    function showOrderNumber(Request $req){
+        $orderlist = Production::join('orders','orders.id','=','productions.order_id')
+                    ->select('order_no')->distinct()
+                    ->get();
+
+        return view('report/orderProdReport',['orderlist'=>$orderlist]);
+    }
+
+    function getOrderNumberData(Request $req){
+        $slug = $req->input('order_no');
+        $dailylist = Daily_production::join('productions','productions.id','=','daily_productions.production_id')
+                    ->join('plans','plans.id','=','productions.plan_id')
+                    ->join('orders','orders.id','=','plans.order_id')
+                    ->orderBy('daily_productions.id', 'DESC')
+                    ->where('orders.order_no',$slug)
+                    ->get(['daily_productions.id as id','orders.order_no','orders.artwork','orders.total_qty as total',
+                        'plans.target_perday as targetPerDay','orders.style','orders.body_color','orders.parts_name',
+                        'daily_productions.today_production','daily_productions.total_production',
+                        'daily_productions.balance','daily_productions.production_date']);
+        
+        //order number list for selection
+        $orderlist = Production::join('orders','orders.id','=','productions.order_id')
+                    ->select('order_no')->distinct()
+                    ->get();
+
+        return view('report/orderProdReportData',['dailylist'=>$dailylist])->with('orderlist',$orderlist);
+    }
     
 }

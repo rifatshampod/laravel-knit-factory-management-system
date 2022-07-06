@@ -83,7 +83,7 @@
                     <ul>
                         <li><a href="order-report">Order Report</a></li>
                         <li><a href="production-report">Production Report</a></li>
-                        <li><a href="daily-production-report">Daily Production Report</a></li>
+                        <li><a href="production-report-order">Date Wise Production</a></li>
                         <li><a href="allocation-report">Allocation Report</a></li>
                         <li><a href="delivery-report-date">Date Wise Delivery</a></li>
                         <li><a href="delivery-report-order">Order Wise Delivery</a></li>
