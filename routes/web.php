@@ -97,6 +97,9 @@ Route::get('production-report',[productionController::class, 'showReportData']);
 //----------------
 Route::get('production-report-order',[productionController::class, 'showOrderNumber']);
 Route::post('order-production-report',[productionController::class, 'getOrderNumberData']);
+Route::view('production-report-date',"report/getDateProduction");  //date wise search
+Route::post('date-production-report',[productionController::class, 'getDateWiseData']); //date wise result
+//receive specific 
 //----------------
 
 

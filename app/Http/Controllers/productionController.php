@@ -137,5 +137,24 @@ class productionController extends Controller
 
         return view('report/orderProdReportData',['dailylist'=>$dailylist])->with('orderlist',$orderlist);
     }
+
+    function getDateWiseData(Request $req){
+        
+        $datefrom = $req->input('start');
+        $dateto = $req->input('end');
+        
+        $dailylist = Daily_production::join('productions','productions.id','=','daily_productions.production_id')
+                    ->join('plans','plans.id','=','productions.plan_id')
+                    ->join('orders','orders.id','=','plans.order_id')
+                    ->whereBetween('daily_productions.production_date',[$datefrom , $dateto])
+                    ->orderBy('daily_productions.id', 'DESC')
+                    ->get(['daily_productions.id as id','orders.order_no','orders.artwork','orders.total_qty as total',
+                        'plans.target_perday as targetPerDay','orders.style','orders.body_color','orders.parts_name',
+                        'daily_productions.today_production','daily_productions.total_production',
+                        'daily_productions.balance','daily_productions.production_date']);
+                   
+
+        return view('report/dateProdReportData',['dailylist'=>$dailylist]);
+    }
     
 }
