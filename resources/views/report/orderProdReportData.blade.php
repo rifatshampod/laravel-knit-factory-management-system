@@ -36,11 +36,29 @@
           <div class="row">
             <div class="col-lg-12">
               <div class="card">
-                <div class="d-flex justify-content-end">
-                  {{-- <div>
-                    <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5"
-                      onclick="exportReportToExcel(this)"><i class="ti-download"></i>EXPORT REPORT</button>
-                  </div> --}}
+                <div class="d-flex justify-content-between mb-4">
+                  <div class="d-flex align-items-center">
+
+                                        <form method="post" action="order-production-report">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label>Select Order Number From List</label>
+
+                                                <select class="form-control input-default" name="order_no">
+
+                                                    <option disabled hidden selected>
+                                                        Select Order Number
+                                                    </option>
+                                                    @foreach ($orderlist as $item)
+                                                    <option>{{$item['order_no']}}</option>
+                                                    @endforeach
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="px-4 py-2">Find All Delivery </button></div>
+                                        </form>
+                                    </div>
                   <div>
                     <button id="btnExport" class="btn btn-info btn-flat btn-addon m-b-10 m-l-5" onclick="printDiv()"><i
                         class="ti-download"></i>Print REPORT</button>
@@ -48,14 +66,16 @@
                 </div>
                 <div class="bootstrap-data-table-panel">
                   <div class="table-responsive">
-                    <table id="Table" class="table table-striped table-bordered">
+                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>Date</th>
+                          <th>Artwork</th>
                           <th>Style Name</th>
                           <th>Order No</th>
                           <th>Body Color</th>
                           <th>Parts Name</th>
+                          <th>Total Qty</th>
                           <th>Target Per Day</th>
                           <th>Today Prod</th>
                           <th>Without Print Balance</th>
@@ -65,11 +85,17 @@
                       <tbody>
                         @foreach ($dailylist as $item)
                         <tr>
-                          <td>{{$item['production_date']}}</td>
+                          <td>{{\Carbon\Carbon::parse($item['production_date'])->format('d-m-Y')}}</td>
+                          <td>
+                            <div class="orderImg">
+                              <img src="{{$item['artwork']}}" alt="" />
+                            </div>
+                          </td>
                           <td>{{$item['style']}}</td>
                           <td>{{$item['order_no']}}</td>
                           <td>{{$item['body_color']}}</td>
                           <td>{{$item['parts_name']}}</td>
+                          <td>{{$item['total']}}</td>
                           <td>{{$item['targetPerDay']}}</td>
                           <td>{{$item['today_production']}}</td>
                           <td>{{$item['balance']}}</td>
@@ -226,70 +252,11 @@
   <!-- scripit init-->
   <script src="assets/js/lib/data-table/datatables.min.js"></script>
   <script src="assets/js/lib/data-table/datatables-init.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
 
   <script>
-    function exportReportToExcel() {
-        let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
-        TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
-          name: `daily-production.xlsx`, // fileName you could use any name
-          sheet: {
-            name: 'Sheet 1' // sheetName
-          }
-        });
-      }
-  </script>
-
-  <!-- Edit Modal functions -->
-  <script>
-    $(document).ready(function(){
-        $(document).on('click', '.editBtn', function(){
-          
-          var production_id = $(this).val();
-          console.log(production_id);
-          jQuery.noConflict(); 
-          $('#editModal').modal('show');
-          $.ajax({
-            url: '/edit-production' + production_id,
-            type: "GET",
-            success:function(response){
-              console.log(response);
-              $('#inhand').val(response.production.inhand);
-              $('#today_production').val(response.production.today_production);
-              $('#total_production').val(response.production.total_production);
-              $('#balance').val(response.production.balance);
-              $('#production_id').val(production_id);
-            }
-          });
-        });
-      });
-
-      $(document).ready(function(){
-        $(document).on('click', '.dailyBtn', function(){
-          
-          var daily_id = $(this).val();
-          console.log(daily_id);
-          jQuery.noConflict(); 
-          $('#addModal').modal('show');
-          $('#daily_id').val(daily_id);
-         
-        });
-      });
-  </script>
-
-  <script>
-    // function exportReportToExcel() {
-      //     let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
-      //     TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
-      //       name: `all-order.xlsx`, // fileName you could use any name
-      //       sheet: {
-      //         name: 'Sheet 1' // sheetName
-      //       }
-      //     });
-      //   }
   
       function printDiv(){
-          var divToPrint = document.getElementById("Table");
+          var divToPrint = document.getElementById("bootstrap-data-table-export");
           var htmlToPrint ="" +'<style type="text/css">' +"table th, table td {"+"border:1px solid #000;"+"padding;0.5em;"+"}"+" img{"+"height:50px;"+" width:50px;"+"}"+"</style>";
           htmlToPrint += divToPrint.outerHTML;
           newWin = window.open("");

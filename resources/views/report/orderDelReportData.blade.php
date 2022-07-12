@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="bootstrap-data-table-panel">
                                     <div class="table-responsive">
-                                        <table id="Table" class="table table-striped table-bordered">
+                                        <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
 
                                             <thead>
                                                 <tr>
@@ -145,8 +145,8 @@
 
     <script src="assets/js/lib/bootstrap.min.js"></script>
     <!-- scripit init-->
-    {{-- <script src="assets/js/lib/data-table/datatables.min.js"></script>
-    <script src="assets/js/lib/data-table/datatables-init.js"></script> --}}
+    <script src="assets/js/lib/data-table/datatables.min.js"></script>
+    <script src="assets/js/lib/data-table/datatables-init.js"></script>
 
     <!-- Edit Modal functions -->
     <script>
@@ -174,7 +174,7 @@
         });
 
         function printDiv() {
-            var divToPrint = document.getElementById("Table");
+            var divToPrint = document.getElementById("bootstrap-data-table-export");
             var htmlToPrint = "" + '<style type="text/css">' + "table th, table td {" + "border:1px solid #000;" + "padding;0.5em;" + "}" + " img{" + "height:50px;" + " width:50px;" + "}" + "</style>";
             htmlToPrint += divToPrint.outerHTML;
             newWin = window.open("");

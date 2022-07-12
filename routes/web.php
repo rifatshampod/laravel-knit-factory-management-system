@@ -73,12 +73,13 @@ Route::put('add-production', [productionController::class,'addDailyData']); // a
 Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
 
 //Report ----------------------------------------------------------
+
+//order specific
 Route::get('order-report',[orderController::class, 'showReportData']); //show all order report from plan if possible
 Route::get('order-report&&body-color={slug}',[orderController::class, 'showBodyColorReportData']);
 Route::get('order-report&&print-quality={slug}',[orderController::class, 'showPrintQualityReportData']);
 Route::get('order-report&&body-parts={slug}',[orderController::class, 'showPartsReportData']);
-Route::get('production-report',[productionController::class, 'showReportData']); //show all production report
-Route::get('daily-production-report',[productionController::class, 'showDailyData']); //day wise production
+//allocation specific
 Route::get('allocation-report',[planController::class, 'showReportData']); //show all production report
 Route::get('allocation-report&&section={slug}',[planController::class, 'showSectionReportData']);
 //delivery specific 
@@ -89,8 +90,14 @@ Route::post('date-delivery-report',[deliveryController::class, 'getDateWiseData'
 //receive specific 
 Route::get('receive-report-order',[deliveryController::class, 'showReceiveOrderNumber']);
 Route::post('order-receive-report',[deliveryController::class, 'getReceiveOrderNumberData']);
-
-
+//production specific
+Route::get('production-report',[productionController::class, 'showReportData']); //show all production report
+Route::get('production-report-order',[productionController::class, 'showOrderNumber']);
+Route::post('order-production-report',[productionController::class, 'getOrderNumberData']);
+Route::view('production-report-date',"report/getDateProduction");  //date wise search
+Route::post('date-production-report',[productionController::class, 'getDateWiseData']); //date wise result
+//receive specific 
+//----------------
 
 
 //settings----------------------------------------------------------
