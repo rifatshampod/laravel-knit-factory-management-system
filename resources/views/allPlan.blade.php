@@ -56,7 +56,7 @@
                             <th>Body Color</th>
                             <th>Print Quality</th>
                             <th>Parts Name</th>
-                            <th>Print Color</th>
+                            <th>P.C.</th>
                             <th>Color Qty</th>
                             <th>Order Qty</th>
                             <th>Extra 5%</th>
@@ -64,10 +64,10 @@
                             <th>Target Day</th>
                             <th>Target Per Day</th>
                             <th>Delivery Date</th>
-                            <th>Productio start date</th>
-                            <th>Productio End date</th>
+                            <th>Production start date</th>
+                            <th>Production End date</th>
                             <th>Section</th>
-                            <th>Action name</th>
+                            <th>Action</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -93,9 +93,9 @@
                             <td>{{$item['total_qty']}}</td>
                             <td>{{$item['target_day']}}</td>
                             <td>{{$item['target_perday']}}</td>
-                            <td>{{$item['delivery_date']}}</td>
-                            <td>{{$item['production_start']}}</td>
-                            <td>{{$item['production_end']}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-m-Y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['production_start'])->format('d-m-Y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['production_end'])->format('d-m-Y')}}</td>
                             <td>{{$item['section']}}</td>
                             <td>
                               @if($item['status']==0)
@@ -110,11 +110,6 @@
                                 </div>
                               @else
                                 <div class="employeeTableIcon d-flex">
-                                <div
-                                  class="Icon1 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1"
-                                >
-                                  <i class="ti-eye mr-1"></i>View
-                                </div>
                                 <button
                                 value="{{$item['id']}}"
                                   class="Icon3 editBtn px-3 py-1 text-white cursor border-none rounded d-flex justify-content-center align-items-center mr-1"
