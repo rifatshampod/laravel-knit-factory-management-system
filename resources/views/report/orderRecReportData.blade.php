@@ -108,8 +108,8 @@
                                                     <td>{{$item['print_color']}}</td>
                                                     <td>{{$item['total_qty']}}</td>
                                                     <td>{{$item['receive_today']}}</td>
-                                                    <td>{{$item['total_receive']}}</td>
-                                                    <td>{{$item['total_qty'] - $item['total_receive']}}</td>
+                                                    <td>{{$item['receive_total']}}</td>
+                                                    <td>{{$item['receive_balance']}}</td>
 
 
                                                 </tr>

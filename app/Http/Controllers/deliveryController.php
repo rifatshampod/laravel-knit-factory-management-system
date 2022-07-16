@@ -176,32 +176,14 @@ class deliveryController extends Controller
 
     function getOrderNumberData(Request $req){
         $slug = $req->input('order_no');
-        $deliverylist = Daily_delivery::join('deliveries','deliveries.id','=','daily_deliveries.delivery_id')
-                    ->join('orders','orders.id','=','deliveries.order_id')
-                    ->where('orders.order_no',$slug)
-                    // ->groupBy('daily_deliveries.delivery_date')
-                    ->orderBy('daily_deliveries.id', 'DESC')
-                    ->get(['daily_deliveries.id as id','orders.id as orderId','orders.artwork',
-                        'orders.style','orders.order_no','orders.body_color','orders.print_quality','orders.parts_name',
-                        'orders.print_color','orders.total_qty', 'deliveries.total_receive',
-                        'daily_deliveries.delivery_today','daily_deliveries.delivery_total',
-                        'daily_deliveries.delivery_balance','daily_deliveries.delivery_date']);
-
-                /**
-                 * 
-                 * Working SQL Query
-                 * select `daily_deliveries`.`delivery_id` as id , `daily_deliveries`.`delivery_date` as delivery_date,`orders`.`id` as `orderId`,`orders`.`artwork`, `orders`.`style`, `orders`.`order_no`, `orders`.`body_color`, `orders`.`print_quality`, `orders`.`parts_name`, `daily_deliveries`.`delivery_today` as today, `daily_deliveries`.`delivery_total` as total, SUM(delivery_today) as total_today from `daily_deliveries` inner join `deliveries` on `deliveries`.`id` = `daily_deliveries`.`delivery_id` inner join `orders` on `orders`.`id` = `deliveries`.`order_id` group by DATE(daily_deliveries.delivery_date)
-                 */
-                        // $deliverylist = DB::select('select `daily_deliveries`.`delivery_id` as id , `daily_deliveries`.`delivery_date` as delivery_date,`orders`.`id` as `orderId`,`orders`.`artwork`, `orders`.`style`, `orders`.`order_no`, `orders`.`body_color`, `orders`.`print_quality`, `orders`.`parts_name`, `daily_deliveries`.`delivery_today` as today, `daily_deliveries`.`delivery_total` as total, SUM(delivery_today) as total_today from `daily_deliveries` inner join `deliveries` on `deliveries`.`id` = `daily_deliveries`.`delivery_id` inner join `orders` on `orders`.`id` = `deliveries`.`order_id` group by DATE(daily_deliveries.delivery_date) ')->get();
-
-                //         $deliverylist = DB::table('daily_deliveries')
-                // ->select('daily_deliveries.delivery_id as id', 'daily_deliveries.delivery_date as date', 'daily_deliveries.delivery_today as today', 'daily_deliveries.delivery_total as total', DB::raw("SUM(delivery_today) as total_today"))
-                // ->join('deliveries','deliveries.id','=','daily_deliveries.delivery_id')
-                // ->join('orders','orders.id','=','deliveries.order_id')
-                // ->groupBy(DB::raw("DATE(daily_deliveries.delivery_date)"))
-                // ->get();
-
-                //         dd($deliverylist);
+       \DB::statement("SET SQL_MODE=''");
+        $deliverylist = Order::select('orders.style','orders.order_no','orders.body_color','orders.print_quality','orders.parts_name', 'orders.print_color','orders.total_qty','orders.artwork','daily_deliveries.delivery_date','deliveries.total_receive','daily_deliveries.delivery_total',DB::raw('SUM(daily_deliveries.delivery_today) AS delivery_today',), DB::raw('max(daily_deliveries.delivery_total) as delivery_total',), DB::raw('min(daily_deliveries.delivery_balance) as delivery_balance',))
+                        ->join('deliveries','deliveries.order_id','=','orders.id')
+                        ->join('daily_deliveries','daily_deliveries.delivery_id','=','deliveries.id')
+                        ->where('orders.order_no',$slug)
+                        ->groupBy('daily_deliveries.delivery_date')
+                        ->groupBy('daily_deliveries.delivery_id')
+                        ->get();
         
         //order number list for selection
         $orderlist = Delivery::join('orders','orders.id','=','deliveries.order_id')

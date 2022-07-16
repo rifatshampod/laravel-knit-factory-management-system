@@ -61,7 +61,11 @@
                       <tbody>
                         @foreach ($deliverylist as $item)
                         <tr>
-                          <td>{{$item['delivery_date']}}</td>
+                          @if($item['delivery_date']==null)
+                          <td> - </td>
+                          @else
+                          <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-m-Y')}}</td>
+                          @endif
                           <td>{{$item['style']}}</td>
                           <td>{{$item['order_no']}}</td>
                           <td>{{$item['body_color']}}</td>

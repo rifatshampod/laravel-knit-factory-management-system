@@ -72,6 +72,7 @@
                           <th>Total Qty</th>
                           <th>Target Per Day</th>
                           <th>Today Prod</th>
+                          <th>Total Prod</th>
                           <th>Without Print Balance</th>
                           {{-- <th>Action</th> --}}
                         </tr>
@@ -92,6 +93,7 @@
                           <td>{{$item['total']}}</td>
                           <td>{{$item['targetPerDay']}}</td>
                           <td>{{$item['today_production']}}</td>
+                          <td>{{$item['total_production']}}</td>
                           <td>{{$item['balance']}}</td>
                           {{-- <td>
                             <div class="employeeTableIcon d-flex">
