@@ -47,9 +47,13 @@
                     <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                       <thead>
                         <tr>
+                          {{-- <th>Artwork</th> --}}
                           <th>Style Name</th>
                           <th>Order No</th>
                           <th>Body Color</th>
+                          <th>Print Quality</th>
+                          <th>Parts Name</th>
+                          <th>P.C</th>
                           <th>First Receive Date</th>
                           <th>Today Receive</th>
                           <th>Total Receive</th>
@@ -63,9 +67,20 @@
                       <tbody>
                         @foreach ($deliverylist as $item)
                         <tr>
+                          {{-- <td>
+                              <div class="orderImg">
+                                <img
+                                  src="{{$item['artwork']}}"
+                                  alt=""
+                                />
+                              </div>
+                            </td> --}}
                           <td>{{$item['style']}}</td>
                           <td>{{$item['order_no']}}</td>
                           <td>{{$item['body_color']}}</td>
+                          <td>{{$item['print_quality']}}</td>
+                          <td>{{$item['parts_name']}}</td>
+                          <td>{{$item['print_color']}}</td>
                           <td>{{$item['first_receive']}}</td>
                           <td>{{$item['today_receive']}}</td>
                           <td>{{$item['total_receive']}}</td>
@@ -185,34 +200,36 @@
             @method('PUT')
 
             <input type="hidden" name="id" id="receive_id" />
+            <input type="hidden" name="total_before" id="total_before" />
+            <input type="hidden" name="receive-balance_before" id="receive_balance_before" />
 
             <div class="row">
 
-              <div class="col-lg-12">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label for="today_receive">Today Receive</label>
-                  <input type="number" name="today_receive" class="form-control" id="today_receive"
-                    placeholder="Today Receive" />
+                  <input type="number" name="today_receive" class="form-control" id="today_receiveR"
+                    placeholder="Today Receive" onblur="findReceiveBalanceDaily()"/>
                 </div>
               </div>
-              <div class="col-lg-12">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label for="receive_date">Receive Date</label>
                   <input type="date" name="receive_date" class="form-control" id="receive_date" />
                 </div>
               </div>
-              {{-- <div class="col-lg-6">
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label for="total_receive">Total Receive</label>
-                  <input type="number" name="total_receive" class="form-control" id="total_receive" />
+                  <input type="number" name="total_receive" class="form-control" id="total_receive" readonly />
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="receive_balance">Receive Balance </label>
-                  <input type="number" name="receive_balance" class="form-control" id="receive_balance" />
+                  <input type="number" name="receive_balance" class="form-control" id="receive_balance" readonly/>
                 </div>
-              </div> --}}
+              </div>
             </div>
             <div class="row justify-content-center">
               <div class="col-lg-4">
@@ -373,7 +390,16 @@
           console.log(receive_id);
           jQuery.noConflict(); 
           $('#receiveModal').modal('show');
-          $('#receive_id').val(receive_id);
+          $.ajax({
+            url: '/edit-delivery' + receive_id,
+            type: "GET",
+            success:function(response){
+              console.log(response);
+              $('#total_before').val(response.delivery.total_receive);
+              $('#receive_balance_before').val(response.delivery.receive_balance);
+              $('#receive_id').val(receive_id);
+            }
+          });
          
         });
       });
@@ -413,6 +439,18 @@
         document.getElementById("total_delivery_completed").value = total;
         document.getElementById("delivery_balance").value = balance;
         console.log(total);
+      }
+
+      //---find Receive total and balance 
+      function findReceiveBalanceDaily(){
+        const todayR = parseInt(document.getElementById("today_receiveR").value);
+        const totalBeforeR = parseInt(document.getElementById("total_before").value);
+        const balanceBeforeR = parseInt(document.getElementById("receive_balance_before").value);
+
+        const totalR = totalBeforeR + todayR;
+        const balanceR = balanceBeforeR - todayR;
+        document.getElementById("total_receive").value = totalR;
+        document.getElementById("receive_balance").value = balanceR;
       }
   </script>
 

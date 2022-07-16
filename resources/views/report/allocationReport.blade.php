@@ -76,8 +76,8 @@
                                                     <th>Target Day</th>
                                                     <th>Target Per Day</th>
                                                     <th>Delivery Date</th>
-                                                    <th>Productio start date</th>
-                                                    <th>Productio End date</th>
+                                                    <th>Production start date</th>
+                                                    <th>Production End date</th>
                                                     <th>Allocation</th>
                                                 </tr>
                                             </thead>

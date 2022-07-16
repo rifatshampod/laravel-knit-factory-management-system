@@ -80,7 +80,7 @@ class productionController extends Controller
         $production->production_id= $req->input('id');
         $production->production_date= $req->input('production_date');
         $production->today_production= $req->input('today_production');
-        $production->total_production= $req->input('total_production');
+        $production->total_production= $req->input('total_yet');
         $production->balance= $req->input('balance');
         $production->save();
 

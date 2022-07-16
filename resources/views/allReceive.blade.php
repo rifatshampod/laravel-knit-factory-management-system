@@ -53,22 +53,26 @@
                           <th>Body Color</th>
                           <th>Parts Name</th>
                           <th>Today Receive</th>
-                          {{-- <th>Total Receive</th>
-                          <th>Receive Balance</th> --}}
+                          <th>Total Receive</th>
+                          <th>Receive Balance</th>
                           {{-- <th>Action</th> --}}
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($deliverylist as $item)
                         <tr>
-                          <td>{{$item['receive_date']}}</td>
+                          @if($item['receive_date']==null)
+                          <td> - </td>
+                          @else
+                          <td>{{\Carbon\Carbon::parse($item['receive_date'])->format('d-m-Y')}}</td>
+                          @endif
                           <td>{{$item['style']}}</td>
                           <td>{{$item['order_no']}}</td>
                           <td>{{$item['body_color']}}</td>
                           <td>{{$item['parts_name']}}</td>
                           <td>{{$item['receive_today']}}</td>
-                          {{-- <td>{{$item['receive_total']}}</td>
-                          <td>{{$item['receive_balance']}}</td> --}}
+                          <td>{{$item['receive_total']}}</td>
+                          <td>{{$item['receive_balance']}}</td>
                           {{-- <td>
 
                             <div class="employeeTableIcon d-flex">

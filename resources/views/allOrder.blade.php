@@ -364,9 +364,7 @@
                     @foreach ($bodycolorlist as $item)
                     <option>{{$item['name']}}</option>
                     @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
                   </select>
-                  <div id="div1"></div>
                 </div>
               </div>
 
@@ -381,9 +379,7 @@
                     @foreach ($qualitylist as $item)
                     <option>{{$item['name']}}</option>
                     @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
                   </select>
-                  <div id="div2"></div>
                 </div>
               </div>
               <div class="col-lg-4">
@@ -397,9 +393,7 @@
                     @foreach ($partslist as $item)
                     <option>{{$item['name']}}</option>
                     @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
                   </select>
-                  <div id="div3"></div>
                 </div>
               </div>
               <div class="col-lg-4">
@@ -450,9 +444,7 @@
                     @foreach ($merchandiserlist as $item)
                     <option>{{$item['name']}}</option>
                     @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
                   </select>
-                  <div id="div4"></div>
                 </div>
               </div>
               <div class="col-lg-4">
@@ -466,9 +458,7 @@
                     @foreach ($supplierlist as $item)
                     <option>{{$item['name']}}</option>
                     @endforeach
-                    <option style="color:violet" value="other">Other, Please Specify</option>
                   </select>
-                  <div id="div5"></div>
                 </div>
               </div>
               <div class="col-lg-4">
@@ -563,12 +553,10 @@
 
   <!-- Edit Modal functions -->
   <script>
-    // $(document).ready(function(){
-    //       $('[data-toggle="tooltip"]').tooltip();
-    //       });
 
     $(document).ready(function(){
 
+        //edit popup
         $(document).on('click', '.editBtn', function(){ 
           var order_id_main = $(this).val();
           console.log(order_id_main);
@@ -599,45 +587,45 @@
           });
         });
 
-        //body color
+        //body color popup
         $(document).on('click', '.colorBtn', function(){
-        var order_id_color = $(this).val();
-        console.log(order_id_color);
-        jQuery.noConflict();
-        $('#colorModal').modal('show');
-        $.ajax({
-        url: '/edit-order' + order_id_color,
-        type: "GET",
-        success:function(response){
-        console.log(response);
-        $('#style_name_color').val(response.order.style);
-        $('#order_no_color').val(response.order.order_no);
-        $('#body_color_color').val(response.order.body_color);
-        $('#print_quality_color').val(response.order.print_quality);
-        $('#parts_name_color').val(response.order.parts_name);
-        $('#print_color_color').val(response.order.print_color);
-        $('#color_qty_color').val(response.order.color_qty);
-        $('#order_qty_color').val(response.order.order_qty);
-        $('#extra_qty_color').val(response.order.extra_qty);
-        $('#total_qty_color').val(response.order.total_qty);
-        $('#delivery_date_color').val(response.order.delivery_date);
-        $('#merchandiser_color').val(response.order.merchandiser);
-        $('#supplier_color').val(response.order.supplier);
-        $('#price_dozen_color').val(response.order.price_dozen);
-        $('#hide_color').val(response.order.status);
-        $('#order_id_previous_color').val(order_id_main_color);
-        }
-        });
+          var order_id_color = $(this).val();
+          console.log(order_id_color);
+          jQuery.noConflict();
+          $('#colorModal').modal('show');
+          $.ajax({
+          url: '/edit-order' + order_id_color,
+          type: "GET",
+          success:function(response){
+          console.log(response);
+          $('#style_name_color').val(response.order.style);
+          $('#order_no_color').val(response.order.order_no);
+          $('#body_color_color').val(response.order.body_color);
+          $('#print_quality_color').val(response.order.print_quality);
+          $('#parts_name_color').val(response.order.parts_name);
+          $('#print_color_color').val(response.order.print_color);
+          $('#color_qty_color').val(response.order.color_qty);
+          $('#order_qty_color').val(response.order.order_qty);
+          $('#extra_qty_color').val(response.order.extra_qty);
+          $('#total_qty_color').val(response.order.total_qty);
+          $('#delivery_date_color').val(response.order.delivery_date);
+          $('#merchandiser_color').val(response.order.merchandiser);
+          $('#supplier_color').val(response.order.supplier);
+          $('#price_dozen_color').val(response.order.price_dozen);
+          $('#hide_color').val(response.order.status);
+          $('#order_id_previous_color').val(order_id_main_color);
+          }
+          });
         });
 
         //delete modal
         $(document).on('click', '.deleteBtn', function(){
-        var order_id_delete = $(this).val();
-        console.log(order_id_delete);
-        jQuery.noConflict();
-        $('#deleteModal').modal('show');
-        $('#order_id_delete_modal').val(order_id_delete);
-        });
+          var order_id_delete = $(this).val();
+          console.log(order_id_delete);
+          jQuery.noConflict();
+          $('#deleteModal').modal('show');
+          $('#order_id_delete_modal').val(order_id_delete);
+          });
       });
     
       function exportReportToExcel() {

@@ -230,7 +230,13 @@
                 </div>
               </div>
 
-              <div class="col-lg-12">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="balance">Total Production </label>
+                  <input type="number" name="total_yet" class="form-control" id="total_yet" readonly />
+                </div>
+              </div>
+              <div class="col-lg-6">
                 <div class="form-group">
                   <label for="balance">Without Print Balance </label>
                   <input type="number" name="balance" class="form-control" id="balance_daily" readonly />
@@ -346,21 +352,15 @@
 
       //---find balance daily
       function findBalanceDaily(){
-        const todayProduction = document.getElementById("today_production_daily").value;
-        const target = document.getElementById("target_daily").value;
-        const total = document.getElementById("total_production").value;
+        const todayProduction = parseInt(document.getElementById("today_production_daily").value);
+        const target = parseInt(document.getElementById("target_daily").value);
+        const total = parseInt(document.getElementById("total_production").value);
         const balance = target-todayProduction -total;
+        const totalYet = total+todayProduction;
         document.getElementById("balance_daily").value = balance;
+        document.getElementById("total_yet").value = totalYet;
       }
 
-      //---edit balance daily
-      function findBalanceDaily(){
-        const todayProduction = document.getElementById("today_production_daily").value;
-        const target = document.getElementById("target_daily").value;
-        const total = document.getElementById("total_production").value;
-        const balance = target-todayProduction -total;
-        document.getElementById("balance_daily").value = balance;
-      }
   </script>
 </body>
 
