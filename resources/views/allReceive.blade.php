@@ -53,8 +53,8 @@
                           <th>Body Color</th>
                           <th>Parts Name</th>
                           <th>Today Receive</th>
-                          {{-- <th>Total Receive</th>
-                          <th>Receive Balance</th> --}}
+                          <th>Total Receive</th>
+                          <th>Receive Balance</th>
                           {{-- <th>Action</th> --}}
                         </tr>
                       </thead>
@@ -67,8 +67,8 @@
                           <td>{{$item['body_color']}}</td>
                           <td>{{$item['parts_name']}}</td>
                           <td>{{$item['receive_today']}}</td>
-                          {{-- <td>{{$item['receive_total']}}</td>
-                          <td>{{$item['receive_balance']}}</td> --}}
+                          <td>{{$item['receive_total']}}</td>
+                          <td>{{$item['receive_balance']}}</td>
                           {{-- <td>
 
                             <div class="employeeTableIcon d-flex">

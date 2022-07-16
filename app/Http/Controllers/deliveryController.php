@@ -16,7 +16,7 @@ class deliveryController extends Controller
         $deliverylist = Delivery::join('orders','orders.id','=','deliveries.order_id')
                     ->orderBy('deliveries.id', 'DESC')
                     ->get(['deliveries.id as id','orders.id as orderId',
-                        'orders.style','orders.order_no','orders.body_color','orders.total_qty as total_order',
+                        'orders.style','orders.order_no','orders.body_color','orders.total_qty as total_order','orders.print_quality','orders.parts_name','orders.print_color','orders.artwork',
                         'deliveries.first_receive', 'deliveries.today_receive',
                         'deliveries.total_receive','deliveries.receive_balance',
                         'deliveries.today_delivery','deliveries.total_delivery',
@@ -83,6 +83,7 @@ class deliveryController extends Controller
         $delivery=Delivery::find($delivery_id);
         $delivery->today_receive= $req->input('today_receive');
         $delivery->total_receive+= $req->input('today_receive');
+        $delivery->receive_balance= $req->input('receive_balance');
         $delivery->update();
 
         return redirect()->back()->with('status','receive information has been updated');
@@ -91,8 +92,8 @@ class deliveryController extends Controller
     function showReceiveData(Request $req){
         $deliverylist = Receive::join('deliveries','deliveries.id','=','receives.delivery_id')
                     ->join('orders','orders.id','=','deliveries.order_id')
-                    ->orderBy('receives.id', 'DESC')
-                    ->get(['receives.id as id','orders.id as orderId',
+                    ->orderBy('receives.id', 'desc')
+                    ->get(['receives.id','orders.id as orderId',
                         'orders.style','orders.order_no','orders.body_color','orders.parts_name',
                         'receives.receive_today','receives.receive_total',
                         'receives.receive_balance','receives.receive_date']);
@@ -100,6 +101,7 @@ class deliveryController extends Controller
 
         return view('allReceive',['deliverylist'=>$deliverylist]);
     }
+
 
     function addDeliveryData(Request $req){
 
