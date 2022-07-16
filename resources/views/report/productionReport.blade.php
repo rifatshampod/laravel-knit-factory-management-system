@@ -59,13 +59,13 @@
                           <th>Body Color</th>
                           <th>Print Quality</th>
                           <th>Parts Name</th>
-                          <th>Print Color</th>
+                          <th>P.C.</th>
                           <th>Total Qty</th>
-                          <th>Target Per Day</th>
+                          <th>T.P. Day</th>
                           <th>Inhand</th>
                           <th>Today Prod</th>
                           <th>Total Prod</th>
-                          <th>Without Print Balance</th>
+                          <th>W.P. Balance</th>
                         </tr>
                       </thead>
                       <tbody>

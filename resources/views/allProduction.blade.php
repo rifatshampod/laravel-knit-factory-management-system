@@ -99,7 +99,7 @@
                             <div class="employeeTableIcon d-flex">
                               <button value="{{$item['id']}}"
                                 class="Icon1 dailyBtn px-3 py-1 text-white border-none cursor rounded d-flex justify-content-center align-items-center mr-1">
-                                <i class="ti-plus mr-1"></i>Add Today
+                                <i class="ti-plus mr-1"></i>Today
                               </button>
                               <button value="{{$item['id']}}"
                                 class="Icon3 editBtn px-3 py-1 text-white cursor border-none rounded d-flex justify-content-center align-items-center mr-1">
