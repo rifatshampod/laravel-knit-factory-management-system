@@ -50,6 +50,14 @@ class productionController extends Controller
         ]);
     }
 
+     function editDailyData($id2){
+        $production2=Daily_production::find($id2);
+        return response()->json([
+            'status'=>200,
+            'production2'=>$production2,
+        ]);
+    }
+
         function updateData(Request $req){
         $production_id = $req->input('id');
         $production=Production::find($production_id);
