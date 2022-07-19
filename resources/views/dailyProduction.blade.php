@@ -251,14 +251,14 @@
           //---find balance daily
       function findBalanceDaily(){
         console.log(document.getElementById("today_production_before").value);
-        const totalBefore = parseInt(document.getElementById("today_production_before").value);
+        const todayBefore = parseInt(document.getElementById("today_production_before").value);
         const totalBefore = parseInt(document.getElementById("total_production_before").value);
         const balanceBefore = parseInt(document.getElementById("balance_before").value);
         const todayNow = parseInt(document.getElementById("today_now").value);
         const balance = balanceBefore + todayBefore - todayNow;
-        const totalYet = totalBefore - totalBefore + todayNow;
-        document.getElementById("total_now").value =balance;
-        document.getElementById("balance_now").value = totalYet;
+        const totalYet = totalBefore - todayBefore + todayNow;
+        document.getElementById("total_now").value = totalYet;
+        document.getElementById("balance_now").value = balance;
       }
   
   </script>
