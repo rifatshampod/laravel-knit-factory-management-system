@@ -68,10 +68,11 @@ Route::put('update-plan', [planController::class,'updateData']);
 //production
 Route::get('all-production',[productionController::class, 'showData']);
 Route::get('edit-production{id}', [productionController::class,'editData']);
-Route::get('edit-daily{id2}', [productionController::class,'editDailyData']);
+Route::get('edit-daily{id2}', [productionController::class,'editDailyDataFetch']);
 Route::put('update-production', [productionController::class,'updateData']);
 Route::put('add-production', [productionController::class,'addDailyData']); // add daily production
 Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
+Route::put('edit-daily-production', [productionController::class, 'editDailydata']);
 
 //Report ----------------------------------------------------------
 

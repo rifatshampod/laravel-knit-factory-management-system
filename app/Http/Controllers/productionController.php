@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\Order;
 use App\Models\Delivery;
 use App\Models\Daily_production;
+use Illuminate\Support\Facades\DB;
 
 class productionController extends Controller
 {
@@ -50,12 +51,47 @@ class productionController extends Controller
         ]);
     }
 
-     function editDailyData($id2){
+     function editDailyDataFetch($id2){
         $production2=Daily_production::find($id2);
         return response()->json([
             'status'=>200,
             'production2'=>$production2,
         ]);
+    }
+
+    function editDailydata(Request $req){
+
+        if($req->input('today_now')){
+        $daily_id = $req->input('id');
+        $production_id = $req->input('production_parent');
+        $today = $req->input('today_now');
+        $todayBefore = $req->input('today_before');
+        $date = $req->input('production_date');
+        $total = $req->input('total_now');
+
+        $difference = $todayBefore - $today;
+        }
+
+        //update method
+
+        $daily = Daily_production::find($daily_id);
+        $daily->today_production=$req->input('today_now');
+        $daily->total_production= $total; 
+        $daily->balance=$req->input('balance_now');
+        $daily->update();
+        
+        // updating all production after the edited one
+
+        Daily_production::where('production_id', $production_id)
+        ->where('production_date','>=', $date)
+        ->where('id','!=',$daily_id)
+       ->update([
+           'total_production' => DB::raw('total_production - '.$difference.''),
+           'balance' => DB::raw('balance + '.$difference.''),
+        ]);
+
+        return redirect()->back();
+
     }
 
         function updateData(Request $req){
