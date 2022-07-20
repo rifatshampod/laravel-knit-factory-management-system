@@ -84,7 +84,7 @@
                           <td>{{$item['first_receive']}}</td>
                           <td>{{$item['today_receive']}}</td>
                           <td>{{$item['total_receive']}}</td>
-                          <td>{{$item['total_order'] - $item['total_receive']}}</td>
+                          <td>{{$item['receive_balance']}}</td>
                           <td>{{$item['today_delivery']}}</td>
                           <td>{{$item['total_delivery']}}</td>
                           <td>{{$item['delivery_balance']}}</td>
@@ -201,7 +201,7 @@
 
             <input type="hidden" name="id" id="receive_id" />
             <input type="hidden" name="total_before" id="total_before" />
-            <input type="hidden" name="receive-balance_before" id="receive_balance_before" />
+            <input type="number" name="receive-balance_before" id="receive_balance_before" />
 
             <div class="row">
 

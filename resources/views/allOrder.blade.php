@@ -412,7 +412,7 @@
                 <div class="form-group">
                   <label for="order_qty">Order Qty</label>
                   <input type="number" name="orderQty" class="form-control" id="order_qty_color"
-                    onchange="totalQtyCal()" />
+                    onchange="totalQtyCalColor()" />
                 </div>
               </div>
               <div class="col-lg-4">
@@ -645,6 +645,14 @@
               (parseInt(orderQty) / 100) * 5;
           const Equation = parseInt(orderQty) + orderExtra;
           document.getElementById("total_qty").value = Equation;
+      }
+      function totalQtyCalColor()
+      {
+          const orderQty = document.getElementById("order_qty_color").value;
+          const orderExtra = document.getElementById("extra_qty_color").value =
+              (parseInt(orderQty) / 100) * 5;
+          const Equation = parseInt(orderQty) + orderExtra;
+          document.getElementById("total_qty_color").value = Equation;
       }
 
       function showfield(name){

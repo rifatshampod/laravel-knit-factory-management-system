@@ -113,12 +113,21 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
-          <form action="add-production" method="POST">
+          <form action="edit-daily-production" method="POST">
             @csrf
             @method('PUT')
 
             <input type="hidden" name="id" id="daily_id" />
-            <input type="number" id="production_parent" name="production_parent">
+            <input type="hidden" id="production_parent" name="production_parent">
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="production_date_before">Entry Date: </label>
+                  <input class="form-control" type="date" id="production_date_before" name="production_date">
+                  </div>
+              </div>
+            </div>
 
             <div class="row">
               <div class="col-lg-6">
@@ -131,7 +140,7 @@
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="today_now">Today Now</label>
-                  <input type="number" name="today_now" class="form-control" id="today_now" onblur="findBalanceDaily()"/>
+                  <input type="number" name="today_now" class="form-control" id="today_now" onblur="findBalanceDaily()" required/>
                 </div>
               </div>
 
@@ -146,7 +155,7 @@
               <div class="col-lg-6">
                 <div class="form-group">
                   <label for="total_now">Total Now</label>
-                  <input type="number" name="today_production" class="form-control" id="total_now"
+                  <input type="number" name="total_now" class="form-control" id="total_now"
                      placeholder="Total Production" readonly />
                 </div>
               </div>
@@ -230,7 +239,8 @@
               $('#total_production_before').val(response.production2.total_production);
               $('#balance_before').val(response.production2.balance);
               $('#production_parent').val(response.production2.production_id);
-              $('#daily_production_id').val(prod_daily_id);
+              $('#production_date_before').val(response.production2.production_date);
+              $('#daily_id').val(prod_daily_id);
             }
           });
         });
