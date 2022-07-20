@@ -117,10 +117,17 @@
             @csrf
             @method('PUT')
 
-            <input type="number" name="id" id="daily_id" />
-            <input type="number" id="production_parent" name="production_parent">
-            <label for="production_date_before">Entry Date: </label>
-            <input type="date" id="production_date_before" name="production_date" readonly>
+            <input type="hidden" name="id" id="daily_id" />
+            <input type="hidden" id="production_parent" name="production_parent">
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="production_date_before">Entry Date: </label>
+                  <input class="form-control" type="date" id="production_date_before" name="production_date">
+                  </div>
+              </div>
+            </div>
 
             <div class="row">
               <div class="col-lg-6">

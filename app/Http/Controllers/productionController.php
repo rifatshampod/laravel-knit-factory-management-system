@@ -76,7 +76,8 @@ class productionController extends Controller
 
         $daily = Daily_production::find($daily_id);
         $daily->today_production=$req->input('today_now');
-        $daily->total_production= $total; 
+        $daily->total_production= $total;
+        $daily->production_date =  $req->input('production_date');
         $daily->balance=$req->input('balance_now');
         $daily->update();
         
