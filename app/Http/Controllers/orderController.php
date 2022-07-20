@@ -105,6 +105,7 @@ class orderController extends Controller
 
         $delivery = new Delivery;
         $delivery->order_id = $order->id;
+        $delivery->receive_balance = $req->input('totalQty');
         $delivery->status = 0;
         $delivery->save();
         
@@ -329,6 +330,14 @@ class orderController extends Controller
             $staffPic->artwork = $picUrl;
             $staffPic->update();
         }
+
+        //update delivery table 
+        $receiveYet = Delivery::where('order_id',$order_id_before)
+                    ->get('total_receive')->first();
+
+        DB::table('deliveries')
+            ->where('order_id', $order_id_before)
+            ->update(['receive_balance' => $req->input('totalQty')-$receiveYet['total_receive']]);
 
         return redirect()->back()->with('status','order information has been updated');
     }

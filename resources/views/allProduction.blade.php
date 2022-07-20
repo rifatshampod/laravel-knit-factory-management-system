@@ -83,7 +83,7 @@
                           <td>{{$item['target_perday']}}</td>
                           <td>{{$item['inhand']}}</td>
                           <td>{{$item['today_production']}}</td>
-                          <td>{{$item['total_production']}}</td>
+                          <td>{{$item['total_today_production']}}</td>
                           <td>{{$item['balance']}}</td>
                           <td>
                             @if($item['productionStatus']==0)
