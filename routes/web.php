@@ -56,9 +56,15 @@ Route::put('start-receive', [deliveryController::class,'updateReceiveData']);
 Route::put('add-receive', [deliveryController::class,'addReceiveData']);
 Route::put('add-delivery', [deliveryController::class,'addDeliveryData']);
 
-//receive & delivery
+//receive
 Route::get('all-receive',[deliveryController::class, 'showReceiveData']);
+Route::get('edit-receive{id}', [deliveryController::class,'editDailyReceiveDataFetch']);
+Route::put('edit-daily-receive', [deliveryController::class, 'editDailyReceiveData']); 
+
+//delivery
 Route::get('daily-delivery',[deliveryController::class, 'showDeliveryData']);
+Route::get('edit-single-delivery{id}', [deliveryController::class,'editDailyDeliveryDataFetch']);
+Route::put('edit-daily-delivery', [deliveryController::class, 'editDailyDeliveryData']); 
 
 //plan
 Route::get('plan',[planController::class, 'showData']);
@@ -72,7 +78,7 @@ Route::get('edit-daily{id2}', [productionController::class,'editDailyDataFetch']
 Route::put('update-production', [productionController::class,'updateData']);
 Route::put('add-production', [productionController::class,'addDailyData']); // add daily production
 Route::get('daily-production',[productionController::class, 'showDailyData']); //day wise production
-Route::put('edit-daily-production', [productionController::class, 'editDailydata']);
+Route::put('edit-daily-production', [productionController::class, 'editDailydata']); 
 
 //Report ----------------------------------------------------------
 

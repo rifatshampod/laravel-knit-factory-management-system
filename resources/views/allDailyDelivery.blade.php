@@ -55,7 +55,7 @@
                           <th>Today Delivery</th>
                           <th>Total Delivery</th>
                           <th>Delivery Balance</th>
-                          {{-- <th>Action</th> --}}
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -73,18 +73,15 @@
                           <td>{{$item['delivery_today']}}</td>
                           <td>{{$item['delivery_total']}}</td>
                           <td>{{$item['delivery_balance']}}</td>
-                          {{-- <td>
+                          <td>
 
                             <div class="employeeTableIcon d-flex">
-
-                              <div
-                                class="Icon3 px-3 py-1 text-white cursor rounded d-flex justify-content-center align-items-center mr-1">
-                                <i class="ti-pencil-alt mr-1"></i> Edit
-                              </div>
+                              <button value="{{$item['id']}}"
+                                class="Icon3 editBtn px-3 py-1 text-white cursor border-none rounded d-flex justify-content-center align-items-center mr-1">
+                                <i class="ti-pencil-alt mr-1"></i>Edit
+                              </button>
                             </div>
-
-
-                          </td> --}}
+                          </td>
                         </tr>
                         @endforeach
 
@@ -103,43 +100,68 @@
     </div>
   </div>
 
-  <!-------Start-Modal------>
-  <div class="modal fade" id="startModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <!-------edit-Modal------>
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
-          <form action="start-receive" method="POST">
+          <form action="edit-daily-delivery" method="POST">
             @csrf
             @method('PUT')
 
-            <input type="hidden" name="id" id="delivery_id" />
-            <input type="hidden" name="order_id" id="order_id" />
+            <input type="hidden" name="id" id="daily_id" />
+            <input type="hidden" id="delivery_parent" name="delivery_parent">
 
             <div class="row">
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label for="first_receive">First Receive Date</label>
-                  <input type="date" name="first_receive" class="form-control" id="first_receive"
-                    placeholder="Enter first Receive" />
+                  <label for="delivery_date_before">Entry Date: </label>
+                  <input class="form-control" type="date" id="delivery_date_before" name="delivery_date">
+                  </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="today_delivery_before">Today Before</label>
+                  <input type="number" name="today_before" class="form-control" id="today_delivery_before"
+                     readonly />
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label for="today_receive">Today Receive</label>
-                  <input type="number" name="today_receive" class="form-control" id="today_receive"
-                    placeholder="Today Receive" />
+                  <label for="today_now">Today Now</label>
+                  <input type="number" name="today_now" class="form-control" id="today_now" onblur="findBalanceDaily()" required/>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="total_delivery_before">Total Before</label>
+                  <input type="number" name="total_delivery_before" class="form-control" id="total_delivery_before" placeholder="Enter target amount"
+                    readonly />
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="total_now">Total Now</label>
+                  <input type="number" name="total_now" class="form-control" id="total_now"
+                     placeholder="Total delivery" readonly />
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <label for="balance_before">Balance Before </label>
+                  <input type="number" name="balance_before" class="form-control" id="balance_before" readonly />
                 </div>
               </div>
               <div class="col-lg-6">
                 <div class="form-group">
-                  <label for="total_receive">Total Receive</label>
-                  <input type="number" name="total_receive" class="form-control" id="total_receive" />
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label for="receive_balance">Receive Balance </label>
-                  <input type="number" name="receive_balance" class="form-control" id="receive_balance" />
+                  <label for="balance_now">Balance Now </label>
+                  <input type="number" name="balance_now" class="form-control" id="balance_now" readonly />
                 </div>
               </div>
             </div>
@@ -186,23 +208,38 @@
           var delivery_id = $(this).val();
           console.log(delivery_id);
           jQuery.noConflict(); 
-          $('#startModal').modal('show');
+          $('#editModal').modal('show');
           $.ajax({
-            url: '/edit-delivery' + delivery_id,
+            url: '/edit-single-delivery' + delivery_id,
             type: "GET",
             success:function(response){
               console.log(response);
-              $('#first_receive').val(response.delivery.first_receive);
-              $('#today_receive').val(response.delivery.today_receive);
-              $('#total_receive').val(response.delivery.total_receive);
-              $('#receive_balance').val(response.delivery.receive_balance);
-              $('#order_id').val(response.delivery.order_id);
-              $('#delivery_id').val(delivery_id);
+              $('#today_delivery_before').val(response.delivery.delivery_today);
+              $('#total_delivery_before').val(response.delivery.delivery_total);
+              $('#balance_before').val(response.delivery.delivery_balance);
+              $('#delivery_parent').val(response.delivery.delivery_id);
+              $('#delivery_date_before').val(response.delivery.delivery_date);
+              $('#daily_id').val(delivery_id);
             }
           });
         });
       });
 
+  </script>
+
+    <script>
+        //---find balance daily
+      function findBalanceDaily(){
+        console.log(document.getElementById("today_delivery_before").value);
+        const todayBefore = parseInt(document.getElementById("today_delivery_before").value);
+        const totalBefore = parseInt(document.getElementById("total_delivery_before").value);
+        const balanceBefore = parseInt(document.getElementById("balance_before").value);
+        const todayNow = parseInt(document.getElementById("today_now").value);
+        const balance = balanceBefore + todayBefore - todayNow;
+        const totalYet = totalBefore - todayBefore + todayNow;
+        document.getElementById("total_now").value = totalYet;
+        document.getElementById("balance_now").value = balance;
+      }
   </script>
 
 

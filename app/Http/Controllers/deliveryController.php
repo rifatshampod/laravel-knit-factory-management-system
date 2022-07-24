@@ -240,4 +240,115 @@ class deliveryController extends Controller
         return view('report/orderRecReportData',['deliverylist'=>$deliverylist])->with('orderlist',$orderlist);
     }
 
+    //daily receive edit --------------------------
+
+    function editDailyReceiveDataFetch($id){
+        $receive=Receive::find($id);
+        return response()->json([
+            'status'=>200,
+            'receive'=>$receive,
+        ]);
+    }
+
+    function editDailyReceiveData(Request $req){
+
+        if($req->input('today_now')){
+        $daily_id = $req->input('id');
+        $delivery_id = $req->input('receive_parent');
+        $today = $req->input('today_now');
+        $todayBefore = $req->input('today_before');
+        $date = $req->input('receive_date');
+        $total = $req->input('total_now');
+
+        $difference = $todayBefore - $today;
+        }
+
+        //update method
+
+        $daily = Receive::find($daily_id);
+        $daily->receive_today=$req->input('today_now');
+        $daily->receive_total= $total;
+        $daily->receive_date =  $req->input('receive_date');
+        $daily->receive_balance=$req->input('balance_now');
+        $daily->update();
+        
+        // updating all production after the edited one
+
+        Receive::where('delivery_id', $delivery_id)
+        ->where('receive_date','>=', $date)
+        ->where('id','!=',$daily_id)
+       ->update([
+           'receive_total' => DB::raw('receive_total - '.$difference.''),
+           'receive_balance' => DB::raw('receive_balance + '.$difference.''),
+        ]);
+
+        //updating balance in main delivery table
+        
+        Delivery::where('id', $delivery_id)
+        ->update([
+            'total_receive' => DB::raw('total_receive - '.$difference.''),
+            'receive_balance' => DB::raw('receive_balance + '.$difference.''),
+        ]);
+
+        return redirect()->back();
+
+    }
+    //daily receive edit end--------------------------
+
+    //daily delivery edit --------------------------
+
+    function editDailyDeliveryDataFetch($id){
+        $delivery=Daily_delivery::find($id);
+        return response()->json([
+            'status'=>200,
+            'delivery'=>$delivery,
+        ]);
+    }
+
+    function editDailyDeliveryData(Request $req){
+
+        if($req->input('today_now')){
+        $daily_id = $req->input('id');
+        $delivery_id = $req->input('delivery_parent');
+        $today = $req->input('today_now');
+        $todayBefore = $req->input('today_before');
+        $date = $req->input('delivery_date');
+        $total = $req->input('total_now');
+
+        $difference = $todayBefore - $today;
+        }
+
+        //update method
+
+        $daily = Daily_delivery::find($daily_id);
+        $daily->delivery_today=$req->input('today_now');
+        $daily->delivery_total= $total;
+        $daily->delivery_date =  $req->input('delivery_date');
+        $daily->delivery_balance=$req->input('balance_now');
+        $daily->update();
+        
+        // updating all production after the edited one
+
+        Daily_delivery::where('delivery_id', $delivery_id)
+        ->where('delivery_date','>=', $date)
+        ->where('id','!=',$daily_id)
+       ->update([
+           'delivery_total' => DB::raw('delivery_total - '.$difference.''),
+           'delivery_balance' => DB::raw('delivery_balance + '.$difference.''),
+        ]);
+
+        //updating balance in main delivery table
+        
+        Delivery::where('id', $delivery_id)
+        ->update([
+            'total_delivery' => DB::raw('total_delivery - '.$difference.''),
+            'delivery_balance' => DB::raw('delivery_balance + '.$difference.''),
+        ]);
+
+        return redirect()->back();
+
+    }
+
+    //daily delivery edit end -------------------------
+
 }
