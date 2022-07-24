@@ -139,7 +139,7 @@ class productionController extends Controller
 
     }
 
-        function updateData(Request $req){
+    function updateData(Request $req){
         $production_id = $req->input('id');
         $production=Production::find($production_id);
         $production->today_production=$req->input('today_production');
