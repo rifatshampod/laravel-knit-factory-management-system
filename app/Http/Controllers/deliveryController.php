@@ -50,14 +50,17 @@ class deliveryController extends Controller
         $delivery->first_receive=$req->input('first_receive');
         $delivery->today_receive= $req->input('today_receive');
         $delivery->total_receive+= $req->input('today_receive');
+        $delivery->receive_balance-=$req->input('today_receive');
         $delivery->status=1;
         $delivery->update();
 
+
         $receive = new Receive;
         $receive->delivery_id= $req->input('id');
+        $receive->receive_date = $req->input('first_receive');
         $receive->receive_today= $req->input('today_receive');
-        // $receive->receive_total= $req->input('total_receive');
-        // $receive->receive_balance= $req->input('receive_balance');
+        $receive->receive_total= $req->input('today_receive');
+        $receive->receive_balance=  $delivery->receive_balance;
         $receive->save();
 
 
