@@ -128,6 +128,13 @@ class productionController extends Controller
            'balance' => DB::raw('balance + '.$difference.''),
         ]);
 
+        //updating balance in main production table
+        
+        Production::where('id', $production_id)
+        ->update([
+           'balance' => DB::raw('balance + '.$difference.''),
+        ]);
+
         return redirect()->back();
 
     }
