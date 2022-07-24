@@ -231,7 +231,7 @@
               $('#today_receive_before').val(response.receive.receive_today);
               $('#total_receive_before').val(response.receive.receive_total);
               $('#balance_before').val(response.receive.receive_balance);
-              $('#receive_parent').val(response.receive.receive_id);
+              $('#receive_parent').val(response.receive.delivery_id);
               $('#receive_date_before').val(response.receive.receive_date);
               $('#daily_id').val(receive_id);
             }
