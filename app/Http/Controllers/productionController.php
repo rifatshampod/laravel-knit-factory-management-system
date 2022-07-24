@@ -48,16 +48,32 @@ class productionController extends Controller
     // }
 
     function showReportData(Request $req){
-        $productionlist = Production::join('plans','plans.id','=','productions.plan_id')
-                    ->join('orders','orders.id','=','plans.order_id')
-                    ->orderBy('productions.id', 'DESC')
-                    ->get(['productions.id as id','orders.id as orderId','orders.artwork',
-                        'orders.style','orders.order_no','orders.body_color','orders.print_quality',
-                        'orders.parts_name','orders.print_color','orders.total_qty','plans.target_perday',
-                        'productions.inhand','productions.today_production',
-                        'productions.total_production','productions.balance',
-                        'productions.status as productionStatus','orders.status as hideStatus'])
-                    ->where('hideStatus',1);
+        // $productionlist = Production::join('plans','plans.id','=','productions.plan_id')
+        //             ->join('orders','orders.id','=','plans.order_id')
+        //             ->orderBy('productions.id', 'DESC')
+        //             ->get(['productions.id as id','orders.id as orderId','orders.artwork',
+        //                 'orders.style','orders.order_no','orders.body_color','orders.print_quality',
+        //                 'orders.parts_name','orders.print_color','orders.total_qty','plans.target_perday',
+        //                 'productions.inhand','productions.today_production',
+        //                 'productions.total_production','productions.balance',
+        //                 'productions.status as productionStatus'])
+        //            ;
+
+        \DB::statement("SET SQL_MODE=''");
+        $productionlist = Production::select('productions.id as id','orders.id as orderId','orders.artwork',
+        'orders.style','orders.order_no','orders.body_color','orders.print_quality',
+        'orders.parts_name','orders.print_color','orders.total_qty','plans.target_perday',
+        'productions.inhand','productions.today_production','orders.status as hideStatus',
+        'productions.total_production','productions.balance','productions.status as productionStatus',
+        DB::raw('SUM(daily_productions.today_production) AS total_today_production'),
+        DB::raw('SUM(daily_productions.balance) AS total_balance'))
+        ->join('plans','plans.id','=','productions.plan_id')
+        ->join('orders','orders.id','=','plans.order_id')
+        ->leftjoin('daily_productions','daily_productions.production_id','=','productions.id')
+        ->groupBy('daily_productions.production_id')
+        ->orderBy('productions.id', 'DESC')
+         ->where('orders.status',1)
+        ->get();
                     
 
         return view('report/productionReport',['productionlist'=>$productionlist]);
@@ -186,6 +202,8 @@ class productionController extends Controller
 
     function getOrderNumberData(Request $req){
         $slug = $req->input('order_no');
+
+        
         $dailylist = Daily_production::join('productions','productions.id','=','daily_productions.production_id')
                     ->join('plans','plans.id','=','productions.plan_id')
                     ->join('orders','orders.id','=','plans.order_id')
