@@ -243,6 +243,22 @@ class deliveryController extends Controller
         return view('report/orderRecReportData',['deliverylist'=>$deliverylist])->with('orderlist',$orderlist);
     }
 
+    function getDateWiseReceiveData(Request $req){   //date wise daily receive data retrieve
+        $datefrom = $req->input('start');
+        $dateto = $req->input('end');
+
+        \DB::statement("SET SQL_MODE=''");
+        $receivelist = Order::select('orders.style','orders.order_no','orders.body_color','orders.print_quality','orders.parts_name', 'orders.print_color','orders.total_qty','orders.artwork','receives.receive_date','deliveries.total_receive','receives.receive_total',DB::raw('SUM(receives.receive_today) AS receive_today',), DB::raw('max(receives.receive_total) as receive_total',), DB::raw('min(receives.receive_balance) as receive_balance',))
+                        ->join('deliveries','deliveries.order_id','=','orders.id')
+                        ->join('receives','receives.delivery_id','=','deliveries.id')
+                        ->whereBetween('receives.receive_date',[$datefrom , $dateto])
+                        ->groupBy('receives.receive_date')
+                        ->groupBy('receives.delivery_id')
+                        ->get();           
+
+        return view('report/dateRecReportData',['receivelist'=>$receivelist]); 
+    }
+
     //daily receive edit --------------------------
 
     function editDailyReceiveDataFetch($id){

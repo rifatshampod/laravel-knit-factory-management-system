@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<x-header title="All Delivery" />
+<x-header title="All Receive" />
 
 <body>
     <x-navigation />
@@ -12,7 +12,7 @@
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Order Wise Delivery</h1>
+                                <h1>Order Wise Receive</h1>
                             </div>
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                                     <li class="breadcrumb-item">
                                         <a href="index.html">Dashboard</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Order Wise Delivery</li>
+                                    <li class="breadcrumb-item active">Order Wise Receive</li>
                                 </ol>
                             </div>
                         </div>
@@ -39,7 +39,7 @@
                                 <div class="d-flex justify-content-between mb-4">
                                     <div class="d-flex align-items-center">
 
-                                        <form method="post" action="date-delivery-report">
+                                        <form method="post" action="date-receive-report">
 
                                             @csrf
                                             <div class="form-group">
@@ -50,7 +50,7 @@
                                                 <input type="date" name="end" />
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="px-4 py-2">Find All Delivery </button>
+                                                <button type="submit" class="px-4 py-2">Find All Receive </button>
                                             </div>
                                         </form>
                                     </div>
@@ -76,17 +76,17 @@
                                                     <th>Parts Name</th>
                                                     <th>P.C</th>
                                                     <th>Total Qty</th>
-                                                    <th>Today Del</th>
-                                                    <th>Total Del</th>
-                                                    <th>Del Bal</th>
+                                                    <th>Today Rec</th>
+                                                    <th>Total Rec</th>
+                                                    <th>Rec Bal</th>
                                                     
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($deliverylist as $item)
+                                                @foreach ($receivelist as $item)
 
                                                 <tr>
-                                                    <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-M-y')}}</td>
+                                                    <td>{{\Carbon\Carbon::parse($item['receive_date'])->format('d-M-y')}}</td>
 
                                                     <td>
                                                         <div class="orderImg">
@@ -100,9 +100,9 @@
                                                     <td>{{$item['parts_name']}}</td>
                                                     <td>{{$item['print_color']}}</td>
                                                     <td>{{round($item['total_qty'])}}</td>
-                                                    <td>{{$item['delivery_today']}}</td>
-                                                    <td>{{$item['delivery_total']}}</td>
-                                                    <td>{{$item['delivery_balance']}}</td>
+                                                    <td>{{$item['receive_today']}}</td>
+                                                    <td>{{$item['receive_total']}}</td>
+                                                    <td>{{$item['receive_balance']}}</td>
                                                 </tr>
                                                 @endforeach
 
@@ -141,6 +141,7 @@
 
     <!-- Edit Modal functions -->
     <script>
+        
 
         function printDiv() {
             var divToPrint = document.getElementById("bootstrap-data-table-export");
