@@ -88,8 +88,10 @@ Route::get('order-report&&body-color={slug}',[orderController::class, 'showBodyC
 Route::get('order-report&&print-quality={slug}',[orderController::class, 'showPrintQualityReportData']);
 Route::get('order-report&&body-parts={slug}',[orderController::class, 'showPartsReportData']);
 //allocation specific
-Route::get('allocation-report',[planController::class, 'showReportData']); //show all production report
+Route::get('allocation-report',[planController::class, 'showReportData']); //show all plan report
 Route::get('allocation-report&&section={slug}',[planController::class, 'showSectionReportData']);
+//receive/delivery
+Route::get('alldel-report',[deliveryController::class, 'showReportData']); //show all rec/del report
 //delivery specific 
 Route::get('delivery-report-order',[deliveryController::class, 'showOrderNumber']);
 Route::post('order-delivery-report',[deliveryController::class, 'getOrderNumberData']);
@@ -98,6 +100,8 @@ Route::post('date-delivery-report',[deliveryController::class, 'getDateWiseData'
 //receive specific 
 Route::get('receive-report-order',[deliveryController::class, 'showReceiveOrderNumber']);
 Route::post('order-receive-report',[deliveryController::class, 'getReceiveOrderNumberData']);
+Route::view('receive-report-date',"report/getDateReceive");  //date wise search
+Route::post('date-receive-report',[deliveryController::class, 'getDateWiseReceiveData']); //date wise result
 //production specific
 Route::get('production-report',[productionController::class, 'showReportData']); //show all production report
 Route::get('production-report-order',[productionController::class, 'showOrderNumber']);

@@ -60,7 +60,7 @@
                           <th>Inhand</th>
                           <th>Today Prod</th>
                           <th>Total Prod</th>
-                          <th>Without Print Balance</th>
+                          <th>W. P. Balance</th>
                           <th>Action</th>
                         </tr>
                       </thead>

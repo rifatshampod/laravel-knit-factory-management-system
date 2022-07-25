@@ -89,7 +89,8 @@
                           <td>{{$item['order_qty']}}</td>
                           <td>{{round($item['extra_qty'],2)}}</td>
                           <td>{{$item['total_qty']}}</td>
-                          <td>{{$item['delivery_date']}}</td>
+                          <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-M-y')}}</td>
+                        
                           <td>{{$item['merchandiser']}}</td>
                           <td>{{$item['price_dozen']}}</td>
                           <td>{{$item['supplier']}}</td>

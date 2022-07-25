@@ -68,13 +68,13 @@
                                                     <th>Body Color</th>
                                                     <th>Print Quality</th>
                                                     <th>Parts Name</th>
-                                                    <th>Print Color</th>
+                                                    <th>P.C</th>
                                                     <th>Color Qty</th>
                                                     <th>Order Qty</th>
                                                     <th>Extra 5%</th>
                                                     <th>Total Qty</th>
-                                                    <th>Target Day</th>
-                                                    <th>Target Per Day</th>
+                                                    <th>Target Days</th>
+                                                    <th>T.P. Day</th>
                                                     <th>Delivery Date</th>
                                                     <th>Production start date</th>
                                                     <th>Production End date</th>
@@ -97,13 +97,14 @@
                                                     <td>{{$item['print_color']}}</td>
                                                     <td>{{$item['color_qty']}}</td>
                                                     <td>{{$item['order_qty']}}</td>
-                                                    <td>{{$item['extra_qty']}}</td>
-                                                    <td>{{$item['total_qty']}}</td>
+                                                    <td>{{round($item['extra_qty'])}}</td>
+                                                    <td>{{round($item['total_qty'])}}</td>
                                                     <td>{{$item['target_day']}}</td>
-                                                    <td>{{$item['target_perday']}}</td>
-                                                    <td>{{$item['delivery_date']}}</td>
-                                                    <td>{{$item['production_start']}}</td>
-                                                    <td>{{$item['production_end']}}</td>
+                                                    <td>{{round($item['target_perday'])}}</td>
+                                                    <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-M-y')}}</td>
+                                                    <td>{{\Carbon\Carbon::parse($item['production_start'])->format('d-M-y')}}</td>
+                                                    <td>{{\Carbon\Carbon::parse($item['production_end'])->format('d-M-y')}}</td>
+                                                    
                                                     <td>{{$item['section']}}</td>
                                                 </tr>
                                                 @endforeach

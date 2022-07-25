@@ -89,13 +89,13 @@
                             <td>{{$item['print_color']}}</td>
                             <td>{{$item['color_qty']}}</td>
                             <td>{{$item['order_qty']}}</td>
-                            <td>{{$item['extra_qty']}}</td>
-                            <td>{{$item['total_qty']}}</td>
+                            <td>{{round($item['extra_qty'])}}</td>
+                            <td>{{round($item['total_qty'])}}</td>
                             <td>{{$item['target_day']}}</td>
                             <td>{{$item['target_perday']}}</td>
-                            <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-m-Y')}}</td>
-                            <td>{{\Carbon\Carbon::parse($item['production_start'])->format('d-m-Y')}}</td>
-                            <td>{{\Carbon\Carbon::parse($item['production_end'])->format('d-m-Y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-M-y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['production_start'])->format('d-M-y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['production_end'])->format('d-M-y')}}</td>
                             <td>{{$item['section']}}</td>
                             <td>
                               @if($item['status']==0)

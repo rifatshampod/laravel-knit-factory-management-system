@@ -93,8 +93,7 @@
                                                 @foreach ($deliverylist as $item)
 
                                                 <tr>
-                                                    <td>{{\Carbon\Carbon::parse($item['receive_date'])->format('d-m-Y')}}</td>
-
+                                                    <td>{{\Carbon\Carbon::parse($item['receive_date'])->format('d-M-y')}}</td>
                                                     <td>
                                                         <div class="orderImg">
                                                             <img src="{{$item['artwork']}}" alt="" />
@@ -106,7 +105,7 @@
                                                     <td>{{$item['print_quality']}}</td>
                                                     <td>{{$item['parts_name']}}</td>
                                                     <td>{{$item['print_color']}}</td>
-                                                    <td>{{$item['total_qty']}}</td>
+                                                    <td>{{round($item['total_qty'])}}</td>
                                                     <td>{{$item['receive_today']}}</td>
                                                     <td>{{$item['receive_total']}}</td>
                                                     <td>{{$item['receive_balance']}}</td>

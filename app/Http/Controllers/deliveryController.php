@@ -50,14 +50,17 @@ class deliveryController extends Controller
         $delivery->first_receive=$req->input('first_receive');
         $delivery->today_receive= $req->input('today_receive');
         $delivery->total_receive+= $req->input('today_receive');
+        $delivery->receive_balance-=$req->input('today_receive');
         $delivery->status=1;
         $delivery->update();
 
+
         $receive = new Receive;
         $receive->delivery_id= $req->input('id');
+        $receive->receive_date = $req->input('first_receive');
         $receive->receive_today= $req->input('today_receive');
-        // $receive->receive_total= $req->input('total_receive');
-        // $receive->receive_balance= $req->input('receive_balance');
+        $receive->receive_total= $req->input('today_receive');
+        $receive->receive_balance=  $delivery->receive_balance;
         $receive->save();
 
 
@@ -166,6 +169,24 @@ class deliveryController extends Controller
 
     // delivery report--------------------------------------------------------------
 
+    //all data report
+
+    function showReportData(Request $req){
+        $deliverylist = Delivery::join('orders','orders.id','=','deliveries.order_id')
+                    ->orderBy('deliveries.id', 'DESC')
+                    ->get(['deliveries.id as id','orders.id as orderId', 'orders.artwork',
+                        'orders.style','orders.order_no','orders.body_color','orders.total_qty as total_order','orders.print_quality','orders.parts_name','orders.print_color','orders.artwork',
+                        'deliveries.first_receive', 'deliveries.today_receive',
+                        'deliveries.total_receive','deliveries.receive_balance',
+                        'deliveries.today_delivery','deliveries.total_delivery',
+                        'deliveries.delivery_balance','deliveries.status',
+                        'deliveries.delivery_status']);
+                    
+
+        return view('report/allDelivery',['deliverylist'=>$deliverylist]);
+    }
+
+
     function showOrderNumber(Request $req){
         $orderlist = Delivery::join('orders','orders.id','=','deliveries.order_id')
                     ->select('order_no')->distinct()
@@ -238,6 +259,22 @@ class deliveryController extends Controller
                     ->get();
 
         return view('report/orderRecReportData',['deliverylist'=>$deliverylist])->with('orderlist',$orderlist);
+    }
+
+    function getDateWiseReceiveData(Request $req){   //date wise daily receive data retrieve
+        $datefrom = $req->input('start');
+        $dateto = $req->input('end');
+
+        \DB::statement("SET SQL_MODE=''");
+        $receivelist = Order::select('orders.style','orders.order_no','orders.body_color','orders.print_quality','orders.parts_name', 'orders.print_color','orders.total_qty','orders.artwork','receives.receive_date','deliveries.total_receive','receives.receive_total',DB::raw('SUM(receives.receive_today) AS receive_today',), DB::raw('max(receives.receive_total) as receive_total',), DB::raw('min(receives.receive_balance) as receive_balance',))
+                        ->join('deliveries','deliveries.order_id','=','orders.id')
+                        ->join('receives','receives.delivery_id','=','deliveries.id')
+                        ->whereBetween('receives.receive_date',[$datefrom , $dateto])
+                        ->groupBy('receives.receive_date')
+                        ->groupBy('receives.delivery_id')
+                        ->get();           
+
+        return view('report/dateRecReportData',['receivelist'=>$receivelist]); 
     }
 
     //daily receive edit --------------------------

@@ -79,14 +79,14 @@
                                                     <th>Today Del</th>
                                                     <th>Total Del</th>
                                                     <th>Del Bal</th>
-                                                    {{-- <th>Action</th> --}}
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($deliverylist as $item)
 
                                                 <tr>
-                                                    <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-m-Y')}}</td>
+                                                    <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-M-y')}}</td>
 
                                                     <td>
                                                         <div class="orderImg">
@@ -99,7 +99,7 @@
                                                     <td>{{$item['print_quality']}}</td>
                                                     <td>{{$item['parts_name']}}</td>
                                                     <td>{{$item['print_color']}}</td>
-                                                    <td>{{$item['total_qty']}}</td>
+                                                    <td>{{round($item['total_qty'])}}</td>
                                                     <td>{{$item['delivery_today']}}</td>
                                                     <td>{{$item['delivery_total']}}</td>
                                                     <td>{{$item['delivery_balance']}}</td>
@@ -141,28 +141,6 @@
 
     <!-- Edit Modal functions -->
     <script>
-        $(document).ready(function() {
-            $(document).on('click', '.editBtn', function() {
-
-                var delivery_id = $(this).val();
-                console.log(delivery_id);
-                jQuery.noConflict();
-                $('#startModal').modal('show');
-                $.ajax({
-                    url: '/edit-delivery' + delivery_id
-                    , type: "GET"
-                    , success: function(response) {
-                        console.log(response);
-                        $('#first_receive').val(response.delivery.first_receive);
-                        $('#today_receive').val(response.delivery.today_receive);
-                        $('#total_receive').val(response.delivery.total_receive);
-                        $('#receive_balance').val(response.delivery.receive_balance);
-                        $('#order_id').val(response.delivery.order_id);
-                        $('#delivery_id').val(delivery_id);
-                    }
-                });
-            });
-        });
 
         function printDiv() {
             var divToPrint = document.getElementById("bootstrap-data-table-export");

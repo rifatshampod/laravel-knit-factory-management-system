@@ -82,13 +82,15 @@
                     <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Report<span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li><a href="order-report">Order Report</a></li>
-                        <li><a href="production-report">Production Report</a></li>
-                        <li><a href="production-report-date">Date Wise Production</a></li>
-                        <li><a href="production-report-order">Order Wise Production</a></li>
-                        <li><a href="allocation-report">Allocation Report</a></li>
-                        <li><a href="delivery-report-date">Date Wise Delivery</a></li>
-                        <li><a href="delivery-report-order">Order Wise Delivery</a></li>
-                        <li><a href="receive-report-order">Order Wise Receive</a></li>
+                        <li><a href="production-report" style="color:rgb(165, 249, 80);">All Production</a></li>
+                        <li><a href="production-report-date" style="color:rgb(165, 249, 80);">Daily Production -Date Wise</a></li>
+                        <li><a href="production-report-order" style="color:rgb(165, 249, 80);">Daily Production -Order Wise</a></li>
+                        <li><a href="allocation-report">Allocation Plan</a></li>
+                        <li><a href="alldel-report" style="color:cyan;">All Receive/Delivery</a></li>
+                        <li><a href="delivery-report-date" style="color:cyan;">Daily Delivery -Date Wise</a></li>
+                        <li><a href="delivery-report-order" style="color:cyan;">Daily Delivery -Order Wise</a></li>
+                        <li><a href="receive-report-date" style="color:rgb(248, 243, 99);">Daily Receive -Date Wise</a></li>                        
+                        <li><a href="receive-report-order" style="color:rgb(248, 243, 99);">Daily Receive -Order Wise</a></li>
 
                     </ul>
                 </li>
