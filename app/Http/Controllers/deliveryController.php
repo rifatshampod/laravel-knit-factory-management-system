@@ -169,6 +169,24 @@ class deliveryController extends Controller
 
     // delivery report--------------------------------------------------------------
 
+    //all data report
+
+    function showReportData(Request $req){
+        $deliverylist = Delivery::join('orders','orders.id','=','deliveries.order_id')
+                    ->orderBy('deliveries.id', 'DESC')
+                    ->get(['deliveries.id as id','orders.id as orderId', 'orders.artwork',
+                        'orders.style','orders.order_no','orders.body_color','orders.total_qty as total_order','orders.print_quality','orders.parts_name','orders.print_color','orders.artwork',
+                        'deliveries.first_receive', 'deliveries.today_receive',
+                        'deliveries.total_receive','deliveries.receive_balance',
+                        'deliveries.today_delivery','deliveries.total_delivery',
+                        'deliveries.delivery_balance','deliveries.status',
+                        'deliveries.delivery_status']);
+                    
+
+        return view('report/allDelivery',['deliverylist'=>$deliverylist]);
+    }
+
+
     function showOrderNumber(Request $req){
         $orderlist = Delivery::join('orders','orders.id','=','deliveries.order_id')
                     ->select('order_no')->distinct()

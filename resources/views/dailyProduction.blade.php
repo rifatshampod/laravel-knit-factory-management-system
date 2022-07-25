@@ -69,7 +69,7 @@
                           @if($item['production_date']==null)
                           <td> - </td>
                           @else
-                          <td>{{\Carbon\Carbon::parse($item['production_date'])->format('d-m-Y')}}</td>
+                          <td>{{\Carbon\Carbon::parse($item['production_date'])->format('d-M-y')}}</td>
                           @endif
                           <td>{{$item['style']}}</td>
                           <td>{{$item['order_no']}}</td>

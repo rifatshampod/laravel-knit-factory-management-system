@@ -93,9 +93,9 @@
                             <td>{{round($item['total_qty'])}}</td>
                             <td>{{$item['target_day']}}</td>
                             <td>{{$item['target_perday']}}</td>
-                            <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-m-Y')}}</td>
-                            <td>{{\Carbon\Carbon::parse($item['production_start'])->format('d-m-Y')}}</td>
-                            <td>{{\Carbon\Carbon::parse($item['production_end'])->format('d-m-Y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-M-y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['production_start'])->format('d-M-y')}}</td>
+                            <td>{{\Carbon\Carbon::parse($item['production_end'])->format('d-M-y')}}</td>
                             <td>{{$item['section']}}</td>
                             <td>
                               @if($item['status']==0)

@@ -86,7 +86,7 @@
                         <li><a href="production-report-date" style="color:rgb(165, 249, 80);">Daily Production -Date Wise</a></li>
                         <li><a href="production-report-order" style="color:rgb(165, 249, 80);">Daily Production -Order Wise</a></li>
                         <li><a href="allocation-report">Allocation Plan</a></li>
-                        <li><a href="#" style="color:cyan;">All Receive/Delivery</a></li>
+                        <li><a href="alldel-report" style="color:cyan;">All Receive/Delivery</a></li>
                         <li><a href="delivery-report-date" style="color:cyan;">Daily Delivery -Date Wise</a></li>
                         <li><a href="delivery-report-order" style="color:cyan;">Daily Delivery -Order Wise</a></li>
                         <li><a href="receive-report-date" style="color:rgb(248, 243, 99);">Daily Receive -Date Wise</a></li>                        

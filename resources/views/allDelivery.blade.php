@@ -81,7 +81,8 @@
                           <td>{{$item['print_quality']}}</td>
                           <td>{{$item['parts_name']}}</td>
                           <td>{{$item['print_color']}}</td>
-                          <td>{{$item['first_receive']}}</td>
+                          <td>{{\Carbon\Carbon::parse($item['first_receive'])->format('d-M-y')}}</td>
+                          
                           <td>{{$item['today_receive']}}</td>
                           <td>{{$item['total_receive']}}</td>
                           <td>{{$item['receive_balance']}}</td>
