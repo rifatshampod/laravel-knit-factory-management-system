@@ -114,7 +114,7 @@
                           <th>Body Color</th>
                           <th>Print Quality</th>
                           <th>Parts Name</th>
-                          <th>Print Color</th>
+                          <th>P.C.</th>
                           <th>Color Qty</th>
                           <th>Order Qty</th>
                           <th>Extra 5%</th>
@@ -141,9 +141,9 @@
                           <td>{{$item['print_color']}}</td>
                           <td>{{$item['color_qty']}}</td>
                           <td>{{$item['order_qty']}}</td>
-                          <td>{{round($item['extra_qty'],2)}}</td>
-                          <td>{{$item['total_qty']}}</td>
-                          <td>{{$item['delivery_date']}}</td>
+                          <td>{{round($item['extra_qty'])}}</td>
+                          <td>{{round($item['total_qty'])}}</td>
+                          <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-M-y')}}</td>
                           <td>{{$item['merchandiser']}}</td>
                           <td>{{$item['price_dozen']}}</td>
                           <td>{{$item['supplier']}}</td>

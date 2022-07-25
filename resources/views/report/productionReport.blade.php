@@ -83,8 +83,8 @@
                           <td>{{$item['print_quality']}}</td>
                           <td>{{$item['parts_name']}}</td>
                           <td>{{$item['print_color']}}</td>
-                          <td>{{$item['total_qty']}}</td>
-                          <td>{{$item['target_perday']}}</td>
+                          <td>{{round($item['total_qty'])}}</td>
+                          <td>{{round($item['target_perday'])}}</td>
                           <td>{{$item['inhand']}}</td>
                           <td>{{$item['today_production']}}</td>
                           <td>{{$item['total_production']}}</td>

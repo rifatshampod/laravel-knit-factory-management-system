@@ -89,8 +89,8 @@
                             <td>{{$item['print_color']}}</td>
                             <td>{{$item['color_qty']}}</td>
                             <td>{{$item['order_qty']}}</td>
-                            <td>{{$item['extra_qty']}}</td>
-                            <td>{{$item['total_qty']}}</td>
+                            <td>{{round($item['extra_qty'])}}</td>
+                            <td>{{round($item['total_qty'])}}</td>
                             <td>{{$item['target_day']}}</td>
                             <td>{{$item['target_perday']}}</td>
                             <td>{{\Carbon\Carbon::parse($item['delivery_date'])->format('d-m-Y')}}</td>

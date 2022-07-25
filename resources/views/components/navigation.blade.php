@@ -82,13 +82,14 @@
                     <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Report<span class="sidebar-collapse-icon ti-angle-down"></span></a>
                     <ul>
                         <li><a href="order-report">Order Report</a></li>
-                        <li><a href="production-report">Production Report</a></li>
-                        <li><a href="production-report-date">Date Wise Production</a></li>
-                        <li><a href="production-report-order">Order Wise Production</a></li>
-                        <li><a href="allocation-report">Allocation Report</a></li>
-                        <li><a href="delivery-report-date">Date Wise Delivery</a></li>
-                        <li><a href="delivery-report-order">Order Wise Delivery</a></li>
-                        <li><a href="receive-report-order">Order Wise Receive</a></li>
+                        <li><a href="production-report">All Production</a></li>
+                        <li><a href="production-report-date">Daily Production -Date Wise</a></li>
+                        <li><a href="production-report-order">Daily Production -Order Wise</a></li>
+                        <li><a href="allocation-report">Allocation Plan</a></li>
+                        <li><a href="delivery-report-date">Daily Delivery -Date Wise</a></li>
+                        <li><a href="delivery-report-order">Daily Delivery -Order Wise</a></li>
+                        <li><a href="delivery-report-date">Daily Receive -Date Wise</a></li>                        
+                        <li><a href="#">Daily Receive -Order Wise</a></li>
 
                     </ul>
                 </li>

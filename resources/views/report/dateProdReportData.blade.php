@@ -70,17 +70,17 @@
                           <th>Body Color</th>
                           <th>Parts Name</th>
                           <th>Total Qty</th>
-                          <th>Target Per Day</th>
+                          <th>T. P. Day</th>
                           <th>Today Prod</th>
                           <th>Total Prod</th>
-                          <th>Without Print Balance</th>
+                          <th>W. P. Balance</th>
                           {{-- <th>Action</th> --}}
                         </tr>
                       </thead>
                       <tbody>
                         @foreach ($dailylist as $item)
                         <tr>
-                          <td>{{\Carbon\Carbon::parse($item['production_date'])->format('d-m-Y')}}</td>
+                          <td>{{\Carbon\Carbon::parse($item['production_date'])->format('d-M-y')}}</td>
                           <td>
                             <div class="orderImg">
                               <img src="{{$item['artwork']}}" alt="" />
@@ -93,18 +93,8 @@
                           <td>{{$item['total']}}</td>
                           <td>{{$item['targetPerDay']}}</td>
                           <td>{{$item['today_production']}}</td>
-                          <td>{{$item['total_production']}}</td>
+                          <td>{{round($item['total_production'])}}</td>
                           <td>{{$item['balance']}}</td>
-                          {{-- <td>
-                            <div class="employeeTableIcon d-flex">
-
-                              <button value="{{$item['id']}}"
-                                class="Icon3 editBtn px-3 py-1 text-white cursor border-none rounded d-flex justify-content-center align-items-center mr-1">
-                                <i class="ti-pencil-alt mr-1"></i>Edit
-                              </button>
-                            </div>
-
-                          </td> --}}
                         </tr>
                         @endforeach
 
