@@ -164,10 +164,23 @@
               <input type="hidden" name="id" id="sections_id" />
 
               <div class="row">
-                
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="name">Section Name</label>
+                    <label for="name">Old Section Name</label>
+                    <input
+                      type="text"
+                      name="name_old"
+                      class="form-control"
+                      id="sections_old"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="name">New Section Name</label>
                     <input
                       type="text"
                       name="name"
@@ -176,7 +189,6 @@
                     />
                   </div>
                 </div>
-                
               </div>
               <div class="row justify-content-center">
                 <div class="col-lg-4">
@@ -255,14 +267,14 @@
           console.log(sections_id);
           jQuery.noConflict(); 
           $('#editModal').modal('show');
-          
-
+        
           $.ajax({
             url: '/get-sections' + sections_id,
             type: "GET",
             success:function(response){
               console.log(response);
               $('#sections_name').val(response.sections.name);
+              $('#sections_old').val(response.sections.name);
               $('#sections_id').val(sections_id);
             }
           });

@@ -266,6 +266,7 @@
             success:function(response){
               console.log(response);
               $('#merchandiser_name').val(response.merchandiser.name);
+              $('#merchandiser_old').val(response.merchandiser.name);
               $('#merchandiser_id').val(merchandiser_id);
             }
           });

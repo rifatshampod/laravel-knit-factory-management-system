@@ -9,6 +9,8 @@ use App\Models\Body_color;
 use App\Models\Print_quality;
 use App\Models\Parts_name;
 use App\Models\Section;
+use App\Models\Order;
+use App\Models\Plan;
 
 class settingsController extends Controller
 {
@@ -121,7 +123,15 @@ class settingsController extends Controller
         $bodycolor->name=$req->input('name');
         $bodycolor->update();
 
-        return redirect()->back()->with('status','Merchandiser information has been updated');
+        //change in other table
+        $oldName = $req->input('name_old');
+        $newName = $req->input('name');
+        $order = Order::where('body_color',$oldName)
+        ->update([
+           'body_color' => $newName,
+        ]);
+
+        return redirect()->back()->with('status','Body Color information has been updated');
     }
 
     function deleteBodycolorData(Request $req){
@@ -240,6 +250,14 @@ class settingsController extends Controller
         $sections=Section::find($sections_id);
         $sections->name=$req->input('name');
         $sections->update();
+
+        //change in other table
+        $oldName = $req->input('name_old');
+        $newName = $req->input('name');
+        $order = Plan::where('section',$oldName)
+        ->update([
+           'section' => $newName,
+        ]);
 
         return redirect()->back()->with('status','sections information has been updated');
     }

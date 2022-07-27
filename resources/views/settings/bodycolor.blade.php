@@ -167,7 +167,23 @@
                 
                 <div class="col-lg-12">
                   <div class="form-group">
-                    <label for="name">bodycolor Name</label>
+                    <label for="name">Previous bodycolor Name</label>
+                    <input
+                      type="text"
+                      name="name_old"
+                      class="form-control"
+                      id="bodycolor_old"
+                      readonly
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                
+                <div class="col-lg-12">
+                  <div class="form-group">
+                    <label for="name">New Body Color Name</label>
                     <input
                       type="text"
                       name="name"
@@ -176,7 +192,6 @@
                     />
                   </div>
                 </div>
-                
               </div>
               <div class="row justify-content-center">
                 <div class="col-lg-4">
@@ -256,13 +271,13 @@
           jQuery.noConflict(); 
           $('#editModal').modal('show');
           
-
           $.ajax({
             url: '/get-bodycolor' + bodycolor_id,
             type: "GET",
             success:function(response){
               console.log(response);
               $('#bodycolor_name').val(response.bodycolor.name);
+              $('#bodycolor_old').val(response.bodycolor.name);
               $('#bodycolor_id').val(bodycolor_id);
             }
           });
