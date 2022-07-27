@@ -21,9 +21,21 @@
                         <li><a href="order">All Order</a></li>
                     </ul>
                 </li>
+                                <li>
+                    <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Report<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li><a href="order-report">Order Report</a></li>
+                    </ul>
+                </li>
                 @elseif (auth()->user()->role == 3)
                 <li>
                     <a class="" href="plan"><i class="ti-gift"></i>Planning</a>
+                </li>
+                                <li>
+                    <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Report<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li><a href="allocation-report">Allocation Plan</a></li>
+                    </ul>
                 </li>
 
                 @elseif (auth()->user()->role == 4)
@@ -34,6 +46,16 @@
                         <li><a href="daily-production">Day wise production</a></li>
                     </ul>
                 </li>
+                                <li>
+                    <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Report<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+
+                        <li><a href="production-report" style="color:rgb(165, 249, 80);">All Production</a></li>
+                        <li><a href="production-report-date" style="color:rgb(165, 249, 80);">Daily Production -Date Wise</a></li>
+                        <li><a href="production-report-order" style="color:rgb(165, 249, 80);">Daily Production -Order Wise</a></li>
+                        
+                    </ul>
+                </li>
                 @elseif (auth()->user()->role == 5)
                 <li>
                     <a class="sidebar-sub-toggle"><i class="ti-truck"></i>Delivery<span class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -41,6 +63,16 @@
                         <li><a href="all-delivery">All Delivery</a></li>
                         <li><a href="all-receive">Daily Receive</a></li>
                         <li><a href="daily-delivery">Daily Delivery</a></li>
+                    </ul>
+                </li>
+                                <li>
+                    <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Report<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <ul>
+                        <li><a href="alldel-report" style="color:cyan;">All Receive/Delivery</a></li>
+                        <li><a href="delivery-report-date" style="color:cyan;">Daily Delivery -Date Wise</a></li>
+                        <li><a href="delivery-report-order" style="color:cyan;">Daily Delivery -Order Wise</a></li>
+                        <li><a href="receive-report-date" style="color:rgb(248, 243, 99);">Daily Receive -Date Wise</a></li>                        
+                        <li><a href="receive-report-order" style="color:rgb(248, 243, 99);">Daily Receive -Order Wise</a></li>
                     </ul>
                 </li>
 

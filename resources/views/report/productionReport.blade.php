@@ -62,10 +62,10 @@
                           <th>P.C.</th>
                           <th>Total Qty</th>
                           <th>T.P. Day</th>
-                          <th>Inhand</th>
                           <th>Today Prod</th>
                           <th>Total Prod</th>
                           <th>W.P. Balance</th>
+                          <th>Section</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -85,10 +85,10 @@
                           <td>{{$item['print_color']}}</td>
                           <td>{{round($item['total_qty'])}}</td>
                           <td>{{round($item['target_perday'])}}</td>
-                          <td>{{$item['inhand']}}</td>
                           <td>{{$item['today_production']}}</td>
                           <td>{{$item['total_production']}}</td>
                           <td>{{$item['balance']}}</td>
+                          <td>{{$item['section']}}</td>
                         </tr>
                         @endforeach
 

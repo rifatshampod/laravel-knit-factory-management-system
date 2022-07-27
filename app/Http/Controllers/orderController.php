@@ -116,8 +116,8 @@ class orderController extends Controller
             $pictureInfo = $req->file('artwork');
             $picName = $pictureInfo->getClientOriginalName();
             $folder = "artwork";
-            $pictureInfo->move($folder, $picName);
-            $picUrl = $folder .'/'. $picName;
+            $pictureInfo->move($folder, $lastId.$picName);
+            $picUrl = $folder .'/'.$lastId.$picName;
             //database
             $staffPic = Order::find($lastId);
             $staffPic->artwork = $picUrl;
@@ -323,8 +323,8 @@ class orderController extends Controller
             $pictureInfo = $req->file('artwork');
             $picName = $pictureInfo->getClientOriginalName();
             $folder = "artwork";
-            $pictureInfo->move($folder, $picName);
-            $picUrl = $folder .'/'. $picName;
+            $pictureInfo->move($folder, $lastId.$picName);
+            $picUrl = $folder .'/'.$lastId.$picName;
             //database
             $staffPic = Order::find($lastId);
             $staffPic->artwork = $picUrl;

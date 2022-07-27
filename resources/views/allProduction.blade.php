@@ -48,16 +48,16 @@
                       <thead>
                         <tr>
 
-                          <th>Artwork</th>
+                          {{-- <th>Artwork</th> --}}
                           <th>Style Name</th>
                           <th>Order No</th>
                           <th>Body Color</th>
                           <th>Print Quality</th>
                           <th>Parts Name</th>
-                          <th>Print Color</th>
+                          <th>P.C.</th>
                           <th>Total Qty</th>
-                          <th>Target Per Day</th>
-                          <th>Inhand</th>
+                          <th>T.P. Day</th>
+                          {{-- <th>Inhand</th> --}}
                           <th>Today Prod</th>
                           <th>Total Prod</th>
                           <th>W. P. Balance</th>
@@ -67,11 +67,11 @@
                       <tbody>
                         @foreach ($productionlist as $item)
                         <tr>
-                          <td>
+                          {{-- <td>
                             <div class="orderImg">
                               <img src="{{$item['artwork']}}" alt="" />
                             </div>
-                          </td>
+                          </td> --}}
 
                           <td>{{$item['style']}}</td>
                           <td>{{$item['order_no']}}</td>
@@ -81,9 +81,9 @@
                           <td>{{$item['print_color']}}</td>
                           <td>{{$item['total_qty']}}</td>
                           <td>{{$item['target_perday']}}</td>
-                          <td>{{$item['inhand']}}</td>
+                          {{-- <td>{{$item['inhand']}}</td> --}}
                           <td>{{$item['today_production']}}</td>
-                          <td>{{$item['total_today_production']}}</td>
+                          <td>{{$item['total_production']}}</td>
                           <td>{{$item['balance']}}</td>
                           <td>
                             @if($item['productionStatus']==0)
@@ -214,13 +214,13 @@
                 </div>
               </div>
 
-              <div class="col-lg-6">
+              {{-- <div class="col-lg-6">
                 <div class="form-group">
                   <label for="inhand">Inhand</label>
                   <input type="number" name="inhand" class="form-control" id="inhand" placeholder="Enter target amount"
                     readonly />
                 </div>
-              </div>
+              </div> --}}
 
               <div class="col-lg-6">
                 <div class="form-group">
@@ -331,7 +331,7 @@
               console.log(response);
               $('#target_daily').val(response.production.total_receive);
               $('#total_production').val(response.production.total_production);
-              $('#inhand').val(response.production.balance);
+              // $('#inhand').val(response.production.balance);
               $('#daily_id').val(daily_id);
             }
           });
