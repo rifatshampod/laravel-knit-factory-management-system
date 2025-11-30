@@ -1,61 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<div align="center">
+  <h1>Laravel Knit Factory Management System</h1>
+  <p><strong>Plan, track, and report every stitch from order intake to delivery.</strong></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+  <p>
+    <img src="https://img.shields.io/badge/stack-Laravel%208%20%7C%20PHP%207.3%20%7C%20Bootstrap%205-red?style=for-the-badge" alt="Tech Stack" />
+    <img src="https://img.shields.io/badge/status-active-success?style=for-the-badge" alt="Project Status" />
+    <img src="https://img.shields.io/badge/version-1.0.0-blue?style=for-the-badge" alt="Version" />
+    <img src="https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge" alt="License" />
+  </p>
+</div>
 
-## About Laravel
+## Introduction
+This application streamlines order allocation, production tracking, and delivery reporting for knitwear factories. It captures orders with artwork, allocates them to production sections, monitors daily output and deliveries, and surfaces reports for allocation, production, and logistics.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
+- 🎯 **Order lifecycle control**: Capture orders with body colors, print qualities, and parts; attach artwork; and track supplier/merchandiser details.
+- 🗂️ **Production planning**: Allocate orders to sections, set daily targets, and spin up production records automatically.
+- 📈 **Performance dashboards**: Summaries for orders, plans, production, and delivery balances on the landing dashboard.
+- 📦 **Delivery & receiving flows**: Track receiving balances, daily deliveries, and adjustments for in-hand stock.
+- 📊 **Reporting suite**: Order, allocation, production, and delivery reports with filters by section, body color, print quality, parts, order number, and date.
+- 👥 **User & settings admin**: Manage users plus master data such as merchandisers, suppliers, sections, colors, print qualities, and parts.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Use Cases & Examples
+- **Planner creating a new allocation**: Capture an order with artwork, then schedule production with target days and per-day throughput to generate a production record automatically.
+- **Production lead entering daily output**: Navigate to daily production, log in-hand stock, today’s production, and remaining balance to keep the dashboard current.
+- **Logistics team delivering by order**: Filter delivery reports by order number or date range to reconcile delivered quantities against receive balances.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Stack
+- **Backend**: PHP 7.3+, Laravel 8 framework, Laravel UI auth scaffolding, Eloquent ORM.
+- **Frontend**: Blade templates, Bootstrap 5 UI toolkit, Laravel Mix build pipeline.
+- **Tooling**: Composer for PHP dependencies; NPM with Laravel Mix/Sass for assets; PHPUnit for testing.
 
-## Learning Laravel
+## Getting Started
+### Prerequisites
+- PHP 7.3+ with Composer
+- Node.js 12+ and NPM
+- MySQL-compatible database
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Installation
+```bash
+# Install PHP dependencies
+composer install
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Install JS dependencies
+npm install
 
-## Laravel Sponsors
+# Environment
+cp .env.example .env
+php artisan key:generate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+# Configure DB credentials in .env, then run migrations and seeders
+php artisan migrate --seed
 
-### Premium Partners
+# Build assets (optional during development)
+npm run dev
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+### Configuration
+Key environment values:
+```env
+APP_NAME="Knit Factory Management"
+APP_ENV=local
+APP_KEY=base64:generated-key
+APP_DEBUG=true
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=knit_factory
+DB_USERNAME=root
+DB_PASSWORD=secret
+```
+
+## Project Structure
+```
+app/
+  Http/Controllers/    # Order, plan, production, delivery, settings, user flows
+  Models/              # Eloquent models for orders, plans, production, deliveries, master data
+resources/views/       # Blade templates for dashboard, CRUD screens, and reports
+routes/web.php         # Authenticated web routes mapping to controllers
+database/migrations/   # Schema definitions for operational and master data tables
+database/seeders/      # Seed data for admin user bootstrap
+public/                # Public assets and uploaded artwork
+```
 
 ## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork the repository and create a feature branch.
+2. Follow PSR-12 for PHP code and keep Blade templates semantic and Bootstrap-friendly.
+3. Add or update tests where applicable.
+4. Submit a pull request describing the change and how to validate it.
 
 ## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License. See `LICENSE` or the header of `composer.json` for details.
